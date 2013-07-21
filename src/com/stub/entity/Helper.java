@@ -1,7 +1,5 @@
 package com.stub.entity;
 
-import android.graphics.Color;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -16,8 +14,8 @@ public class Helper {
 
     public Helper(){
         applications = new ArrayList<Application>();
-        Application app1 = new Application("SecondApp", Color.CYAN);
-        Application app2 = new Application("FirstApp", Color.MAGENTA);
+        Application app1 = new Application("SecondApp", AppColor.LIME);
+        Application app2 = new Application("FirstApp", AppColor.MAGENTA);
         String info = "Can't connect to the FirstApp.server04";
         Date date1 = new Date();
         date1.setYear(2013);
@@ -35,7 +33,7 @@ public class Helper {
         applications.add(app1);
         applications.add(app2);
 
-    };
+    }
 
     public List<Application> getAllApps(){
         return applications;

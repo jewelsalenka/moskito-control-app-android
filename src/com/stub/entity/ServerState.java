@@ -9,8 +9,8 @@ import com.example.moskito_control_app_android.R;
 public enum ServerState {
     RED, VIOLET, YELLOW, GREEN, ORANGE;
 
-    public int getColorDrawable(ServerState state) {
-        switch (state){
+    public int getColorId() {
+        switch (this){
             case RED:
                 return R.drawable.red;
             case VIOLET:

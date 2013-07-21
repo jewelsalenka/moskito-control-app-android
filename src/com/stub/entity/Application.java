@@ -1,7 +1,5 @@
 package com.stub.entity;
 
-import android.graphics.Color;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,11 +10,11 @@ import java.util.List;
  */
 public class Application implements Serializable{
     private String name;
-    private int color;
+    private AppColor color;
     private List<Server> servers;
     private List<Change> history;
 
-    public Application(String name, int color) {
+    public Application(String name, AppColor color) {
         this.name = name;
         this.color = color;
         servers = new ArrayList<Server>();
@@ -36,7 +34,7 @@ public class Application implements Serializable{
         return name;
     }
 
-    public int getColor() {
+    public AppColor getColor() {
         return color;
     }
 

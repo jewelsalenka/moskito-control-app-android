@@ -8,13 +8,16 @@
             android:layout_width="@dimen/server_state_color_size"
             android:layout_height="@dimen/server_state_color_size"
             android:background="@android:drawable/btn_star"
-            android:layout_marginLeft="@dimen/server_state_color_marginLeft"/>
+            android:layout_marginLeft="@dimen/server_state_color_marginLeft"
+            android:layout_marginRight="@dimen/server_state_color_marginLeft"
+            android:layout_centerVertical="true"/>
     <TextView
             android:id="@+id/server_name"
             android:layout_height="match_parent"
             android:layout_width="wrap_content"
             android:text="localhost"
-            android:layout_toRightOf="@id/server_color_state"/>
+            android:layout_toRightOf="@id/server_color_state"
+            android:gravity="center_vertical"/>
     <View
             android:id="@+id/show_hide_info"
             android:layout_width="@dimen/server_show_hide_info_size"

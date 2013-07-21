@@ -5,8 +5,8 @@
     <dimen name="header_margin_left_right">7dp</dimen>
     <dimen name="history_button_height">40dp</dimen>
     <dimen name="server_item_height">30dp</dimen>
-    <dimen name="server_state_color_size">20dp</dimen>
-    <dimen name="app_color_size">20dp</dimen>
+    <dimen name="server_state_color_size">7dp</dimen>
+    <dimen name="app_color_size">7dp</dimen>
     <dimen name="server_state_color_marginLeft">5dp</dimen>
     <dimen name="server_show_hide_info_size">20dp</dimen>
     <dimen name="btn_go_to_app_size">20dp</dimen>

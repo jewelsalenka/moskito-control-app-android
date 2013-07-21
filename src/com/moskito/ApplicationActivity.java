@@ -33,6 +33,8 @@ public class ApplicationActivity extends Activity{
 
     private void obtainView(){
         noDataView = (TextView) findViewById(R.id.no_data);
+        View header = findViewById(R.id.header);
+        header.setBackground(getResources().getDrawable(currentApp.getColor().getColorId()));
         View showApplicationsView = findViewById(R.id.show_applications);
         showApplicationsView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,12 +66,6 @@ public class ApplicationActivity extends Activity{
             noDataView.setVisibility(View.VISIBLE);
         } else {
             noDataView.setVisibility(View.GONE);
-        }
-    }
-
-    private void setAppColors(){
-        for (Server server : currentApp.getServers()){
-
         }
     }
 }

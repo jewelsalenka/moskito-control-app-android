@@ -1,6 +1,7 @@
 package com.moskito;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,13 +47,12 @@ public class ServerAdapter extends BaseAdapter{
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View rootView = LayoutInflater.from(context).inflate(R.layout.server_list_item, parent, false);
-
-        View serverColor = (View) rootView.findViewById(R.id.server_color_state);
+        View serverColor = rootView.findViewById(R.id.server_color_state);
         TextView appName = (TextView) rootView.findViewById(R.id.server_name);
 
         Server server = (Server) getItem(position);
-
-        //TODO appColor
+        Drawable color = context.getResources().getDrawable(server.getState().getColorId());
+        serverColor.setBackground(color);
         appName.setText(server.getName());
 
         return rootView;

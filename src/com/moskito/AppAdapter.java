@@ -46,12 +46,12 @@ public class AppAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View rootView = LayoutInflater.from(context).inflate(R.layout.app_list_item, parent, false);
-        View appColor = (View) rootView.findViewById(R.id.app_color);
+        View appColor = rootView.findViewById(R.id.app_color);
         TextView appName = (TextView) rootView.findViewById(R.id.app_name);
 
-        Application application = (Application) getItem(position);
-        //TODO set color
-        appName.setText(application.getName());
+        Application app = (Application) getItem(position);
+        appColor.setBackground(context.getResources().getDrawable(app.getColor().getColorDrawableId()));
+        appName.setText(app.getName());
 
         return rootView;
     }
