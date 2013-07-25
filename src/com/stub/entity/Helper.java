@@ -30,6 +30,14 @@ public class Helper {
         app2.addServer(server1);
         app2.addServer(server2);
         app2.addServer(server3);
+        Change change1 = new Change(server1, ServerState.GREEN, ServerState.ORANGE, new Date());
+        Change change2 = new Change(server2, ServerState.VIOLET, ServerState.RED, new Date());
+        Change change3 = new Change(server1, ServerState.ORANGE, ServerState.YELLOW, new Date());
+        Change change4 = new Change(server1, ServerState.YELLOW, ServerState.GREEN, new Date());
+        app2.addChange(change1);
+        app2.addChange(change2);
+        app2.addChange(change3);
+        app2.addChange(change4);
         applications.add(app1);
         applications.add(app2);
 

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/server_item_height"
+                android:id="@+id/history_item">
+
+    <TextView android:id="@+id/change_date"
+            android:layout_width="@dimen/history_change_date_width"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/history_date_marginLeft"
+            android:gravity="center"
+            android:textSize="@dimen/history_date_textSize"
+            android:text="10 Jul 22:56:54"/>
+
+    <TextView
+            android:id="@+id/server_name"
+            android:layout_height="match_parent"
+            android:layout_width="fill_parent"
+            android:gravity="center"
+            android:text="localhost"
+            android:layout_centerInParent="true"
+            android:ellipsize="end"
+            android:lines="1"/>
+
+    <LinearLayout android:layout_width="wrap_content"
+                  android:layout_height="match_parent"
+                  android:id="@+id/state_changes"
+                  android:orientation="horizontal"
+                  android:layout_alignParentRight="true"
+                  android:layout_marginRight="@dimen/history_state_changes_layout_marginRight">
+        <View
+                android:id="@+id/history_old_state"
+                android:layout_width="@dimen/history_server_state_color_size"
+                android:layout_height="@dimen/history_server_state_color_size"
+                android:background="@drawable/red"
+                android:layout_gravity="center_vertical"
+                />
+        <View
+                android:id="@+id/left_arrow"
+                android:layout_width="@dimen/server_show_hide_info_size"
+                android:layout_height="@dimen/server_show_hide_info_size"
+                android:background="@drawable/arrow"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="@dimen/history_state_changes_layout_marginRight"
+                android:layout_marginLeft="@dimen/history_state_changes_layout_marginRight"
+                />
+        <View
+                android:id="@+id/history_new_state"
+                android:layout_width="@dimen/history_server_state_color_size"
+                android:layout_height="@dimen/history_server_state_color_size"
+                android:background="@drawable/green"
+                android:layout_gravity="center_vertical"
+                />
+    </LinearLayout>
+
+</RelativeLayout>
