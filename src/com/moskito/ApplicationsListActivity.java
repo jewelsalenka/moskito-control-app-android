@@ -21,15 +21,10 @@ public class ApplicationsListActivity extends Activity {
     public void onCreate(Bundle bundle){
         super.onCreate(bundle);
         setContentView(R.layout.applications);
-        obtainView();
         if (mHelper == null){
             mHelper = new Helper();
         }
         initializeList();
-    }
-
-    public void obtainView(){
-
     }
 
     public void initializeList(){

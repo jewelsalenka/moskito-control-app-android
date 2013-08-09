@@ -30,7 +30,7 @@ public class HistoryActivity extends Activity {
 
     private void obtainView(){
         View header = findViewById(R.id.header);
-        header.setBackground(getResources().getDrawable(currentApp.getColor().getColorId()));
+        header.setBackgroundDrawable(getResources().getDrawable(currentApp.getColor().getColorId()));
         TextView history = (TextView) findViewById(R.id.history_button);
         history.setOnClickListener(new View.OnClickListener() {
             @Override

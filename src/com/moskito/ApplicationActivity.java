@@ -38,7 +38,7 @@ public class ApplicationActivity extends Activity{
     private void obtainView(){
         noDataView = (TextView) findViewById(R.id.no_data);
         View header = findViewById(R.id.header);
-        header.setBackground(getResources().getDrawable(currentApp.getColor().getColorId()));
+        header.setBackgroundDrawable(getResources().getDrawable(currentApp.getColor().getColorId()));
         View showApplicationsView = findViewById(R.id.show_applications);
         showApplicationsView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,16 +64,15 @@ public class ApplicationActivity extends Activity{
     }
 
     private void initializeList(){
-        ServerAdapter sAdapter = new ServerAdapter(this, currentApp.getServers());
+        final ServerAdapter sAdapter = new ServerAdapter(this, currentApp.getServers());
         ListView lvSimple = (ListView) findViewById(R.id.servers_list);
         lvSimple.setAdapter(sAdapter);
         lvSimple.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                view = findViewById(R.id.server_list_item_advanced);
-
-
+                RelativeLayout advancedLayout = (RelativeLayout) view.findViewById(R.id.item_advanced);
+                view.setSelected(!(advancedLayout.getVisibility() == View.VISIBLE));
+                sAdapter.notifyDataSetChanged();
             }
         });
 

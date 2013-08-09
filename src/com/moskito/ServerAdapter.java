@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.example.moskito_control_app_android.R;
 import com.stub.entity.Server;
@@ -46,15 +47,28 @@ public class ServerAdapter extends BaseAdapter{
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View rootView = LayoutInflater.from(context).inflate(R.layout.server_list_item, parent, false);
+
+        View rootView = convertView;
+        if (rootView == null){
+            rootView = LayoutInflater.from(context).inflate(R.layout.server_list_item_advanced, parent, false);
+        }
         View serverColor = rootView.findViewById(R.id.server_color_state);
         TextView appName = (TextView) rootView.findViewById(R.id.server_name);
 
         Server server = (Server) getItem(position);
         Drawable color = context.getResources().getDrawable(server.getState().getColorId());
-        serverColor.setBackground(color);
+        serverColor.setBackgroundDrawable(color);
         appName.setText(server.getName());
 
+        RelativeLayout advancedLayout = (RelativeLayout) rootView.findViewById(R.id.item_advanced);
+
+        if (rootView.isSelected()){
+            advancedLayout.setVisibility(View.VISIBLE);
+            ((TextView) rootView.findViewById(R.id.info_text)).setText(server.getInfo());
+            ((TextView) rootView.findViewById(R.id.info_date)).setText(server.getDate().toLocaleString());
+        } else {
+            advancedLayout.setVisibility(View.GONE);
+        }
         return rootView;
     }
 }

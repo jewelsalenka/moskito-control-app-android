@@ -50,7 +50,7 @@ public class AppAdapter extends BaseAdapter {
         TextView appName = (TextView) rootView.findViewById(R.id.app_name);
 
         Application app = (Application) getItem(position);
-        appColor.setBackground(context.getResources().getDrawable(app.getColor().getColorDrawableId()));
+        appColor.setBackgroundDrawable(context.getResources().getDrawable(app.getColor().getColorDrawableId()));
         appName.setText(app.getName());
 
         return rootView;

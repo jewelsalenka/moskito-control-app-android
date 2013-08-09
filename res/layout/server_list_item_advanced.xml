@@ -9,7 +9,8 @@
 
     <RelativeLayout android:id="@+id/item_advanced"
                     android:layout_width="match_parent"
-                    android:layout_height="96dp">
+                    android:layout_height="96dp"
+                    android:visibility="gone">
         <View android:id = "@+id/info_icon"
               android:layout_height="@dimen/icon_size"
               android:layout_width="@dimen/icon_size"

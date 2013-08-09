@@ -17,8 +17,9 @@
     <ListView
             android:id="@+id/servers_list"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/header_height"/>
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/header_height"
+            android:layout_marginBottom="@dimen/history_button_height"/>
     <TextView
             android:id="@+id/history_button"
             android:layout_height="@dimen/history_button_height"

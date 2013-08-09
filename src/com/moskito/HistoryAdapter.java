@@ -57,9 +57,9 @@ public class HistoryAdapter extends BaseAdapter {
         dateView.setText(getDateString(change.getDate()));
         serverNameView.setText(change.getServer().getName());
         Drawable oldState = context.getResources().getDrawable(change.getOldColorId());
-        oldStateView.setBackground(oldState);
+        oldStateView.setBackgroundDrawable(oldState);
         Drawable newState = context.getResources().getDrawable(change.getNewColorId());
-        newStateView.setBackground(newState);
+        newStateView.setBackgroundDrawable(newState);
 
 
         return rootView;
