@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                tools:ignore="All"
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+    <include layout="@layout/application"/>
+
+    <SlidingDrawer
+            android:id="@+id/left_drawer"
+            android:layout_width="200dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"
+            android:handle="@+id/left_handle"
+            android:content="@+id/left_content"
+            android:orientation="horizontal"
+            android:rotation="180">
+
+        <View
+                android:id="@id/left_handle"
+                android:layout_height="@dimen/icon_size"
+                android:layout_width="@dimen/icon_size"
+                android:background="#F00" />
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                      android:id="@id/left_content"
+                      android:orientation="vertical"
+                      android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:background="@color/light_grey"
+                      android:rotation="180">
+            <include layout="@layout/applications"/>
+        </LinearLayout>
+    </SlidingDrawer>
+
+    <SlidingDrawer
+            android:id="@+id/bottom_drawer"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:handle="@+id/bottom_handle"
+            android:content="@+id/bottom_content"
+            android:orientation="vertical"
+            android:layout_alignParentBottom="true">
+
+        <TextView
+                android:id="@id/bottom_handle"
+                android:layout_height="@dimen/history_button_height"
+                android:layout_width="match_parent"
+                android:text="@string/history"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/header_height"
+                android:background="@color/dark_grey"/>
+
+        <RelativeLayout android:id="@id/bottom_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/light_grey">
+            <ListView
+                    android:id="@+id/history_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/history_button"/>
+        </RelativeLayout>
+    </SlidingDrawer>
+
+</RelativeLayout>
