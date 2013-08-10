@@ -13,14 +13,15 @@ public class Change implements Serializable{
     private Server server;
     private ServerState oldColor;
     private ServerState newColor;
+    private String info;
     private Date date;
 
-
-    public Change(Server server, ServerState oldColor, ServerState newColor, Date date) {
+    public Change(Server server, ServerState oldColor, ServerState newColor, Date date, String info) {
         this.server = server;
         this.oldColor = oldColor;
         this.newColor = newColor;
         this.date = date;
+        this.info = info;
     }
 
     public Server getServer() {
@@ -37,5 +38,9 @@ public class Change implements Serializable{
 
     public Date getDate() {
         return date;
+    }
+
+    public String getInfo() {
+        return info;
     }
 }

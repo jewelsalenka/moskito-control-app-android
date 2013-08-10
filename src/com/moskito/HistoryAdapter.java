@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.example.moskito_control_app_android.R;
 import com.stub.entity.Change;
@@ -46,8 +47,10 @@ public class HistoryAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View rootView = LayoutInflater.from(context).inflate(R.layout.history_list_item, parent, false);
-
+        View rootView = convertView;
+        if (rootView == null){
+            rootView = LayoutInflater.from(context).inflate(R.layout.history_list_item_advanced, parent, false);
+        }
         TextView dateView = (TextView) rootView.findViewById(R.id.change_date);
         TextView serverNameView = (TextView) rootView.findViewById(R.id.server_name);
         View oldStateView = rootView.findViewById(R.id.history_old_state);
@@ -61,6 +64,15 @@ public class HistoryAdapter extends BaseAdapter {
         Drawable newState = context.getResources().getDrawable(change.getNewColorId());
         newStateView.setBackgroundDrawable(newState);
 
+        RelativeLayout advancedLayout = (RelativeLayout) rootView.findViewById(R.id.item_history_advanced);
+        if (rootView.isSelected()){
+            advancedLayout.setVisibility(View.VISIBLE);
+            ((TextView) rootView.findViewById(R.id.info_text)).setText(change.getInfo());
+            ((TextView) rootView.findViewById(R.id.info_date)).setText(change.getDate().toLocaleString());
+            rootView.findViewById(R.id.info_date);
+        } else {
+            advancedLayout.setVisibility(View.GONE);
+        }
 
         return rootView;
     }

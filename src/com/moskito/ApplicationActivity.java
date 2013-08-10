@@ -68,14 +68,15 @@ public class ApplicationActivity extends Activity{
     }
 
     private void initializeHistoryList(){
-        HistoryAdapter historyAdapter = new HistoryAdapter(this, currentApp.getHistory());
+        final HistoryAdapter historyAdapter = new HistoryAdapter(this, currentApp.getHistory());
         ListView lvSimple = (ListView) findViewById(R.id.history_list);
         lvSimple.setAdapter(historyAdapter);
         lvSimple.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-
+                RelativeLayout advancedLayout = (RelativeLayout) view.findViewById(R.id.item_history_advanced);
+                view.setSelected(!(advancedLayout.getVisibility() == View.VISIBLE));
+                historyAdapter.notifyDataSetChanged();
             }
         });
     }
