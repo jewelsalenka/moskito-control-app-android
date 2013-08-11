@@ -29,26 +29,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f5dd896a-20fb-4525-b6f6-35b13d27b44c" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/stub/entity/State.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/stub/entity/AppColor.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/stub/entity/ServerState.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AndroidManifest.xml" afterPath="$PROJECT_DIR$/AndroidManifest.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/moskito/ServerAdapter.java" afterPath="$PROJECT_DIR$/src/com/moskito/ComponentAdapter.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/stub/entity/Change.java" afterPath="$PROJECT_DIR$/src/com/stub/entity/HistoryItem.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/stub/entity/Server.java" afterPath="$PROJECT_DIR$/src/com/stub/entity/Component.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stub/entity/Application.java" afterPath="$PROJECT_DIR$/src/com/stub/entity/Application.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/moskito/ApplicationActivity.java" afterPath="$PROJECT_DIR$/src/com/moskito/ApplicationActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stub/entity/Change.java" afterPath="$PROJECT_DIR$/src/com/stub/entity/Change.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stub/entity/Helper.java" afterPath="$PROJECT_DIR$/src/com/stub/entity/Helper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stub/entity/Server.java" afterPath="$PROJECT_DIR$/src/com/stub/entity/Server.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/moskito-control-app-android.iml" afterPath="$PROJECT_DIR$/moskito-control-app-android.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/moskito/HistoryAdapter.java" afterPath="$PROJECT_DIR$/src/com/moskito/HistoryAdapter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/app_list_item.xml" afterPath="$PROJECT_DIR$/res/layout/app_list_item.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values/dimen.xml" afterPath="$PROJECT_DIR$/res/values/dimen.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/history_list_item.xml" afterPath="$PROJECT_DIR$/res/layout/history_list_item.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/history_list_item_advanced.xml" afterPath="$PROJECT_DIR$/res/layout/history_list_item_advanced.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/server_list_item.xml" afterPath="$PROJECT_DIR$/res/layout/server_list_item.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/server_list_item_advanced.xml" afterPath="$PROJECT_DIR$/res/layout/server_list_item_advanced.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="moskito-control-app-android.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="f5dd896a-20fb-4525-b6f6-35b13d27b44c" time="1376200699208" ignored="false" />
+    <file path="/Dummy.txt" changelist="f5dd896a-20fb-4525-b6f6-35b13d27b44c" time="1376204938142" ignored="false" />
     <file path="$PROJECT_DIR$/../../../moskito-control-app-android/gen/com/example/moskito_control_app_android/BuildConfig.java" changelist="f5dd896a-20fb-4525-b6f6-35b13d27b44c" time="1374226875735" ignored="false" />
     <file path="$PROJECT_DIR$/src/com/example/MoskitoControl/ApplicationsActivity.java" changelist="f5dd896a-20fb-4525-b6f6-35b13d27b44c" time="1374226877133" ignored="false" />
     <file path="/fragment.java" changelist="f5dd896a-20fb-4525-b6f6-35b13d27b44c" time="1376204247674" ignored="false" />
-    <file path="/ServerAdapter.java" changelist="f5dd896a-20fb-4525-b6f6-35b13d27b44c" time="1376076550912" ignored="false" />
+    <file path="/ServerAdapter.java" changelist="f5dd896a-20fb-4525-b6f6-35b13d27b44c" time="1376205945294" ignored="false" />
     <file path="/ServerState.java" changelist="f5dd896a-20fb-4525-b6f6-35b13d27b44c" time="1374400573938" ignored="false" />
     <file path="/.gitignore" changelist="f5dd896a-20fb-4525-b6f6-35b13d27b44c" time="1374402625371" ignored="false" />
     <file path="/application.xml" changelist="f5dd896a-20fb-4525-b6f6-35b13d27b44c" time="1375901295960" ignored="false" />
@@ -59,8 +61,8 @@
     <file path="/history.xml" changelist="f5dd896a-20fb-4525-b6f6-35b13d27b44c" time="1374729666056" ignored="false" />
     <file path="/history_list_item.xml" changelist="f5dd896a-20fb-4525-b6f6-35b13d27b44c" time="1374726355026" ignored="false" />
     <file path="/HistoryActivity.java" changelist="f5dd896a-20fb-4525-b6f6-35b13d27b44c" time="1376076895257" ignored="false" />
-    <file path="/HistoryAdapter.java" changelist="f5dd896a-20fb-4525-b6f6-35b13d27b44c" time="1376129633594" ignored="false" />
-    <file path="/Change.java" changelist="f5dd896a-20fb-4525-b6f6-35b13d27b44c" time="1376128922530" ignored="false" />
+    <file path="/HistoryAdapter.java" changelist="f5dd896a-20fb-4525-b6f6-35b13d27b44c" time="1376205995052" ignored="false" />
+    <file path="/Change.java" changelist="f5dd896a-20fb-4525-b6f6-35b13d27b44c" time="1376206034405" ignored="false" />
     <file path="/AndroidManifest.xml" changelist="f5dd896a-20fb-4525-b6f6-35b13d27b44c" time="1376115990496" ignored="false" />
     <file path="/Helper.java" changelist="f5dd896a-20fb-4525-b6f6-35b13d27b44c" time="1376204426090" ignored="false" />
     <file path="/a.xml" changelist="f5dd896a-20fb-4525-b6f6-35b13d27b44c" time="1376162906749" ignored="false" />
@@ -70,6 +72,7 @@
     <file path="/history_list_item_advanced.xml" changelist="f5dd896a-20fb-4525-b6f6-35b13d27b44c" time="1376129316850" ignored="false" />
     <file path="/DataProviderCreater.java" changelist="f5dd896a-20fb-4525-b6f6-35b13d27b44c" time="1376169680788" ignored="false" />
     <file path="/AppColor.java" changelist="f5dd896a-20fb-4525-b6f6-35b13d27b44c" time="1376171264525" ignored="false" />
+    <file path="/a.dummy" changelist="f5dd896a-20fb-4525-b6f6-35b13d27b44c" time="1376205674651" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -120,68 +123,7 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
-    <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true">
-      <breakpoint url="file://$PROJECT_DIR$/src/com/moskito/ServerAdapter.java" line="63" class="com.moskito.ServerAdapter" package="com.moskito">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/com/moskito/ServerAdapter.java" line="69" class="com.moskito.ServerAdapter" package="com.moskito">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/com/moskito/ServerAdapter.java" line="52" class="com.moskito.ServerAdapter" package="com.moskito">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/com/moskito/ServerAdapter.java" line="54" class="com.moskito.ServerAdapter" package="com.moskito">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-    </line_breakpoints>
+    <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_rules />
     <ui_properties />
@@ -195,12 +137,32 @@
       <file leaf-file-name="ApplicationActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/moskito/ApplicationActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="44" column="68" selection-start="1278" selection-end="1278" vertical-scroll-proportion="0.0">
+            <state line="86" column="46" selection-start="3252" selection-end="3252" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2139#2422#0" expanded="true" />
-                <element signature="e#2411#2412#0" expanded="true" />
+                <element signature="e#1436#1854#0" expanded="true" />
+                <element signature="e#1843#1844#0" expanded="true" />
+                <element signature="e#2125#2408#0" expanded="true" />
+                <element signature="e#2397#2398#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ComponentAdapter.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/moskito/ComponentAdapter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="54" column="31" selection-start="1463" selection-end="1463" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="color.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/res/values/color.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -214,37 +176,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MoskitoControlRequesterTest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../moskito-control-requester/src/test/java/org/moskito/control/requester/MoskitoControlRequesterTest.java">
+      <file leaf-file-name="HistoryAdapter.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/moskito/HistoryAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="39" column="13" selection-start="1265" selection-end="1675" vertical-scroll-proportion="0.0">
+            <state line="55" column="26" selection-start="1542" selection-end="1542" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Helper.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/stub/entity/Helper.java">
+      <file leaf-file-name="HistoryItem.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/stub/entity/HistoryItem.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="51" column="39" selection-start="2073" selection-end="2073" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Server.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/stub/entity/Server.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="50" column="25" selection-start="928" selection-end="928" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Change.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/stub/entity/Change.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="60" selection-start="399" selection-end="399" vertical-scroll-proportion="0.2637931">
+            <state line="11" column="52" selection-start="240" selection-end="240" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -252,37 +196,43 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Component.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../moskito-control-requester/src/main/java/org/moskito/control/requester/data/Component.java">
+      <file leaf-file-name="AppAdapter.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/moskito/AppAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="38" column="29" selection-start="573" selection-end="573" vertical-scroll-proportion="0.0">
+            <state line="18" column="13" selection-start="417" selection-end="417" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ResponseParser.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../moskito-control-requester/src/main/java/org/moskito/control/requester/parser/ResponseParser.java">
+      <file leaf-file-name="app_list_item.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/res/layout/app_list_item.xml">
+          <provider editor-type-id="android-designer">
+            <state />
+          </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state line="45" column="12" selection-start="1559" selection-end="1645" vertical-scroll-proportion="0.0">
+            <state line="10" column="58" selection-start="520" selection-end="520" vertical-scroll-proportion="-3.3333333">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Color.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../moskito-control-requester/src/main/java/org/moskito/control/requester/data/Color.java">
+      <file leaf-file-name="application.xml" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/res/layout/application.xml">
+          <provider editor-type-id="android-designer">
+            <state />
+          </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="12" selection-start="95" selection-end="95" vertical-scroll-proportion="0.0">
+            <state line="14" column="68" selection-start="619" selection-end="619" vertical-scroll-proportion="0.29300568">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Application.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/stub/entity/Application.java">
+      <file leaf-file-name="strings.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="11" selection-start="338" selection-end="338" vertical-scroll-proportion="0.0">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0">
               <folding />
             </state>
           </provider>
@@ -306,13 +256,7 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/.idea/workspace.xml" />
-        <option value="$PROJECT_DIR$/../../../Drawer/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/../../../Drawer/res/layout/main.xml" />
-        <option value="$PROJECT_DIR$/res/layout/applications.xml" />
-        <option value="$PROJECT_DIR$/src/com/moskito/ApplicationsListActivity.java" />
         <option value="$PROJECT_DIR$/res/layout/history_list_item_advanced.xml" />
-        <option value="$PROJECT_DIR$/src/com/moskito/HistoryAdapter.java" />
         <option value="$PROJECT_DIR$/res/layout/main.xml" />
         <option value="$PROJECT_DIR$/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/src/com/stub/entity/DataProviderCreater.java" />
@@ -321,7 +265,13 @@
         <option value="$PROJECT_DIR$/src/com/stub/entity/State.java" />
         <option value="$PROJECT_DIR$/src/com/stub/entity/Helper.java" />
         <option value="$PROJECT_DIR$/src/com/stub/entity/Server.java" />
+        <option value="$PROJECT_DIR$/src/com/stub/entity/Component.java" />
+        <option value="$PROJECT_DIR$/src/com/moskito/ServerAdapter.java" />
+        <option value="$PROJECT_DIR$/src/com/moskito/ComponentAdapter.java" />
+        <option value="$PROJECT_DIR$/src/com/moskito/HistoryAdapter.java" />
         <option value="$PROJECT_DIR$/src/com/stub/entity/Change.java" />
+        <option value="$PROJECT_DIR$/build.xml" />
+        <option value="$PROJECT_DIR$/res/values/dimen.xml" />
       </list>
     </option>
   </component>
@@ -418,12 +368,22 @@
               <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+          </PATH>
+          <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="com" />
+              <option name="myItemId" value="moskito-control-app-android" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="moskito-control-app-android" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="entity" />
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="values" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -437,15 +397,25 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
+              <option name="myItemId" value="res" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="com" />
+              <option name="myItemId" value="layout" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="moskito-control-app-android" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="moskito-control-app-android" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="moskito" />
+              <option name="myItemId" value="res" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -672,7 +642,11 @@
       <created>1376129856860</created>
       <updated>1376129856860</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Network connection has been added.">
+      <created>1376204953677</created>
+      <updated>1376204953677</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -697,16 +671,18 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="775" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290938" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22528364" sideWeight="0.6244057" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.58028615" sideWeight="0.8737785" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15397082" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39936608" sideWeight="0.7504052" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23137876" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.58028615" sideWeight="0.1262215" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26012966" sideWeight="0.39336494" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290938" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -718,15 +694,13 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298217" sideWeight="0.73058635" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19869708" sideWeight="0.3227345" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19869708" sideWeight="0.41971382" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.6772655" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298217" sideWeight="0.9096672" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298217" sideWeight="0.9096672" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22528364" sideWeight="0.6244057" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296355" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -772,7 +746,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="History advanced item has been added." />
+    <option name="LAST_COMMIT_MESSAGE" value="Network connection has been added." />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -789,6 +763,7 @@
     <MESSAGE value=".gitignore added." />
     <MESSAGE value="Navigation between layout have been added." />
     <MESSAGE value="History advanced item has been added." />
+    <MESSAGE value="Network connection has been added." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -798,93 +773,47 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$USER_HOME$/Development/Android/adt-bundle-linux-x86-20130522/sdk/sources/android-17/java/lang/Enum.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="97" column="18" selection-start="3476" selection-end="3476" vertical-scroll-proportion="0.33260393" />
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Development/Android/adt-bundle-linux-x86-20130522/sdk/sources/android-17/android/content/res/Resources.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="682" column="0" selection-start="28258" selection-end="29373" vertical-scroll-proportion="1.0946844">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/values/color.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="17" selection-start="438" selection-end="438" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/app_list_item.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="24" selection-start="703" selection-end="703" vertical-scroll-proportion="0.43194193" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/header.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="46" selection-start="1027" selection-end="1044" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Development/Android/adt-bundle-linux-x86-20130522/sdk/sources/android-17/android/widget/AdapterView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="261" column="13" selection-start="7928" selection-end="7928" vertical-scroll-proportion="0.33275864">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../moskito-control-requester/src/test/java/org/moskito/control/requester/MoskitoControlRequesterTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="13" selection-start="1265" selection-end="1675" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../moskito-control-requester/src/main/java/org/moskito/control/requester/data/Application.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="26" selection-start="132" selection-end="133" vertical-scroll-proportion="0.20517242">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../moskito-control-requester/src/main/java/org/moskito/control/requester/parser/ResponseParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="45" column="12" selection-start="1559" selection-end="1645" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../moskito-control-requester/src/main/java/org/moskito/control/requester/data/Color.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="12" selection-start="95" selection-end="95" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/moskito/ApplicationActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="44" column="68" selection-start="1278" selection-end="1278" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2139#2422#0" expanded="true" />
-            <element signature="e#2411#2412#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../moskito-control-requester/src/main/java/org/moskito/control/requester/data/Component.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="29" selection-start="573" selection-end="573" vertical-scroll-proportion="0.0">
+        <state line="38" column="29" selection-start="573" selection-end="573" vertical-scroll-proportion="0.320598">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="94" selection-start="848" selection-end="848" vertical-scroll-proportion="0.53968257">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/stub/entity/Application.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="11" selection-start="349" selection-end="349" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/stub/entity/Component.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="27" selection-start="456" selection-end="456" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/stub/entity/Helper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="50" column="39" selection-start="2055" selection-end="2055" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/stub/entity/HistoryItem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="52" selection-start="240" selection-end="240" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -895,26 +824,78 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/stub/entity/Helper.java">
+    <entry file="file://$PROJECT_DIR$/src/com/moskito/HistoryAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="51" column="39" selection-start="2073" selection-end="2073" vertical-scroll-proportion="0.0">
+        <state line="55" column="26" selection-start="1542" selection-end="1542" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/stub/entity/Server.java">
+    <entry file="file://$PROJECT_DIR$/src/com/moskito/ComponentAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="50" column="25" selection-start="928" selection-end="928" vertical-scroll-proportion="0.0">
+        <state line="54" column="31" selection-start="1463" selection-end="1463" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/stub/entity/Change.java">
+    <entry file="file://$PROJECT_DIR$/src/com/moskito/ApplicationActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="60" selection-start="399" selection-end="399" vertical-scroll-proportion="0.2637931">
+        <state line="86" column="46" selection-start="3252" selection-end="3252" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#1436#1854#0" expanded="true" />
+            <element signature="e#1843#1844#0" expanded="true" />
+            <element signature="e#2125#2408#0" expanded="true" />
+            <element signature="e#2397#2398#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/moskito/AppAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="13" selection-start="417" selection-end="417" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/values/dimen.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="29" selection-start="274" selection-end="274" vertical-scroll-proportion="0.18378378">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/values/color.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/app_list_item.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="58" selection-start="520" selection-end="520" vertical-scroll-proportion="-3.3333333">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/application.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="68" selection-start="619" selection-end="619" vertical-scroll-proportion="0.29300568">
+          <folding />
         </state>
       </provider>
     </entry>

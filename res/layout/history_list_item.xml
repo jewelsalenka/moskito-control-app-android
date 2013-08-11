@@ -2,7 +2,7 @@
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/server_item_height"
+                android:layout_height="@dimen/component_item_height"
                 android:id="@+id/history_item">
 
     <TextView android:id="@+id/change_date"
@@ -38,8 +38,8 @@
                 />
         <View
                 android:id="@+id/left_arrow"
-                android:layout_width="@dimen/server_show_hide_info_size"
-                android:layout_height="@dimen/server_show_hide_info_size"
+                android:layout_width="@dimen/component_show_hide_info_size"
+                android:layout_height="@dimen/component_show_hide_info_size"
                 android:background="@drawable/arrow"
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="@dimen/history_state_changes_layout_marginRight"

@@ -12,13 +12,13 @@
         <View android:id = "@+id/info_icon"
               android:layout_height="@dimen/icon_size"
               android:layout_width="@dimen/icon_size"
-              android:layout_marginTop="@dimen/server_item_height"
+              android:layout_marginTop="@dimen/component_item_height"
               android:background="@android:drawable/ic_menu_info_details"/>
         <TextView android:id="@+id/info_text"
                   android:layout_height="wrap_content"
                   android:layout_width="wrap_content"
                   android:layout_toRightOf="@id/info_icon"
-                  android:layout_marginTop="@dimen/server_item_advanced_marginTop"
+                  android:layout_marginTop="@dimen/component_item_advanced_marginTop"
                   android:text="Can't connect to the FirstApp.server04 Can't connect"
                   android:maxLines="2"/>
         <TextView android:id="@+id/info_date"

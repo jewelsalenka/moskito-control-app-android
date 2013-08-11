@@ -9,7 +9,8 @@ import android.widget.BaseAdapter;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.example.moskito_control_app_android.R;
-import com.stub.entity.Change;
+import com.stub.entity.HistoryItem;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -19,15 +20,15 @@ import java.util.List;
  * Date: 25.07.13
  */
 public class HistoryAdapter extends BaseAdapter {
-    private List<Change> history;
+    private List<HistoryItem> history;
     private final Context context;
 
-    public HistoryAdapter(Context context, List<Change> servers) {
+    public HistoryAdapter(Context context, List<HistoryItem> history) {
         this.context = context;
-        if (servers != null){
-            this.history = servers;
+        if (history != null){
+            this.history = history;
         } else {
-            this.history = new ArrayList<Change>();
+            this.history = new ArrayList<HistoryItem>();
         }
     }
     @Override
@@ -52,23 +53,23 @@ public class HistoryAdapter extends BaseAdapter {
             rootView = LayoutInflater.from(context).inflate(R.layout.history_list_item_advanced, parent, false);
         }
         TextView dateView = (TextView) rootView.findViewById(R.id.change_date);
-        TextView serverNameView = (TextView) rootView.findViewById(R.id.server_name);
+        TextView componentNameView = (TextView) rootView.findViewById(R.id.server_name);
         View oldStateView = rootView.findViewById(R.id.history_old_state);
         View newStateView = rootView.findViewById(R.id.history_new_state);
 
-        Change change = (Change) getItem(position);
-        dateView.setText(getDateString(change.getDate()));
-        serverNameView.setText(change.getServer().getName());
-        Drawable oldState = context.getResources().getDrawable(change.getOldColorId());
+        HistoryItem historyItem = (HistoryItem) getItem(position);
+        dateView.setText(getDateString(historyItem.getDate()));
+        componentNameView.setText(historyItem.getComponent().getName());
+        Drawable oldState = context.getResources().getDrawable(historyItem.getOldColorId());
         oldStateView.setBackgroundDrawable(oldState);
-        Drawable newState = context.getResources().getDrawable(change.getNewColorId());
+        Drawable newState = context.getResources().getDrawable(historyItem.getNewColorId());
         newStateView.setBackgroundDrawable(newState);
 
         RelativeLayout advancedLayout = (RelativeLayout) rootView.findViewById(R.id.item_history_advanced);
         if (rootView.isSelected()){
             advancedLayout.setVisibility(View.VISIBLE);
-            ((TextView) rootView.findViewById(R.id.info_text)).setText(change.getInfo());
-            ((TextView) rootView.findViewById(R.id.info_date)).setText(change.getDate().toLocaleString());
+            ((TextView) rootView.findViewById(R.id.info_text)).setText(historyItem.getInfo());
+            ((TextView) rootView.findViewById(R.id.info_date)).setText(historyItem.getDate().toLocaleString());
             rootView.findViewById(R.id.info_date);
         } else {
             advancedLayout.setVisibility(View.GONE);

@@ -11,22 +11,22 @@ import java.util.List;
 public class Application implements Serializable{
     private String name;
     private State color;
-    private List<Server> servers;
-    private List<Change> history;
+    private List<Component> components;
+    private List<HistoryItem> history;
 
     public Application(String name, State color) {
         this.name = name;
         this.color = color;
-        servers = new ArrayList<Server>();
-        history = new ArrayList<Change>();
+        components = new ArrayList<Component>();
+        history = new ArrayList<HistoryItem>();
     }
 
-    public void addServer(Server server){
-        servers.add(server);
+    public void addServer(Component component){
+        components.add(component);
     }
 
-    public void addChange(Change change){
-        history.add(change);
+    public void addChange(HistoryItem historyItem){
+        history.add(historyItem);
     }
 
     public String getName() {
@@ -38,11 +38,11 @@ public class Application implements Serializable{
         return color;
     }
 
-    public List<Server> getServers() {
-        return servers;
+    public List<Component> getComponents() {
+        return components;
     }
 
-    public List<Change> getHistory() {
+    public List<HistoryItem> getHistory() {
         return history;
     }
 }

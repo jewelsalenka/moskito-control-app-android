@@ -7,13 +7,13 @@ import java.util.Date;
  * User: Olenka Shemshey
  * Date: 13.07.13
  */
-public class Server implements Serializable {
+public class Component implements Serializable {
     private String name;
     private String info;
     private Date date;
     private State state;
 
-    public Server(String name, String info, Date date, State state) {
+    public Component(String name, String info, Date date, State state) {
         this.name = name;
         this.info = info;
         this.date = date;

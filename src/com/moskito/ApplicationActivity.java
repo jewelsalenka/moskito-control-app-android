@@ -12,7 +12,6 @@ import com.example.moskito_control_app_android.R;
 import com.stub.entity.*;
 
 import java.io.IOException;
-import java.util.List;
 
 /**
  * User: Olenka Shemshey
@@ -42,7 +41,7 @@ public class ApplicationActivity extends Activity{
     }
 
     private void initializeServersList(){
-        final ServerAdapter sAdapter = new ServerAdapter(this, currentApp.getServers());
+        final ComponentAdapter sAdapter = new ComponentAdapter(this, currentApp.getComponents());
         ListView lvSimple = (ListView) findViewById(R.id.servers_list);
         lvSimple.setAdapter(sAdapter);
         lvSimple.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -103,7 +102,7 @@ public class ApplicationActivity extends Activity{
     }
 
     private void updateNoData(){
-        if ((currentApp.getServers() == null) || (currentApp.getServers().size() == 0)){
+        if ((currentApp.getComponents() == null) || (currentApp.getComponents().size() == 0)){
             noDataView.setVisibility(View.VISIBLE);
         } else {
             noDataView.setVisibility(View.GONE);

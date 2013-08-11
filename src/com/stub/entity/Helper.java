@@ -2,7 +2,6 @@ package com.stub.entity;
 
 import org.moskito.control.requester.Requester;
 import org.moskito.control.requester.config.RequesterConfiguration;
-import org.moskito.control.requester.data.Component;
 import org.moskito.control.requester.data.DataProvider;
 import org.moskito.control.requester.data.StatusResponse;
 import org.moskito.control.requester.parser.ResponseParser;
@@ -41,7 +40,7 @@ public class Helper {
             String appName = app.getName();
             State appColor = State.valueOf(app.getApplicationColor().toString());
             Application application = new Application(appName, appColor);
-            for(Component component : app.getComponents()) {
+            for(org.moskito.control.requester.data.Component component : app.getComponents()) {
                 String name = component.getName();
                 String info = new String();
                 for(String message : component.getMessages()) {
@@ -49,7 +48,7 @@ public class Helper {
                 }
                 Date date = new Date(component.getLastUpdateTimestamp());
                 State state = State.valueOf(component.getColor().toString());
-                Server server = new Server(name, info, date, state);
+                Component server = new Component(name, info, date, state);
                 application.addServer(server);
             }
             appList.add(application);
