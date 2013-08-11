@@ -11,7 +11,7 @@
 
     <SlidingDrawer
             android:id="@+id/left_drawer"
-            android:layout_width="200dp"
+            android:layout_width="300dp"
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
             android:layout_alignParentBottom="true"
@@ -22,9 +22,9 @@
 
         <View
                 android:id="@id/left_handle"
-                android:layout_height="@dimen/icon_size"
-                android:layout_width="@dimen/icon_size"
-                android:background="#F00" />
+                android:layout_height="match_parent"
+                android:layout_width="70dp"
+                />
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                       android:id="@id/left_content"
