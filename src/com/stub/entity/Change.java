@@ -11,12 +11,12 @@ import java.util.Date;
  */
 public class Change implements Serializable{
     private Server server;
-    private ServerState oldColor;
-    private ServerState newColor;
+    private State oldColor;
+    private State newColor;
     private String info;
     private Date date;
 
-    public Change(Server server, ServerState oldColor, ServerState newColor, Date date, String info) {
+    public Change(Server server, State oldColor, State newColor, Date date, String info) {
         this.server = server;
         this.oldColor = oldColor;
         this.newColor = newColor;

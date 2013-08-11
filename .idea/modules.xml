@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/../../../Drawer/Drawer.iml" filepath="$PROJECT_DIR$/../../../Drawer/Drawer.iml" />
       <module fileurl="file://$PROJECT_DIR$/moskito-control-app-android.iml" filepath="$PROJECT_DIR$/moskito-control-app-android.iml" />
     </modules>
   </component>

@@ -11,9 +11,9 @@ public class Server implements Serializable {
     private String name;
     private String info;
     private Date date;
-    private ServerState state;
+    private State state;
 
-    public Server(String name, String info, Date date, ServerState state) {
+    public Server(String name, String info, Date date, State state) {
         this.name = name;
         this.info = info;
         this.date = date;
@@ -44,11 +44,11 @@ public class Server implements Serializable {
         this.date = date;
     }
 
-    public ServerState getState() {
+    public State getState() {
         return state;
     }
 
-    public void setState(ServerState state) {
+    public void setState(State state) {
         this.state = state;
     }
 }

@@ -1,11 +1,18 @@
 package com.moskito;
 
 import android.app.Activity;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
 import com.example.moskito_control_app_android.R;
 import com.stub.entity.*;
+
+import java.io.IOException;
+import java.util.List;
 
 /**
  * User: Olenka Shemshey
@@ -17,25 +24,20 @@ public class ApplicationActivity extends Activity{
     private TextView noDataView;
     private SlidingDrawer leftDrawer;
     private View header;
+    TextView appTitleView;
 
     public void onCreate(Bundle bundle){
         super.onCreate(bundle);
         setContentView(R.layout.main);
-        if (mHelper == null){
-            mHelper = new Helper();
-        }
-        currentApp = mHelper.getAllApps().get(0);
         obtainView();
-        initializeServersList();
-        initializeAppsList();
-        initializeHistoryList();
-        updateNoData();
+        createConnection();
     }
 
     private void obtainView(){
         leftDrawer = (SlidingDrawer) findViewById(R.id.left_drawer);
         noDataView = (TextView) findViewById(R.id.no_data);
         header = findViewById(R.id.header);
+        appTitleView = (TextView) header.findViewById(R.id.application_title);
         updateHead();
     }
 
@@ -90,7 +92,14 @@ public class ApplicationActivity extends Activity{
     }
 
     private void updateHead(){
-        header.setBackground(getResources().getDrawable(currentApp.getColor().getColorId()));
+
+        if (currentApp == null){
+            header.setBackgroundDrawable(getResources().getDrawable(R.color.light_grey));
+            appTitleView.setText("App");
+        } else {
+            header.setBackgroundDrawable(getResources().getDrawable(currentApp.getColor().getColorId()));
+            appTitleView.setText(currentApp.getName());
+        }
     }
 
     private void updateNoData(){
@@ -98,6 +107,36 @@ public class ApplicationActivity extends Activity{
             noDataView.setVisibility(View.VISIBLE);
         } else {
             noDataView.setVisibility(View.GONE);
+        }
+    }
+
+    public void createConnection() {
+        String stringUrl = "http://server04.test.anotheria.net:8999/moskito-control/rest/control";
+        ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+        if (networkInfo != null && networkInfo.isConnected()) {
+            new DownloadWebpageTask().execute(stringUrl);
+        } else {
+            noDataView.setText("No network connection available.");
+        }
+    }
+
+    private class DownloadWebpageTask extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... urls) {
+            try {
+                mHelper = new Helper(urls[0]);
+                return "Connection established";
+            } catch (IOException e) {
+                noDataView.setText("Connection failed. URL may be invalid.");
+                return "Connection failed. URL may be invalid.";
+            }
+        }
+        // onPostExecute displays the results of the AsyncTask.
+        @Override
+        protected void onPostExecute(String result) {
+            initializeAppsList();
+            updateAppData(mHelper.getAllApps().get(0));
         }
     }
 }

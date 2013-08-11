@@ -1,5 +1,13 @@
 package com.stub.entity;
 
+import org.moskito.control.requester.Requester;
+import org.moskito.control.requester.config.RequesterConfiguration;
+import org.moskito.control.requester.data.Component;
+import org.moskito.control.requester.data.DataProvider;
+import org.moskito.control.requester.data.StatusResponse;
+import org.moskito.control.requester.parser.ResponseParser;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -11,39 +19,41 @@ import java.util.List;
 public class Helper {
 
     private List<Application> applications;
+    StatusResponse statusResponse;
 
-    public Helper(){
-        applications = new ArrayList<Application>();
-        Application app1 = new Application("SecondApp", AppColor.LIME);
-        Application app2 = new Application("FirstApp", AppColor.MAGENTA);
-        String info = "Can't connect to the FirstApp.server04";
-        Date date1 = new Date();
-        date1.setYear(2013);
-        date1.setMonth(7);
-        date1.setDate(23);
-        date1.setHours(12);
-        date1.setMinutes(23);
-        date1.setSeconds(47);
-        Server server1 = new Server("localhost", info, date1, ServerState.GREEN);
-        Server server2 = new Server("server04", info, date1, ServerState.RED);
-        Server server3 = new Server("XYZ", info, date1, ServerState.GREEN);
-        app2.addServer(server1);
-        app2.addServer(server2);
-        app2.addServer(server3);
-        Change change1 = new Change(server1, ServerState.GREEN, ServerState.ORANGE, new Date(), "info1");
-        Change change2 = new Change(server2, ServerState.VIOLET, ServerState.RED, new Date(), "info2");
-        Change change3 = new Change(server1, ServerState.ORANGE, ServerState.YELLOW, new Date(), "info3");
-        Change change4 = new Change(server1, ServerState.YELLOW, ServerState.GREEN, new Date(), "info4");
-        app2.addChange(change1);
-        app2.addChange(change2);
-        app2.addChange(change3);
-        app2.addChange(change4);
-        applications.add(app1);
-        applications.add(app2);
+    public Helper(String url) throws IOException {
+        createConnection(url);
+    }
 
+    private void createConnection(String url){
+        RequesterConfiguration configuration = new RequesterConfiguration();
+        configuration.setConnectTimeout(100000);
+        configuration.setReadTimeout(100000);
+        Requester requester = new Requester(configuration);
+        ResponseParser parser = new ResponseParser();
+        DataProvider dataProvider = new DataProvider(requester, parser);
+        statusResponse = dataProvider.getStatusResponse(url);
     }
 
     public List<Application> getAllApps(){
-        return applications;
+        List<Application> appList = new ArrayList<Application>();
+        for (org.moskito.control.requester.data.Application app: statusResponse.getApplications())  {
+            String appName = app.getName();
+            State appColor = State.valueOf(app.getApplicationColor().toString());
+            Application application = new Application(appName, appColor);
+            for(Component component : app.getComponents()) {
+                String name = component.getName();
+                String info = new String();
+                for(String message : component.getMessages()) {
+                    info.concat(message);
+                }
+                Date date = new Date(component.getLastUpdateTimestamp());
+                State state = State.valueOf(component.getColor().toString());
+                Server server = new Server(name, info, date, state);
+                application.addServer(server);
+            }
+            appList.add(application);
+        }
+        return appList;
     }
 }
