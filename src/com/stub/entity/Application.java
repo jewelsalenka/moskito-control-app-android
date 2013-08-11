@@ -29,6 +29,10 @@ public class Application implements Serializable{
         history.add(historyItem);
     }
 
+    public void addHistory(List<HistoryItem> history){
+        this.history.addAll(history);
+    }
+
     public String getName() {
 
         return name;

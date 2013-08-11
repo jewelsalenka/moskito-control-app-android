@@ -59,7 +59,7 @@ public class HistoryAdapter extends BaseAdapter {
 
         HistoryItem historyItem = (HistoryItem) getItem(position);
         dateView.setText(getDateString(historyItem.getDate()));
-        componentNameView.setText(historyItem.getComponent().getName());
+        componentNameView.setText(historyItem.getComponentName());
         Drawable oldState = context.getResources().getDrawable(historyItem.getOldColorId());
         oldStateView.setBackgroundDrawable(oldState);
         Drawable newState = context.getResources().getDrawable(historyItem.getNewColorId());

@@ -3,6 +3,7 @@ package com.stub.entity;
 import org.moskito.control.requester.Requester;
 import org.moskito.control.requester.config.RequesterConfiguration;
 import org.moskito.control.requester.data.DataProvider;
+import org.moskito.control.requester.data.HistoryResponse;
 import org.moskito.control.requester.data.StatusResponse;
 import org.moskito.control.requester.parser.ResponseParser;
 
@@ -19,6 +20,7 @@ public class Helper {
 
     private List<Application> applications;
     StatusResponse statusResponse;
+    DataProvider dataProvider;
 
     public Helper(String url) throws IOException {
         createConnection(url);
@@ -30,8 +32,26 @@ public class Helper {
         configuration.setReadTimeout(100000);
         Requester requester = new Requester(configuration);
         ResponseParser parser = new ResponseParser();
-        DataProvider dataProvider = new DataProvider(requester, parser);
+        dataProvider = new DataProvider(requester, parser);
         statusResponse = dataProvider.getStatusResponse(url);
+    }
+
+    public List<HistoryItem> getHistory(String url, String appName) throws IOException{
+        List<HistoryItem> history = new ArrayList<HistoryItem>();
+        HistoryResponse historyResponse = dataProvider.getHistoryResponse(url, appName);
+        for(org.moskito.control.requester.data.HistoryItem historyItem : historyResponse.getHistoryItems()) {
+            String componentName = historyItem.getComponentName();
+            State oldState = State.valueOf(historyItem.getOldStatus().toString());
+            State newState = State.valueOf(historyItem.getNewStatus().toString());
+            String info = new String();
+            for(String message : historyItem.getNewMessages()) {
+                info.concat(message);
+            }
+            Date date = new Date(historyItem.getTimestamp());
+            HistoryItem item = new HistoryItem(componentName, oldState, newState, date, info);
+            history.add(item);
+        }
+        return history;
     }
 
     public List<Application> getAllApps(){

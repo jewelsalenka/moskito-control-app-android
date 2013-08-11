@@ -8,22 +8,22 @@ import java.util.Date;
  * Date: 13.07.13
  */
 public class HistoryItem implements Serializable{
-    private Component component;
+    private String componentName;
     private State oldColor;
     private State newColor;
     private String info;
     private Date date;
 
-    public HistoryItem(Component component, State oldColor, State newColor, Date date, String info) {
-        this.component = component;
+    public HistoryItem(String componentName, State oldColor, State newColor, Date date, String info) {
+        this.componentName = componentName;
         this.oldColor = oldColor;
         this.newColor = newColor;
         this.date = date;
         this.info = info;
     }
 
-    public Component getComponent() {
-        return component;
+    public String getComponentName() {
+        return componentName;
     }
 
     public int getOldColorId() {

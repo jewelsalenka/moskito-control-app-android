@@ -63,6 +63,7 @@ public class ApplicationActivity extends Activity{
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 updateAppData(mHelper.getAllApps().get(position));
+                new HistoryGetter().execute("http://server04.test.anotheria.net:8999/moskito-control/rest/history");
                 leftDrawer.close();
             }
         });
@@ -114,13 +115,13 @@ public class ApplicationActivity extends Activity{
         ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
         if (networkInfo != null && networkInfo.isConnected()) {
-            new DownloadWebpageTask().execute(stringUrl);
+            new HelperConnection().execute(stringUrl);
         } else {
             noDataView.setText("No network connection available.");
         }
     }
 
-    private class DownloadWebpageTask extends AsyncTask<String, Void, String> {
+    private class HelperConnection extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... urls) {
             try {
@@ -136,6 +137,26 @@ public class ApplicationActivity extends Activity{
         protected void onPostExecute(String result) {
             initializeAppsList();
             updateAppData(mHelper.getAllApps().get(0));
+            new HistoryGetter().execute("http://server04.test.anotheria.net:8999/moskito-control/rest/history");
+        }
+    }
+
+    private class HistoryGetter extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... urls) {
+            try {
+                currentApp.addHistory(mHelper.getHistory(urls[0], currentApp.getName()));
+                return "Connection established";
+            } catch (IOException e) {
+                noDataView.setText("Connection failed. URL may be invalid.");
+                return "Connection failed. URL may be invalid.";
+            }
+        }
+        // onPostExecute displays the results of the AsyncTask.
+        @Override
+        protected void onPostExecute(String result) {
+            initializeHistoryList();
+            //updateAppData(mHelper.getAllApps().get(0));
         }
     }
 }
