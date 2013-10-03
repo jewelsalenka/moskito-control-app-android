@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                tools:ignore="All"
                 android:orientation="vertical"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent">
@@ -25,12 +23,12 @@
                 android:text="@string/history"
                 android:gravity="center"
                 android:layout_marginTop="@dimen/header_height"
-                android:background="@color/dark_grey"/>
+                android:background="@drawable/history_button"/>
 
         <RelativeLayout android:id="@id/bottom_content"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@color/light_grey">
+                        android:background="@drawable/history_button">
             <ListView
                     android:id="@+id/history_list"
                     android:layout_width="match_parent"

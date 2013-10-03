@@ -3,7 +3,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/light_grey">
+                android:background="@drawable/main_font">
 
     <include layout="@layout/header"/>
     <TextView
@@ -19,7 +19,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/header_height"
-            android:layout_marginBottom="@dimen/history_button_height"/>
+            android:layout_marginBottom="@dimen/history_button_height"
+            android:divider="@drawable/main_list_devider"
+            android:dividerHeight="1dp"/>
     <TextView
             android:id="@+id/history_button"
             android:layout_height="@dimen/history_button_height"
@@ -27,5 +29,5 @@
             android:text="@string/history"
             android:layout_alignParentBottom="true"
             android:gravity="center"
-            android:background="@color/dark_grey"/>
+            android:background="@drawable/history_button"/>
 </RelativeLayout>
