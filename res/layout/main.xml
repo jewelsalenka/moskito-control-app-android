@@ -9,35 +9,7 @@
 
     <include layout="@layout/application"/>
 
-    <SlidingDrawer
-            android:id="@+id/left_drawer"
-            android:layout_width="300dp"
-            android:layout_height="match_parent"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentBottom="true"
-            android:handle="@+id/left_handle"
-            android:content="@+id/left_content"
-            android:orientation="horizontal"
-            android:rotation="180">
-
-        <View
-                android:id="@id/left_handle"
-                android:layout_height="match_parent"
-                android:layout_width="70dp"
-                />
-
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                      android:id="@id/left_content"
-                      android:orientation="vertical"
-                      android:layout_width="match_parent"
-                      android:layout_height="match_parent"
-                      android:background="@color/light_grey"
-                      android:rotation="180">
-            <include layout="@layout/applications"/>
-        </LinearLayout>
-    </SlidingDrawer>
-
-    <SlidingDrawer
+      <SlidingDrawer
             android:id="@+id/bottom_drawer"
             android:layout_width="match_parent"
             android:layout_height="400dp"

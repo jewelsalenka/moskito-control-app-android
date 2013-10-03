@@ -5,7 +5,7 @@
       <profile>
         <option name="device" value="2.7in QVGA" />
         <option name="deviceConfiguration" value="Portrait" />
-        <option name="targetHashString" value="android-17" />
+        <option name="targetHashString" value="android-16" />
         <option name="theme" value="Theme" />
       </profile>
     </option>
@@ -17,7 +17,7 @@
         <option name="device" value="2.7in QVGA" />
         <option name="dockMode" value="" />
         <option name="nightMode" value="notnight" />
-        <option name="targetHashString" value="android-17" />
+        <option name="targetHashString" value="android-16" />
         <option name="theme" value="Theme" />
         <option name="visible" value="false" />
       </GlobalState>
@@ -29,26 +29,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f5dd896a-20fb-4525-b6f6-35b13d27b44c" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/libs/configureme-2.0.1.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/libs/gson-2.2.4.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/libs/guava-14.0.1.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/libs/json-20090211.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/libs/log4j-1.2.17.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/libs/moskito-control-requester-1.0-SNAPSHOT.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/gen/com/example/moskito_control_app_android/BuildConfig.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/gen/com/example/moskito_control_app_android/Manifest.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/gen/com/example/moskito_control_app_android/R.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/moskito/ApplicationActivity.java" afterPath="$PROJECT_DIR$/src/com/moskito/ApplicationActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/applications.xml" afterPath="$PROJECT_DIR$/res/layout/applications.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values/dimen.xml" afterPath="$PROJECT_DIR$/res/values/dimen.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/main.xml" afterPath="$PROJECT_DIR$/res/layout/main.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/moskito-control-app-android.iml" afterPath="$PROJECT_DIR$/moskito-control-app-android.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project.properties" afterPath="$PROJECT_DIR$/project.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="moskito-control-app-android.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="f5dd896a-20fb-4525-b6f6-35b13d27b44c" time="1376210068026" ignored="false" />
-    <file path="$PROJECT_DIR$/../../../moskito-control-app-android/gen/com/example/moskito_control_app_android/BuildConfig.java" changelist="f5dd896a-20fb-4525-b6f6-35b13d27b44c" time="1374226875735" ignored="false" />
+    <file path="/Dummy.txt" changelist="f5dd896a-20fb-4525-b6f6-35b13d27b44c" time="1380835371327" ignored="false" />
+    <file path="S:/../moskito-control-app-android/gen/com/example/moskito_control_app_android/BuildConfig.java" changelist="f5dd896a-20fb-4525-b6f6-35b13d27b44c" time="1374226875735" ignored="false" />
     <file path="$PROJECT_DIR$/src/com/example/MoskitoControl/ApplicationsActivity.java" changelist="f5dd896a-20fb-4525-b6f6-35b13d27b44c" time="1374226877133" ignored="false" />
-    <file path="/fragment.java" changelist="f5dd896a-20fb-4525-b6f6-35b13d27b44c" time="1376215091142" ignored="false" />
+    <file path="/fragment.java" changelist="f5dd896a-20fb-4525-b6f6-35b13d27b44c" time="1380835777463" ignored="false" />
     <file path="/ServerAdapter.java" changelist="f5dd896a-20fb-4525-b6f6-35b13d27b44c" time="1376205945294" ignored="false" />
     <file path="/ServerState.java" changelist="f5dd896a-20fb-4525-b6f6-35b13d27b44c" time="1374400573938" ignored="false" />
     <file path="/.gitignore" changelist="f5dd896a-20fb-4525-b6f6-35b13d27b44c" time="1374402625371" ignored="false" />
     <file path="/application.xml" changelist="f5dd896a-20fb-4525-b6f6-35b13d27b44c" time="1375901295960" ignored="false" />
-    <file path="/ApplicationActivity.java" changelist="f5dd896a-20fb-4525-b6f6-35b13d27b44c" time="1376214254178" ignored="false" />
+    <file path="/ApplicationActivity.java" changelist="f5dd896a-20fb-4525-b6f6-35b13d27b44c" time="1380835658682" ignored="false" />
     <file path="/dimen.xml" changelist="f5dd896a-20fb-4525-b6f6-35b13d27b44c" time="1374724386286" ignored="false" />
     <file path="/server_list_item_advanced.xml" changelist="f5dd896a-20fb-4525-b6f6-35b13d27b44c" time="1375898567826" ignored="false" />
     <file path="/server_list_item.xml" changelist="f5dd896a-20fb-4525-b6f6-35b13d27b44c" time="1374438902618" ignored="false" />
@@ -62,7 +66,7 @@
     <file path="/a.xml" changelist="f5dd896a-20fb-4525-b6f6-35b13d27b44c" time="1376162906749" ignored="false" />
     <file path="/AppAdapter.java" changelist="f5dd896a-20fb-4525-b6f6-35b13d27b44c" time="1376076879777" ignored="false" />
     <file path="/main.xml" changelist="f5dd896a-20fb-4525-b6f6-35b13d27b44c" time="1376216097674" ignored="false" />
-    <file path="/applications.xml" changelist="f5dd896a-20fb-4525-b6f6-35b13d27b44c" time="1376116203985" ignored="false" />
+    <file path="/applications.xml" changelist="f5dd896a-20fb-4525-b6f6-35b13d27b44c" time="1380835451690" ignored="false" />
     <file path="/history_list_item_advanced.xml" changelist="f5dd896a-20fb-4525-b6f6-35b13d27b44c" time="1376129316850" ignored="false" />
     <file path="/DataProviderCreater.java" changelist="f5dd896a-20fb-4525-b6f6-35b13d27b44c" time="1376169680788" ignored="false" />
     <file path="/AppColor.java" changelist="f5dd896a-20fb-4525-b6f6-35b13d27b44c" time="1376171264525" ignored="false" />
@@ -125,7 +129,7 @@
       </breakpoint>
     </breakpoint_any>
     <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true">
-      <breakpoint url="file://$PROJECT_DIR$/src/com/moskito/ApplicationActivity.java" line="147" class="com.moskito.ApplicationActivity.HistoryGetter" package="com.moskito">
+      <breakpoint url="file://$PROJECT_DIR$/src/com/moskito/ApplicationActivity.java" line="146" class="com.moskito.ApplicationActivity.HelperConnection" package="com.moskito">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -151,46 +155,57 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ApplicationActivity.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="ApplicationActivity.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/moskito/ApplicationActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="44" column="0" selection-start="1285" selection-end="1285" vertical-scroll-proportion="0.0">
+            <state line="42" column="60" selection-start="1320" selection-end="1320" vertical-scroll-proportion="0.13917525">
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1436#1854#0" expanded="true" />
-                <element signature="e#1843#1844#0" expanded="true" />
-                <element signature="e#2125#2525#0" expanded="true" />
-                <element signature="e#2514#2515#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.xml" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="dimen.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/res/values/dimen.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="20" column="39" selection-start="1069" selection-end="1069" vertical-scroll-proportion="-14.4">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/res/layout/main.xml">
           <provider editor-type-id="android-designer">
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state line="26" column="16" selection-start="1011" selection-end="1011" vertical-scroll-proportion="0.84011626">
+            <state line="2" column="0" selection-start="40" selection-end="363" vertical-scroll-proportion="-0.72">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AlertController.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/Development/Android/adt-bundle-linux-x86-20130522/sdk/sources/android-17/com/android/internal/app/AlertController.java">
+      <file leaf-file-name="application.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/res/layout/application.xml">
+          <provider editor-type-id="android-designer">
+            <state />
+          </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state line="878" column="46" selection-start="32463" selection-end="32463" vertical-scroll-proportion="0.0">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ViewLayersActivity.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/Development/Android/adt-bundle-linux-x86-20130522/sdk/sources/android-17/com/android/test/hwui/ViewLayersActivity.java">
+      <file leaf-file-name="applications.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/res/layout/applications.xml">
+          <provider editor-type-id="android-designer">
+            <state />
+          </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state line="107" column="42" selection-start="4184" selection-end="4184" vertical-scroll-proportion="0.0">
+            <state line="19" column="58" selection-start="878" selection-end="878" vertical-scroll-proportion="-6.84">
               <folding />
             </state>
           </provider>
@@ -199,9 +214,9 @@
       <file leaf-file-name="Helper.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/stub/entity/Helper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="53" column="23" selection-start="2179" selection-end="2179" vertical-scroll-proportion="0.0">
+            <state line="16" column="60" selection-start="525" selection-end="525" vertical-scroll-proportion="0.0">
               <folding>
-                <element signature="e#1352#1365#0" expanded="true" />
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -210,10 +225,8 @@
       <file leaf-file-name="HistoryItem.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/stub/entity/HistoryItem.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="11" selection-start="330" selection-end="330" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state line="15" column="11" selection-start="318" selection-end="318" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -245,7 +258,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/com/stub/entity/DataProviderCreater.java" />
         <option value="$PROJECT_DIR$/src/com/stub/entity/AppColor.java" />
         <option value="$PROJECT_DIR$/src/com/stub/entity/State.java" />
         <option value="$PROJECT_DIR$/src/com/stub/entity/Server.java" />
@@ -253,14 +265,15 @@
         <option value="$PROJECT_DIR$/src/com/moskito/ServerAdapter.java" />
         <option value="$PROJECT_DIR$/src/com/stub/entity/Change.java" />
         <option value="$PROJECT_DIR$/build.xml" />
-        <option value="$PROJECT_DIR$/res/values/dimen.xml" />
         <option value="$PROJECT_DIR$/src/com/stub/entity/HistoryItem.java" />
         <option value="$PROJECT_DIR$/src/com/stub/entity/Helper.java" />
         <option value="$PROJECT_DIR$/src/com/stub/entity/Application.java" />
         <option value="$PROJECT_DIR$/src/com/moskito/HistoryAdapter.java" />
         <option value="$PROJECT_DIR$/src/com/moskito/ComponentAdapter.java" />
-        <option value="$PROJECT_DIR$/src/com/moskito/ApplicationActivity.java" />
         <option value="$PROJECT_DIR$/res/layout/main.xml" />
+        <option value="$PROJECT_DIR$/res/layout/applications.xml" />
+        <option value="$PROJECT_DIR$/src/com/moskito/ApplicationActivity.java" />
+        <option value="$PROJECT_DIR$/res/values/dimen.xml" />
       </list>
     </option>
   </component>
@@ -268,8 +281,10 @@
     <treeState />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="width" value="1280" />
-    <option name="height" value="775" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1382" />
+    <option name="height" value="744" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -309,6 +324,11 @@
   <component name="ProjectReloadState">
     <option name="STATE" value="0" />
   </component>
+  <component name="ProjectStructureProblems">
+    <ignored-problems>
+      <problem id="unused-library(library:project:libs)" />
+    </ignored-problems>
+  </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1" splitterProportion="0.5">
       <flattenPackages />
@@ -328,10 +348,6 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="moskito-control-app-android" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="External Libraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -401,6 +417,10 @@
               <option name="myItemId" value="res" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="values" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -430,39 +450,35 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="libs" />
+              <option name="myItemId" value="res" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="project.structure.last.edited" value="Libraries" />
-    <property name="SHOW_ALL_PROCESSES" value="false" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="GoToFile.includeJavaFiles" value="false" />
     <property name="project.structure.proportion" value="0.15" />
-    <property name="OverrideImplement.combined" value="true" />
     <property name="options.splitter.main.proportions" value="0.3" />
-    <property name="recentsLimit" value="5" />
     <property name="MemberChooser.sorted" value="false" />
-    <property name="options.lastSelected" value="preferences.sourceCode.XML" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/libs/moskito-control-requester-1.0-SNAPSHOT.jar!/" />
+    <property name="options.lastSelected" value="reference.settingsdialog.IDE.editor.colors.Font" />
+    <property name="recentsLimit" value="5" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../samples/SlidingMenu-master/SlidingMenu-master/library" />
     <property name="AndroidLayoutSelectedEditor" value="text-editor" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="DEBUGGABLE_DEVICE" value="emulator-5554 (MyDevice)" />
     <property name="MemberChooser.copyJavadoc" value="false" />
-    <property name="DEBUGGABLE_PROCESS" value="com.example.moskito_control_app_android" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="restartRequiresConfirmation" value="true" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -597,11 +613,11 @@
     </configuration>
     <configuration default="false" name="moskito-control-app-android" type="AndroidRunConfigurationType" factoryName="Android Application">
       <module name="moskito-control-app-android" />
-      <option name="ACTIVITY_CLASS" value="com.moskito.ApplicationActivity" />
-      <option name="MODE" value="specific_activity" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <option name="MODE" value="default_activity" />
       <option name="DEPLOY" value="true" />
-      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
-      <option name="PREFERRED_AVD" value="MyDevice" />
+      <option name="TARGET_SELECTION_MODE" value="USB_DEVICE" />
+      <option name="PREFERRED_AVD" value="" />
       <option name="USE_COMMAND_LINE" value="true" />
       <option name="COMMAND_LINE" value="" />
       <option name="WIPE_USER_DATA" value="false" />
@@ -693,14 +709,15 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1280" height="775" extended-state="0" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="false" />
     <layout>
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.9096672" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21439394" sideWeight="0.9096672" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290938" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22528364" sideWeight="0.6244057" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22734499" sideWeight="0.8737785" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15397082" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39936608" sideWeight="0.7504052" order="3" side_tool="false" content_ui="tabs" />
@@ -709,7 +726,7 @@
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26012966" sideWeight="0.39336494" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290938" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5627981" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32307693" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.8330684" sideWeight="0.85899514" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296355" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -717,13 +734,12 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298217" sideWeight="0.73058635" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19869708" sideWeight="0.7058824" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.29411766" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298217" sideWeight="0.9096672" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19848485" sideWeight="0.7076923" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2923077" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298217" sideWeight="0.9096672" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22734499" sideWeight="0.8737785" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -769,7 +785,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="History from network." />
+    <option name="LAST_COMMIT_MESSAGE" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -783,12 +799,6 @@
     <option name="UPDATE_FILTER_BY_SCOPE" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value=".gitignore added." />
-    <MESSAGE value="Navigation between layout have been added." />
-    <MESSAGE value="History advanced item has been added." />
-    <MESSAGE value="Network connection has been added." />
-    <MESSAGE value="Code refactoring." />
-    <MESSAGE value="History from network." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -798,26 +808,52 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../moskito-control-requester/src/main/java/org/moskito/control/requester/Requester.java">
+    <entry file="file://$PROJECT_DIR$/src/com/moskito/ApplicationActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="13" selection-start="585" selection-end="585" vertical-scroll-proportion="0.0">
+        <state line="44" column="0" selection-start="1324" selection-end="1324" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/main.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="16" selection-start="1048" selection-end="1048" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../moskito-control-requester/src/main/java/org/moskito/control/requester/data/DataProvider.java">
+    <entry file="file://$PROJECT_DIR$/src/com/stub/entity/Helper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="77" selection-start="395" selection-end="395" vertical-scroll-proportion="0.19767442">
+        <state line="53" column="23" selection-start="2183" selection-end="2183" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/stub/entity/HistoryItem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="11" selection-start="331" selection-end="331" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/stub/entity/Application.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="32" column="28" selection-start="817" selection-end="817" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/stub/entity/HistoryItem.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="11" selection-start="330" selection-end="330" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state line="15" column="11" selection-start="318" selection-end="318" vertical-scroll-proportion="0.0">
+          <folding />
         </state>
       </provider>
     </entry>
@@ -828,25 +864,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/stub/entity/Helper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="53" column="23" selection-start="2179" selection-end="2179" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#1352#1365#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/moskito/HistoryAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="4" column="11" selection-start="108" selection-end="108" vertical-scroll-proportion="0.119929455">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Development/Android/adt-bundle-linux-x86-20130522/sdk/sources/android-17/android/widget/AdapterView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="760" column="18" selection-start="25187" selection-end="25187" vertical-scroll-proportion="0.33222592">
           <folding />
         </state>
       </provider>
@@ -861,41 +881,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Development/Android/adt-bundle-linux-x86-20130522/sdk/sources/android-17/android/database/DataSetObservable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="16" selection-start="1146" selection-end="1146" vertical-scroll-proportion="0.33275864">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Development/Android/adt-bundle-linux-x86-20130522/sdk/sources/android-17/android/widget/BaseAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="49" column="35" selection-start="1802" selection-end="1802" vertical-scroll-proportion="0.36206895">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Development/Android/adt-bundle-linux-x86-20130522/sdk/sources/android-17/com/android/test/hwui/ViewLayersActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="107" column="42" selection-start="4184" selection-end="4184" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Development/Android/adt-bundle-linux-x86-20130522/sdk/sources/android-17/com/android/internal/app/AlertController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="878" column="46" selection-start="32463" selection-end="32463" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Development/Android/adt-bundle-linux-x86-20130522/sdk/sources/android-17/java/util/List.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="163" column="13" selection-start="6835" selection-end="6835" vertical-scroll-proportion="0.33275864">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/moskito/ComponentAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="70" column="9" selection-start="2330" selection-end="2330" vertical-scroll-proportion="4.877049">
@@ -905,16 +890,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/moskito/ApplicationActivity.java">
+    <entry file="file://$PROJECT_DIR$/res/layout/application.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state line="44" column="0" selection-start="1285" selection-end="1285" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1436#1854#0" expanded="true" />
-            <element signature="e#1843#1844#0" expanded="true" />
-            <element signature="e#2125#2525#0" expanded="true" />
-            <element signature="e#2514#2515#0" expanded="true" />
-          </folding>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
         </state>
       </provider>
     </entry>
@@ -923,8 +905,43 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="16" selection-start="1011" selection-end="1011" vertical-scroll-proportion="0.84011626">
+        <state line="2" column="0" selection-start="40" selection-end="363" vertical-scroll-proportion="-0.72">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/applications.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="58" selection-start="878" selection-end="878" vertical-scroll-proportion="-6.84">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/values/dimen.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="39" selection-start="1069" selection-end="1069" vertical-scroll-proportion="-14.4">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/stub/entity/Helper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="60" selection-start="525" selection-end="525" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/moskito/ApplicationActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="42" column="60" selection-start="1320" selection-end="1320" vertical-scroll-proportion="0.13917525">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -990,9 +1007,21 @@
           </splitter-proportions>
         </settings>
       </state>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>Android 4.1.2 Platform</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.37402192" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
-          <last-edited>configureme-2.0.1</last-edited>
+          <last-edited>libs</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

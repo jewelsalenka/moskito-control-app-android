@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
 import com.example.moskito_control_app_android.R;
+import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.stub.entity.*;
 
 import java.io.IOException;
@@ -21,23 +22,31 @@ public class ApplicationActivity extends Activity{
     private static Helper mHelper;
     private Application currentApp;
     private TextView noDataView;
-    private SlidingDrawer leftDrawer;
     private View header;
     TextView appTitleView;
 
     public void onCreate(Bundle bundle){
         super.onCreate(bundle);
         setContentView(R.layout.main);
+        SlidingMenu menu = new SlidingMenu(this);
+        menu.setMode(SlidingMenu.LEFT);
+        menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+        menu.setShadowWidthRes(R.dimen.shadow_width);
+//        menu.setShadowDrawable(R.drawable.shadow);
+        menu.setBehindOffsetRes(R.dimen.slidingmenu_offset);
+        menu.setFadeDegree(0.35f);
+        menu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
+        menu.setMenu(R.layout.applications);
         obtainView();
         createConnection();
     }
 
     private void obtainView(){
-        leftDrawer = (SlidingDrawer) findViewById(R.id.left_drawer);
         noDataView = (TextView) findViewById(R.id.no_data);
         header = findViewById(R.id.header);
         appTitleView = (TextView) header.findViewById(R.id.application_title);
         updateHead();
+
     }
 
     private void initializeServersList(){
@@ -64,7 +73,6 @@ public class ApplicationActivity extends Activity{
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 updateAppData(mHelper.getAllApps().get(position));
                 new HistoryGetter().execute("http://server04.test.anotheria.net:8999/moskito-control/rest/history");
-                leftDrawer.close();
             }
         });
     }
