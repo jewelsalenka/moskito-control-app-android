@@ -29,11 +29,19 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/history_button">
+            <View
+                    android:id="@+id/history_button_devider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@id/history_button"
+                    android:background="@drawable/main_list_devider"/>
             <ListView
                     android:id="@+id/history_list"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_below="@id/history_button"/>
+                    android:divider="@drawable/main_list_devider"
+                    android:dividerHeight="1dp"
+                    android:layout_below="@id/history_button_devider"/>
         </RelativeLayout>
     </SlidingDrawer>
 

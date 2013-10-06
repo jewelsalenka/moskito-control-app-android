@@ -6,19 +6,29 @@
               android:id="@+id/header">
     <View
             android:id="@+id/settings"
-            android:layout_height="@dimen/icon_size"
-            android:layout_width="@dimen/icon_size"
-            android:background="@android:drawable/ic_menu_manage"
+            android:layout_height="@dimen/header_icon_height"
+            android:layout_width="@dimen/header_icon_width"
+            android:background="@drawable/settings"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/header_margin_left_right"/>
     <View
             android:id="@+id/info"
-            android:layout_height="@dimen/icon_size"
-            android:layout_width="@dimen/icon_size"
-            android:background="@android:drawable/ic_menu_info_details"
+            android:layout_height="@dimen/header_icon_height"
+            android:layout_width="@dimen/header_icon_width"
+            android:background="@drawable/info"
             android:layout_toLeftOf="@id/settings"
-            android:layout_centerVertical="true"/>
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/header_margin_left_right"/>
+
+    <View
+            android:id="@+id/chart"
+            android:layout_height="@dimen/header_icon_height"
+            android:layout_width="@dimen/header_icon_width"
+            android:background="@drawable/chart"
+            android:layout_toLeftOf="@id/info"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/header_margin_left_right"/>
 
     <TextView
             android:id="@+id/application_title"
@@ -27,16 +37,26 @@
             android:text="App"
             android:textColor="@color/wight"
             android:gravity="center"
-            android:layout_centerHorizontal="true"
-            />
+            android:layout_centerHorizontal="true"/>
     <View
             android:id="@+id/show_applications"
-            android:layout_height="@dimen/icon_size"
-            android:layout_width="@dimen/icon_size"
-            android:background="@android:drawable/ic_menu_sort_by_size"
+            android:layout_height="@dimen/header_icon_height"
+            android:layout_width="@dimen/header_icon_width"
+            android:background="@drawable/apps"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/header_margin_left_right"/>
+
+    <View
+            android:id="@+id/refresh"
+            android:layout_height="@dimen/header_icon_height"
+            android:layout_width="@dimen/header_icon_width"
+            android:background="@drawable/refresh"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/show_applications"
+            android:layout_marginLeft="@dimen/header_margin_left_right"/>
+
+
 
 
 

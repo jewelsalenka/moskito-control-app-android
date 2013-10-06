@@ -30,4 +30,5 @@
             android:layout_alignParentBottom="true"
             android:gravity="center"
             android:background="@drawable/history_button"/>
+
 </RelativeLayout>

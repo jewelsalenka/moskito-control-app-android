@@ -38,9 +38,9 @@
                 />
         <View
                 android:id="@+id/left_arrow"
-                android:layout_width="@dimen/component_show_hide_info_size"
-                android:layout_height="@dimen/component_show_hide_info_size"
-                android:background="@drawable/arrow"
+                android:layout_width="@dimen/history_status_arrow_size"
+                android:layout_height="@dimen/history_status_arrow_size"
+                android:background="@drawable/status_arrow"
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="@dimen/history_state_changes_layout_marginRight"
                 android:layout_marginLeft="@dimen/history_state_changes_layout_marginRight"

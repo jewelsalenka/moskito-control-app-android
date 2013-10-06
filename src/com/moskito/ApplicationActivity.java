@@ -37,6 +37,7 @@ public class ApplicationActivity extends Activity{
         menu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
         menu.setMenu(R.layout.applications);
         menu.setSecondaryMenu(R.layout.settings);
+        menu.setSecondaryShadowDrawable(R.drawable.right_shadow);
         obtainView();
         createConnection();
     }

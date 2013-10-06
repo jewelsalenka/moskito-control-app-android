@@ -56,7 +56,7 @@ public class ComponentAdapter extends BaseAdapter{
         TextView appName = (TextView) rootView.findViewById(R.id.server_name);
 
         Component component = (Component) getItem(position);
-        Drawable color = context.getResources().getDrawable(component.getState().getColorId());
+        Drawable color = context.getResources().getDrawable(component.getState().getColorDrawableId());
         componentStateView.setBackgroundDrawable(color);
         appName.setText(component.getName());
 

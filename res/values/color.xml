@@ -3,11 +3,10 @@
     <color name="dark_grey">#5F6056</color>
     <color name="light_grey">#E1E2E5</color>
     <color name="wight">#F4F4F4</color>
-    <color name="green">#1d9f2d</color>
-    <color name="lime">#1ee709</color>
-    <color name="yellow">#f8fb15</color>
-    <color name="orange">#fd8a24</color>
-    <color name="red">#e70919</color>
-    <color name="magenta">#f209fb</color>
-    <color name="violet">#a90ce3</color>
+    <color name="green">#85BD0A</color>
+    <color name="yellow">#DDCE00</color>
+    <color name="orange">#FF9019</color>
+    <color name="red">#F6302A</color>
+    <color name="none">#ECECEC</color>
+    <color name="purple">#E153B8</color>
 </resources>

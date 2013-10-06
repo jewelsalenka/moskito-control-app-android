@@ -25,11 +25,11 @@ public enum State {
             case RED:
                 return R.drawable.red;
             case PURPLE:
-                return R.drawable.violet;
+                return R.drawable.purple;
             case NONE:
 
             default:
-                return R.drawable.magenta;
+                return R.drawable.none;
         }
     }
 
@@ -44,11 +44,11 @@ public enum State {
             case RED:
                 return R.color.red;
             case PURPLE:
-                return R.color.violet;
+                return R.color.purple;
             case NONE:
 
             default:
-                return R.color.magenta;
+                return R.color.none;
         }
     }
 

@@ -5,17 +5,36 @@
                 tools:ignore="All"
                 android:orientation="vertical"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent">
+                android:layout_height="fill_parent"
+                android:background="@drawable/main_font">
     <TextView
             android:id="@+id/app_header"
-            android:layout_height="@dimen/header_height"
+            android:layout_height="@dimen/header_height_minus_devider"
             android:layout_width="match_parent"
             android:text="@string/applications"
             android:gravity="center_vertical"
-            android:background="@color/dark_grey"/>
+            android:layout_marginLeft="12dp"
+            android:textColor="@android:color/black"
+            />
+
+    <View
+            android:id="@+id/apps_devider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/app_header"
+            android:background="@drawable/main_list_devider"/>
+
     <ListView
             android:id="@+id/app_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:divider="@drawable/main_list_devider"
+            android:dividerHeight="1dp"
             android:layout_marginTop="@dimen/header_height"/>
+    <View
+            android:id="@+id/app_list_bottom_devider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/app_list"
+            android:background="@drawable/main_list_devider"/>
 </RelativeLayout>

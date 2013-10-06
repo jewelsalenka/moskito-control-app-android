@@ -27,11 +27,11 @@ public class HistoryItem implements Serializable{
     }
 
     public int getOldColorId() {
-        return oldColor.getColorId();
+        return oldColor.getColorDrawableId();
     }
 
     public int getNewColorId() {
-        return newColor.getColorId();
+        return newColor.getColorDrawableId();
     }
 
     public Date getDate() {
