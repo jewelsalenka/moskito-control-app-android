@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="@drawable/main_font">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/main_font">
     <TextView
             android:id="@+id/settings_header"
             android:layout_height="@dimen/header_height"
@@ -14,48 +14,166 @@
             android:layout_marginLeft="12dp"
             android:textColor="@android:color/black"/>
     <View
-        android:id="@+id/settings_devider"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@drawable/main_list_devider"/>
+            android:id="@+id/settings_devider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/settings_header"
+            android:background="@drawable/main_list_devider"/>
 
     <TextView
-        android:id="@+id/server_address"
-        android:layout_height="20dp"
-        android:layout_width="match_parent"
-        android:text="@string/server_address"
-        android:layout_marginLeft="12dp"/>
+            android:id="@+id/server_address"
+            android:layout_height="20dp"
+            android:layout_width="match_parent"
+            android:text="@string/server_address"
+            android:layout_below="@id/settings_devider"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="12dp"/>
     <EditText
             android:id="@+id/server_address_input"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="45dp"
             android:layout_marginRight="12dp"
             android:layout_marginLeft="12dp"
             android:textSize="14dp"
+            android:layout_below="@id/server_address"
             android:text="http://server04.test.anotheria.net"/>
     <TextView
             android:id="@+id/server_port"
             android:layout_height="20dp"
             android:layout_width="match_parent"
             android:layout_marginLeft="12dp"
+            android:layout_below="@id/server_address_input"
             android:text="@string/port"/>
+
+    <EditText
+            android:id="@+id/server_port_input"
+            android:layout_width="100dp"
+            android:layout_height="44dp"
+            android:textSize="14dp"
+            android:layout_marginLeft="12dp"
+            android:layout_below="@id/server_port"
+            android:text="8999"/>
+
+    <ToggleButton  android:id="@+id/http_or_https"
+                   android:layout_width="80dp"
+                   android:layout_height="45dp"
+                   android:layout_marginRight="12dp"
+                   android:layout_below="@id/server_port"
+                   android:layout_alignParentRight="true"
+                   android:textOn="@string/http"
+                   android:textOff="@string/https"/>
+
+
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginLeft="12dp"
-        >
-        <EditText
-                android:id="@+id/server_address_input"
-                android:layout_width="80dp"
-                android:layout_height="40dp"
-                android:textSize="14dp"
-                android:text="8999"/>
+            android:id="@+id/authorization"
+            android:gravity="right"
+            android:layout_width="fill_parent"
+            android:orientation="horizontal"
+            android:layout_below="@id/server_port_input"
+            android:layout_height="wrap_content">
+        <CheckBox
+                android:id="@+id/checkbox_authorization"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp">
+        </CheckBox>
+
         <TextView
-                android:id="@+id/server_port"
+                android:id="@+id/authorization_text"
                 android:layout_height="20dp"
                 android:layout_width="match_parent"
-                android:text="@string/port"/>
-
+                android:layout_marginLeft="12dp"
+                android:text="@string/authorization"/>
     </LinearLayout>
-</LinearLayout>
+
+    <TextView
+            android:id="@+id/login"
+            android:layout_height="20dp"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="12dp"
+            android:layout_below="@id/authorization"
+            android:text="@string/login"/>
+
+    <EditText
+            android:id="@+id/login_input"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:textSize="14dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_below="@id/login"
+            android:text="Alenka"/>
+
+    <TextView
+            android:id="@+id/password"
+            android:layout_height="20dp"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="12dp"
+            android:layout_below="@id/login_input"
+            android:text="@string/password"/>
+
+    <EditText
+            android:id="@+id/password_input"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:textSize="14dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_below="@id/password"
+            android:text="*************"/>
+
+    <TextView
+            android:id="@+id/update_interval_text"
+            android:layout_height="20dp"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="12dp"
+            android:layout_below="@id/password_input"
+            android:text="@string/update_interval"/>
+
+    <RelativeLayout
+            android:id="@+id/update_interval"
+            android:layout_width="match_parent"
+            android:layout_below="@id/update_interval_text"
+            android:background="@drawable/field"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_height="44dp">
+
+        <View android:id="@+id/minus_interval"
+                  android:layout_height="30dp"
+                  android:layout_width="30dp"
+                  android:layout_marginLeft="12dp"
+                  android:layout_centerVertical="true"
+                  android:background="@drawable/minus"/>
+
+        <TextView
+                android:id="@+id/interval_minutes"
+                android:layout_height="20dp"
+                android:layout_width="match_parent"
+                android:layout_centerInParent="true"
+                android:textSize="18dp"
+                android:gravity="center"
+                android:text="@string/interval"/>
+
+        <View android:id="@+id/plus_interval"
+              android:layout_height="30dp"
+              android:layout_width="30dp"
+              android:layout_alignParentRight="true"
+              android:layout_centerVertical="true"
+              android:layout_marginRight="12dp"
+              android:background="@drawable/plus"/>
+
+    </RelativeLayout>
+
+    <Button android:id="@+id/plus_interval"
+          android:layout_width="match_parent"
+          android:layout_height="44dp"
+          android:layout_below="@id/update_interval"
+          android:background="@color/green"
+          android:text="@string/save"
+          android:textSize="22dp"
+          android:gravity="center"
+          android:layout_marginTop="12dp"
+          android:layout_marginLeft="12dp"
+          android:layout_marginRight="12dp"/>
+</RelativeLayout>

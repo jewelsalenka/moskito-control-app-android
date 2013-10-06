@@ -9,5 +9,11 @@
     <string name="authorization">Authorization</string>
     <string name="update_interval">Update Interval (minutes)</string>
     <string name="no_data">No Data Available</string>
+    <string name="http">http</string>
+    <string name="https">https</string>
+    <string name="login">Login</string>
+    <string name="password">Password</string>
+    <string name="interval">1</string>
+    <string name="save">Save</string>
 
 </resources>
