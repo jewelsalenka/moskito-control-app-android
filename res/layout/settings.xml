@@ -92,6 +92,7 @@
             android:layout_width="match_parent"
             android:layout_marginLeft="12dp"
             android:layout_below="@id/authorization"
+            android:visibility="invisible"
             android:text="@string/login"/>
 
     <EditText
@@ -102,6 +103,7 @@
             android:layout_marginLeft="12dp"
             android:layout_marginRight="12dp"
             android:layout_below="@id/login"
+            android:visibility="invisible"
             android:text="Alenka"/>
 
     <TextView
@@ -110,6 +112,7 @@
             android:layout_width="match_parent"
             android:layout_marginLeft="12dp"
             android:layout_below="@id/login_input"
+            android:visibility="invisible"
             android:text="@string/password"/>
 
     <EditText
@@ -120,6 +123,8 @@
             android:layout_marginLeft="12dp"
             android:layout_marginRight="12dp"
             android:layout_below="@id/password"
+            android:visibility="invisible"
+            android:password="true"
             android:text="*************"/>
 
     <TextView
@@ -128,6 +133,7 @@
             android:layout_width="match_parent"
             android:layout_marginLeft="12dp"
             android:layout_below="@id/password_input"
+            android:visibility="invisible"
             android:text="@string/update_interval"/>
 
     <RelativeLayout
@@ -137,9 +143,10 @@
             android:background="@drawable/field"
             android:layout_marginLeft="12dp"
             android:layout_marginRight="12dp"
+            android:visibility="invisible"
             android:layout_height="44dp">
 
-        <View android:id="@+id/minus_interval"
+        <Button android:id="@+id/minus_interval"
                   android:layout_height="30dp"
                   android:layout_width="30dp"
                   android:layout_marginLeft="12dp"
@@ -155,7 +162,7 @@
                 android:gravity="center"
                 android:text="@string/interval"/>
 
-        <View android:id="@+id/plus_interval"
+        <Button android:id="@+id/plus_interval"
               android:layout_height="30dp"
               android:layout_width="30dp"
               android:layout_alignParentRight="true"
@@ -165,7 +172,8 @@
 
     </RelativeLayout>
 
-    <Button android:id="@+id/plus_interval"
+    <Button android:id="@+id/save_button"
+          android:visibility="invisible"
           android:layout_width="match_parent"
           android:layout_height="44dp"
           android:layout_below="@id/update_interval"
