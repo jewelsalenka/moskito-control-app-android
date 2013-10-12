@@ -2,6 +2,8 @@ package com.moskito;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -27,28 +29,32 @@ public class ApplicationActivity extends Activity{
     private EditText mLogin;
     private EditText mPassword;
     private TextView mMinutesUpdateInterval;
+    private SlidingMenu mSliderMenu;
+    private View mShowAppList;
+    private View mShowSettings;
 
     public void onCreate(Bundle bundle){
         super.onCreate(bundle);
         setContentView(R.layout.main);
-        initSlidingMenu();
         obtainView();
+        initHeader();
+        initSlidingMenu();
         initSettingsPanel();
         createConnection();
         updateHead();
     }
 
     private void initSlidingMenu(){
-        SlidingMenu menu = new SlidingMenu(this);
-        menu.setMode(SlidingMenu.LEFT_RIGHT);
-        menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
-        menu.setShadowWidthRes(R.dimen.shadow_width);
-        menu.setBehindOffsetRes(R.dimen.slidingmenu_offset);
-        menu.setFadeDegree(0.35f);
-        menu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
-        menu.setMenu(R.layout.applications);
-        menu.setSecondaryMenu(R.layout.settings);
-        menu.setSecondaryShadowDrawable(R.drawable.right_shadow);
+        mSliderMenu = new SlidingMenu(this);
+        mSliderMenu.setMode(SlidingMenu.LEFT_RIGHT);
+        mSliderMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+        mSliderMenu.setShadowWidthRes(R.dimen.shadow_width);
+        mSliderMenu.setBehindOffsetRes(R.dimen.slidingmenu_offset);
+        mSliderMenu.setFadeDegree(0.35f);
+        mSliderMenu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
+        mSliderMenu.setMenu(R.layout.applications);
+        mSliderMenu.setSecondaryMenu(R.layout.settings);
+        mSliderMenu.setSecondaryShadowDrawable(R.drawable.right_shadow);
     }
 
     private void initSettingsPanel(){
@@ -105,13 +111,29 @@ public class ApplicationActivity extends Activity{
     }
     private void obtainView(){
         mNoDataView = (TextView) findViewById(R.id.no_data);
-        mHeader = findViewById(R.id.header);
-        mAppTitleView = (TextView) mHeader.findViewById(R.id.application_title);
         mLogin = (EditText) findViewById(R.id.login_input);
         mPassword = (EditText) findViewById(R.id.password_input);
         mMinutesUpdateInterval = (TextView) findViewById(R.id.interval_minutes);
-    }
 
+    }
+    private void initHeader(){
+        mHeader = findViewById(R.id.header);
+        mAppTitleView = (TextView) mHeader.findViewById(R.id.application_title);
+        mShowAppList = mHeader.findViewById(R.id.show_applications);
+        mShowAppList.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                mSliderMenu.toggle();
+            }
+        });
+        mShowSettings = mHeader.findViewById(R.id.settings);
+        mShowSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mSliderMenu.showSecondaryMenu();
+            }
+        });
+    }
     private void initializeServersList(){
         final ComponentAdapter sAdapter = new ComponentAdapter(this, mCurrentApp.getComponents());
         ListView lvSimple = (ListView) findViewById(R.id.servers_list);
@@ -134,6 +156,7 @@ public class ApplicationActivity extends Activity{
         lvSimple.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                mSliderMenu.toggle();
                 updateAppData(mHelper.getAllApps().get(position));
                 new HistoryGetter().execute("http://server04.test.anotheria.net:8999/moskito-control/rest/history");
             }
