@@ -13,10 +13,10 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/header_margin_left_right"/>
     <View
-            android:id="@+id/info"
+            android:id="@+id/help"
             android:layout_height="@dimen/header_icon_height"
             android:layout_width="@dimen/header_icon_width"
-            android:background="@drawable/info"
+            android:background="@drawable/help_icon"
             android:layout_toLeftOf="@id/settings"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/header_margin_left_right"/>
@@ -26,7 +26,7 @@
             android:layout_height="@dimen/header_icon_height"
             android:layout_width="@dimen/header_icon_width"
             android:background="@drawable/chart"
-            android:layout_toLeftOf="@id/info"
+            android:layout_toLeftOf="@id/help"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/header_margin_left_right"/>
 

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>
+		Monitoring your application
+	</title>
+    <link type="text/css" rel="stylesheet" rev="stylesheet" href="styles.css" />
+</head>
+
+<body>
+<div class="content">
+    <p>The central point of MoSKito-Control App is the <b>main panel</b>. All the monitored components are listed here.</p>
+
+    <img src="component_list.png" alt="component list" width="300">
+
+    <p><b>Navigate through component list:</b> swipe up/down.</p>
+
+    <p>Every component has a health indicator. It is a sign that changes color in accordance with the state of component.</p>
+
+    <img src="health_indicator.png" width="300px" alt="health indicator">
+
+    <p>Colors of the health indicators stand for the following statuses:</p>
+
+    <p><img src="green.png" align="top" height="20" width="20"> = Good</p>
+    <p><img src="yellow.png" align="top" height="20" width="20"> = Minor problem</p>
+    <p><img src="orange.png" align="top" height="20" width="20"> = Yet minor problem that needs your attention</p>
+    <p><img src="red.png" align="top" height="20" width="20"> = Problem that needs inspection</p>
+    <p><img src="purple.png" align="top" height="20" width="20"> = Imminent system malfunction</p>
+    <p><img src="off.png" align="top" height="20" width="20"> = No Data Error</p>
+
+    <p><b>No Data Error</b> means no data is currently available for the component.
+       It might be caused by different reasons: from an unstable Internet connection up to a severe application breakdown.
+       In any case, the situation may require your attention.</p>
+
+    <p>The <b>top panel</b> takes the color of the worst component. For example, when all components are green and only one is purple, the panel becomes purple, too.</p>
+    <p>In case MoSKito-Control App cannot receive data, the panels will turn blue and a message will appear to explain what goes wrong.</p>
+</div>
+<h4><a href="index.html">Back to index</a></h4>
+</body>
+</html>

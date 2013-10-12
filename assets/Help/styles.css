@@ -1,0 +1,41 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #FFFFFF;
+    color: #000000;
+    font-family: Helvetica Neue;
+    font-size: 17px;
+}
+
+
+h4
+{
+    margin: 0;
+    font-weight: normal;
+}
+
+h4 a {
+    display: block;
+    color: #000000;
+    text-decoration: none;
+    height: 45px;
+    line-height: 45px;
+    border-bottom: 1.0px solid #c8c8c8;
+    padding-left: 15px;
+}
+
+a:hover {
+    color: #000000;
+    text-decoration: none;
+}
+
+.content
+{
+    padding-left: 15px;
+    padding-right: 15px;
+    border-bottom: 1.0px solid #c8c8c8;
+}

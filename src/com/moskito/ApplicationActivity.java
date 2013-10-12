@@ -2,8 +2,7 @@ package com.moskito;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.graphics.drawable.Drawable;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -109,6 +108,7 @@ public class ApplicationActivity extends Activity{
             }
         });
     }
+
     private void obtainView(){
         mNoDataView = (TextView) findViewById(R.id.no_data);
         mLogin = (EditText) findViewById(R.id.login_input);
@@ -116,6 +116,7 @@ public class ApplicationActivity extends Activity{
         mMinutesUpdateInterval = (TextView) findViewById(R.id.interval_minutes);
 
     }
+
     private void initHeader(){
         mHeader = findViewById(R.id.header);
         mAppTitleView = (TextView) mHeader.findViewById(R.id.application_title);
@@ -133,7 +134,17 @@ public class ApplicationActivity extends Activity{
                 mSliderMenu.showSecondaryMenu();
             }
         });
+        View mHelp = mHeader.findViewById(R.id.help);
+        mHelp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ApplicationActivity.this, HelpActivity.class);
+                ApplicationActivity.this.startActivity(intent);
+                overridePendingTransition(R.anim.push_up_in_help, R.anim.static_out_help);
+            }
+        });
     }
+
     private void initializeServersList(){
         final ComponentAdapter sAdapter = new ComponentAdapter(this, mCurrentApp.getComponents());
         ListView lvSimple = (ListView) findViewById(R.id.servers_list);
