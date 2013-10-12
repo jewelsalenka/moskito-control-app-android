@@ -1,6 +1,7 @@
 package com.moskito;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,9 +20,14 @@ import java.util.List;
 public class AppAdapter extends BaseAdapter {
     private List<Application> applications;
     private final Context context;
+    private int currentApp = 0;
+    private final Drawable arrow;
+    private final Drawable activeArrow;
 
     public AppAdapter(Context context, List<Application> apps) {
         this.context = context;
+        arrow = context.getResources().getDrawable(R.drawable.arrow_right);
+        activeArrow = context.getResources().getDrawable(R.drawable.arrow_right_active);
         if (apps != null){
             this.applications = apps;
         } else {
@@ -52,7 +58,11 @@ public class AppAdapter extends BaseAdapter {
         Application app = (Application) getItem(position);
         appColor.setBackgroundDrawable(context.getResources().getDrawable(app.getColor().getColorDrawableId()));
         appName.setText(app.getName());
-
+        rootView.findViewById(R.id.go_to_app).setBackground(position != currentApp ? arrow : activeArrow);
         return rootView;
+    }
+
+    public void setCurrentApp(int position){
+        currentApp = position;
     }
 }

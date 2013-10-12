@@ -60,6 +60,7 @@
                    android:layout_marginRight="12dp"
                    android:layout_below="@id/server_port"
                    android:layout_alignParentRight="true"
+                   android:checked="true"
                    android:textOn="@string/http"
                    android:textOff="@string/https"/>
 
@@ -92,7 +93,7 @@
             android:layout_width="match_parent"
             android:layout_marginLeft="12dp"
             android:layout_below="@id/authorization"
-            android:visibility="invisible"
+            android:visibility="gone"
             android:text="@string/login"/>
 
     <EditText
@@ -103,7 +104,7 @@
             android:layout_marginLeft="12dp"
             android:layout_marginRight="12dp"
             android:layout_below="@id/login"
-            android:visibility="invisible"
+            android:visibility="gone"
             android:text="Alenka"/>
 
     <TextView
@@ -123,7 +124,7 @@
             android:layout_marginLeft="12dp"
             android:layout_marginRight="12dp"
             android:layout_below="@id/password"
-            android:visibility="invisible"
+            android:visibility="gone"
             android:password="true"
             android:text="*************"/>
 
@@ -133,7 +134,7 @@
             android:layout_width="match_parent"
             android:layout_marginLeft="12dp"
             android:layout_below="@id/password_input"
-            android:visibility="invisible"
+            android:visibility="gone"
             android:text="@string/update_interval"/>
 
     <RelativeLayout
@@ -143,7 +144,6 @@
             android:background="@drawable/field"
             android:layout_marginLeft="12dp"
             android:layout_marginRight="12dp"
-            android:visibility="invisible"
             android:layout_height="44dp">
 
         <Button android:id="@+id/minus_interval"
@@ -173,7 +173,6 @@
     </RelativeLayout>
 
     <Button android:id="@+id/save_button"
-          android:visibility="invisible"
           android:layout_width="match_parent"
           android:layout_height="44dp"
           android:layout_below="@id/update_interval"

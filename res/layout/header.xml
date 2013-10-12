@@ -51,7 +51,7 @@
             android:id="@+id/refresh"
             android:layout_height="@dimen/header_icon_height"
             android:layout_width="@dimen/header_icon_width"
-            android:background="@drawable/refresh"
+            android:background="@drawable/refresh_icon"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@id/show_applications"
             android:layout_marginLeft="@dimen/header_margin_left_right"/>

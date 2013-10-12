@@ -3,11 +3,15 @@ package com.moskito;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.RotateAnimation;
 import android.widget.*;
 import com.example.moskito_control_app_android.R;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
@@ -25,8 +29,6 @@ public class ApplicationActivity extends Activity{
     private TextView mNoDataView;
     private View mHeader;
     private TextView mAppTitleView;
-    private EditText mLogin;
-    private EditText mPassword;
     private TextView mMinutesUpdateInterval;
     private SlidingMenu mSliderMenu;
     private View mShowAppList;
@@ -60,28 +62,22 @@ public class ApplicationActivity extends Activity{
         final CheckBox authorization = (CheckBox) findViewById(R.id.checkbox_authorization);
         final View login = findViewById(R.id.login);
         final View password = findViewById(R.id.password);
-        final View intervalText = findViewById(R.id.update_interval_text);
         final RelativeLayout interval = (RelativeLayout) findViewById(R.id.update_interval);
-        final View save = findViewById(R.id.save_button);
+        final EditText loginText = (EditText) findViewById(R.id.login_input);
+        final EditText passwordText = (EditText) findViewById(R.id.password_input);
         authorization.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (authorization.isChecked()){
                     login.setVisibility(View.VISIBLE);
-                    mLogin.setVisibility(View.VISIBLE);
+                    loginText.setVisibility(View.VISIBLE);
                     password.setVisibility(View.VISIBLE);
-                    mPassword.setVisibility(View.VISIBLE);
-                    interval.setVisibility(View.VISIBLE);
-                    save.setVisibility(View.VISIBLE);
-                    intervalText.setVisibility(View.VISIBLE);
+                    passwordText.setVisibility(View.VISIBLE);
                 } else {
-                    login.setVisibility(View.INVISIBLE);
-                    mLogin.setVisibility(View.INVISIBLE);
-                    password.setVisibility(View.INVISIBLE);
-                    mPassword.setVisibility(View.INVISIBLE);
-                    interval.setVisibility(View.INVISIBLE);
-                    save.setVisibility(View.INVISIBLE);
-                    intervalText.setVisibility(View.INVISIBLE);
+                    login.setVisibility(View.GONE);
+                    loginText.setVisibility(View.GONE);
+                    password.setVisibility(View.GONE);
+                    passwordText.setVisibility(View.GONE);
                 }
             }
         });
@@ -111,10 +107,7 @@ public class ApplicationActivity extends Activity{
 
     private void obtainView(){
         mNoDataView = (TextView) findViewById(R.id.no_data);
-        mLogin = (EditText) findViewById(R.id.login_input);
-        mPassword = (EditText) findViewById(R.id.password_input);
         mMinutesUpdateInterval = (TextView) findViewById(R.id.interval_minutes);
-
     }
 
     private void initHeader(){
@@ -143,6 +136,15 @@ public class ApplicationActivity extends Activity{
                 overridePendingTransition(R.anim.push_up_in_help, R.anim.static_out_help);
             }
         });
+        final View refresh = mHeader.findViewById(R.id.refresh);
+        refresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Animation animation = new RotateAnimation(0, 1080, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+                animation.setDuration(2800);
+                refresh.startAnimation(animation);
+            }
+        });
     }
 
     private void initializeServersList(){
@@ -161,7 +163,7 @@ public class ApplicationActivity extends Activity{
     }
 
     private void initializeAppsList(){
-        AppAdapter sAdapter = new AppAdapter(this, mHelper.getAllApps());
+        final AppAdapter sAdapter = new AppAdapter(this, mHelper.getAllApps());
         ListView lvSimple = (ListView) findViewById(R.id.app_list);
         lvSimple.setAdapter(sAdapter);
         lvSimple.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -169,6 +171,8 @@ public class ApplicationActivity extends Activity{
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 mSliderMenu.toggle();
                 updateAppData(mHelper.getAllApps().get(position));
+                sAdapter.setCurrentApp(position);
+                sAdapter.notifyDataSetChanged();
                 new HistoryGetter().execute("http://server04.test.anotheria.net:8999/moskito-control/rest/history");
             }
         });
