@@ -45,7 +45,7 @@ public class Helper {
             State newState = State.valueOf(historyItem.getNewStatus().toString());
             String info = new String();
             for(String message : historyItem.getNewMessages()) {
-                info.concat(message);
+                info += message;
             }
             Date date = new Date(historyItem.getTimestamp());
             HistoryItem item = new HistoryItem(componentName, oldState, newState, date, info);
@@ -64,7 +64,7 @@ public class Helper {
                 String name = component.getName();
                 String info = new String();
                 for(String message : component.getMessages()) {
-                    info.concat(message);
+                    info+=message;
                 }
                 Date date = new Date(component.getLastUpdateTimestamp());
                 State state = State.valueOf(component.getColor().toString());

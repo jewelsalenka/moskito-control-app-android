@@ -19,7 +19,7 @@
     <dimen name="btn_go_to_app_width">8dp</dimen>
     <dimen name="btn_go_to_app_height">12dp</dimen>
     <dimen name="no_data_marginTop">60dp</dimen>
-    <dimen name="history_change_date_width">80dp</dimen>
+    <dimen name="history_change_date_width">50dp</dimen>
     <dimen name="history_state_changes_layout_marginRight">7dp</dimen>
     <dimen name="history_date_textSize">10dp</dimen>
     <dimen name="shadow_width">30dp</dimen>

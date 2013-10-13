@@ -11,9 +11,11 @@ import android.widget.TextView;
 import com.example.moskito_control_app_android.R;
 import com.stub.entity.HistoryItem;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * User: Olenka Shemshey
@@ -58,7 +60,8 @@ public class HistoryAdapter extends BaseAdapter {
         View newStateView = rootView.findViewById(R.id.history_new_state);
 
         HistoryItem historyItem = (HistoryItem) getItem(position);
-        dateView.setText(getDateString(historyItem.getDate()));
+        String date = new SimpleDateFormat("dd MMM HH:mm:ss", Locale.ENGLISH).format(historyItem.getDate());
+        dateView.setText(date);
         componentNameView.setText(historyItem.getComponentName());
         Drawable oldState = context.getResources().getDrawable(historyItem.getOldColorId());
         oldStateView.setBackgroundDrawable(oldState);
@@ -69,17 +72,12 @@ public class HistoryAdapter extends BaseAdapter {
         if (rootView.isSelected()){
             advancedLayout.setVisibility(View.VISIBLE);
             ((TextView) rootView.findViewById(R.id.info_text)).setText(historyItem.getInfo());
-            ((TextView) rootView.findViewById(R.id.info_date)).setText(historyItem.getDate().toLocaleString());
+            String newString = new SimpleDateFormat("HH:mm:ss").format(historyItem.getDate());
+            ((TextView) rootView.findViewById(R.id.info_date)).setText(newString);
             rootView.findViewById(R.id.info_date);
         } else {
             advancedLayout.setVisibility(View.GONE);
         }
-
         return rootView;
-    }
-
-    private String getDateString(Date date){
-        return date.getDay() + " " + date.getMonth() + " "
-                + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
     }
 }
