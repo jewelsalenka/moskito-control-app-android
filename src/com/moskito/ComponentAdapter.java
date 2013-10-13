@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.example.moskito_control_app_android.R;
 import com.stub.entity.Component;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,7 +51,7 @@ public class ComponentAdapter extends BaseAdapter{
 
         View rootView = convertView;
         if (rootView == null){
-            rootView = LayoutInflater.from(context).inflate(R.layout.server_list_item_advanced, parent, false);
+            rootView = LayoutInflater.from(context).inflate(R.layout.component_list_item_advanced, parent, false);
         }
         View componentStateView = rootView.findViewById(R.id.server_color_state);
         TextView appName = (TextView) rootView.findViewById(R.id.server_name);
@@ -65,7 +66,8 @@ public class ComponentAdapter extends BaseAdapter{
         if (rootView.isSelected()){
             advancedLayout.setVisibility(View.VISIBLE);
             ((TextView) rootView.findViewById(R.id.info_text)).setText(component.getInfo());
-            ((TextView) rootView.findViewById(R.id.info_date)).setText(component.getDate().toLocaleString());
+            String date = new SimpleDateFormat("dd MMM HH:mm:ss").format(component.getDate());
+            ((TextView) rootView.findViewById(R.id.info_date)).setText(date);
         } else {
             advancedLayout.setVisibility(View.GONE);
         }
