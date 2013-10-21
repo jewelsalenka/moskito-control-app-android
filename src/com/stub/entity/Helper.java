@@ -69,7 +69,12 @@ public class Helper {
                 Date date = new Date(component.getLastUpdateTimestamp());
                 State state = State.valueOf(component.getColor().toString());
                 Component server = new Component(name, info, date, state);
-                application.addServer(server);
+                application.addComponent(server);
+            }
+            //todo get charts from network
+            // stub realization of adding chart for FirstApp
+            if (appName.equals("FirstApp")){
+                application.addChart(Chart.createStubChart());
             }
             appList.add(application);
         }

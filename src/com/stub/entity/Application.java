@@ -13,15 +13,17 @@ public class Application implements Serializable{
     private State color;
     private List<Component> components;
     private List<HistoryItem> history;
+    private List<Chart> charts;
 
     public Application(String name, State color) {
         this.name = name;
         this.color = color;
         components = new ArrayList<Component>();
         history = new ArrayList<HistoryItem>();
+        charts = new ArrayList<Chart>();
     }
 
-    public void addServer(Component component){
+    public void addComponent(Component component){
         components.add(component);
     }
 
@@ -33,6 +35,13 @@ public class Application implements Serializable{
         this.history.addAll(history);
     }
 
+    public void addChart(Chart chart){
+        charts.add(chart);
+    }
+
+    public void addCharts(List<Chart> charts){
+        this.charts.addAll(charts);
+    }
     public String getName() {
 
         return name;
@@ -48,5 +57,9 @@ public class Application implements Serializable{
 
     public List<HistoryItem> getHistory() {
         return history;
+    }
+
+    public List<Chart> getCharts() {
+        return charts;
     }
 }

@@ -3,19 +3,19 @@ package com.moskito;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.view.animation.RotateAnimation;
 import android.widget.*;
 import com.example.moskito_control_app_android.R;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
-import com.stub.entity.*;
+import com.stub.entity.Application;
+import com.stub.entity.Helper;
 
 import java.io.IOException;
 
@@ -24,6 +24,7 @@ import java.io.IOException;
  * Date: 13.07.13
  */
 public class ApplicationActivity extends Activity{
+    public static final String APP_KEY = ApplicationActivity.class.getSimpleName()+".CurrentApp";
     private static Helper mHelper;
     private Application mCurrentApp;
     private TextView mNoDataView;
@@ -143,6 +144,30 @@ public class ApplicationActivity extends Activity{
                 Animation animation = new RotateAnimation(0, 1080, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
                 animation.setDuration(2800);
                 refresh.startAnimation(animation);
+            }
+        });
+        View graphics = mHeader.findViewById(R.id.chart);
+        graphics.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mCurrentApp.getCharts().size() == 0){
+                    View popUpView = getLayoutInflater().inflate(R.layout.no_charts, null);
+                    final PopupWindow mpopup = new PopupWindow(popUpView, RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT, true); //Creation of popup
+                    mpopup.setAnimationStyle(android.R.style.Animation_Dialog);
+                    mpopup.showAtLocation(popUpView, Gravity.CENTER, 0, 0);
+                    popUpView.findViewById(R.id.button_ok).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            mpopup.dismiss();
+                        }
+                    });
+                }else {
+                    Intent intent = new Intent(ApplicationActivity.this, AppChart.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable(APP_KEY, mCurrentApp);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
             }
         });
     }

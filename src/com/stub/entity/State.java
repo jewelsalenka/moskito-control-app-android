@@ -2,11 +2,13 @@ package com.stub.entity;
 
 import com.example.moskito_control_app_android.R;
 
+import java.io.Serializable;
+
 /**
  * User: Olenka Shemshey
  * Date: 21.07.13
  */
-public enum State {
+public enum State implements Serializable{
     GREEN,
     YELLOW,
     ORANGE,
