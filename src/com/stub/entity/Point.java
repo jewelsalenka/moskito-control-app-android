@@ -1,37 +1,36 @@
 package com.stub.entity;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * User: Olenka Shemshey
  * Date: 14.10.13
  */
 public class Point implements Serializable{
-    private Date xCaption;
-    private float yValues;
-    private String debugTs;
+    private String xCaption;
+    private double yValues;
+    private long timestamp;
 
-    public Point(Date xCaption, float yValues) {
+    public Point(String xCaption, double yValues) {
         this.xCaption = xCaption;
         this.yValues = yValues;
     }
 
-    public Point(Date xCaption, float yValues, String debugTs) {
+    public Point(String xCaption, double yValues, long debugTs) {
         this.xCaption = xCaption;
         this.yValues = yValues;
-        this.debugTs = debugTs;
+        this.timestamp = debugTs;
     }
 
-    public Date getxCaption() {
+    public String getxCaption() {
         return xCaption;
     }
 
-    public float getyValues() {
+    public double getyValues() {
         return yValues;
     }
 
-    public String getDebugTs() {
-        return debugTs;
+    public long getTimestamp() {
+        return timestamp;
     }
 }

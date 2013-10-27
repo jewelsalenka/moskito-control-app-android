@@ -3,21 +3,29 @@ package com.moskito;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.widget.*;
+import com.androidplot.xy.*;
 import com.example.moskito_control_app_android.R;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
-import com.stub.entity.Application;
-import com.stub.entity.Helper;
+import com.stub.entity.*;
 
 import java.io.IOException;
+import java.text.FieldPosition;
+import java.text.Format;
+import java.text.ParsePosition;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * User: Olenka Shemshey
@@ -34,6 +42,8 @@ public class ApplicationActivity extends Activity{
     private SlidingMenu mSliderMenu;
     private View mShowAppList;
     private View mShowSettings;
+    private  MultitouchPlot mMultitouchPlot;
+
 
     public void onCreate(Bundle bundle){
         super.onCreate(bundle);
@@ -44,6 +54,63 @@ public class ApplicationActivity extends Activity{
         initSettingsPanel();
         createConnection();
         updateHead();
+    }
+
+    private void initMultitouchPlot() {
+        if (mCurrentApp.getCharts().size() == 0) return;
+        SlidingDrawer chartSlidingDrawer = (SlidingDrawer) findViewById(R.id.charts_drawer);
+        mMultitouchPlot = (MultitouchPlot) chartSlidingDrawer.findViewById(R.id.multitouchPlot);
+        Paint backgroundPaint = new Paint();
+        backgroundPaint.setColor(Color.rgb(255, 255, 236));
+        backgroundPaint.setStyle(Paint.Style.FILL);
+        mMultitouchPlot.getGraphWidget().setBackgroundPaint(backgroundPaint);
+        mMultitouchPlot.getLegendWidget().setVisible(false);
+        mMultitouchPlot.getGraphWidget().setGridBackgroundPaint(backgroundPaint);
+        // Reduce the number of range labels
+        mMultitouchPlot.setTicksPerRangeLabel(3);
+        // By default, AndroidPlot displays developer guides to aid in laying out your plot.
+        // To get rid of them call disableAllMarkup():
+        // multitouchPlot.disableAllMarkup();
+        drawOnMultitouchPlot(0);
+    }
+
+    private void drawOnMultitouchPlot(int groupPosition){
+        mMultitouchPlot.clear();
+        Chart chart = mCurrentApp.getCharts().get(groupPosition);
+        List<Line> lines = chart.getLines();
+        for (Line line : lines) {
+            if (line.isDrawable()) {
+                List<Number> x = new ArrayList<Number>();
+                List<Double> y = new ArrayList<Double>();
+                List<String> xString = new ArrayList<String>();
+                int index = 0;
+                for (Point point : line.getPoints()) {
+                    x.add(index);
+                    xString.add(point.getxCaption());
+                    Double yNumber = point.getyValues();
+                    y.add(yNumber);
+                    index++;
+                }
+
+                // Turn the above arrays into XYSeries:
+                XYSeries series1 = new SimpleXYSeries(
+                        x, y,
+                        "Obw�d brzucha");                             // Set the display title of the series
+
+                // Create a formatter to use for drawing a series using LineAndPointRenderer:
+                LineAndPointFormatter series1Format = new LineAndPointFormatter(
+                        Color.rgb(0, 200, 0),                   // line color
+                        Color.rgb(0, 200, 0),                   // point color
+                        R.color.none, new PointLabelFormatter());              // fill color (optional)
+
+                // Add series1 to the xyplot:
+                mMultitouchPlot.addSeries(series1, series1Format);
+                mMultitouchPlot.getGraphWidget().setDomainValueFormat(new GraphXLabelFormat(xString));
+                mMultitouchPlot.setRangeBoundaries(0, findMaxValue(y), BoundaryMode.FIXED);
+                mMultitouchPlot.setDomainBoundaries(0, 2.2, BoundaryMode.FIXED);
+            }
+        }
+        mMultitouchPlot.invalidate();
     }
 
     private void initSlidingMenu(){
@@ -109,6 +176,13 @@ public class ApplicationActivity extends Activity{
     private void obtainView(){
         mNoDataView = (TextView) findViewById(R.id.no_data);
         mMinutesUpdateInterval = (TextView) findViewById(R.id.interval_minutes);
+        final SlidingDrawer historyDrawer = (SlidingDrawer) findViewById(R.id.bottom_drawer);
+        historyDrawer.setOnDrawerOpenListener(new SlidingDrawer.OnDrawerOpenListener() {
+            @Override
+            public void onDrawerOpened() {
+                historyDrawer.bringToFront();
+            }
+        });
     }
 
     private void initHeader(){
@@ -162,14 +236,46 @@ public class ApplicationActivity extends Activity{
                         }
                     });
                 }else {
-                    Intent intent = new Intent(ApplicationActivity.this, AppChart.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable(APP_KEY, mCurrentApp);
-                    intent.putExtras(bundle);
-                    startActivity(intent);
+                    SlidingDrawer chartSlidingDrawer = (SlidingDrawer) findViewById(R.id.charts_drawer);
+                    if (chartSlidingDrawer.isOpened()){
+                        chartSlidingDrawer.animateClose();
+                    } else {
+                        chartSlidingDrawer.animateOpen();
+                    }
+
                 }
             }
         });
+    }
+
+    private double findMaxValue(List<Double> y){
+        double max = 0;
+        for (Double n : y){
+            max = Math.max(max, n);
+        }
+        return max;
+    }
+
+    private class GraphXLabelFormat extends Format {
+
+        private String[] mLabels;
+
+        private GraphXLabelFormat(List<String> labels) {
+            this.mLabels = labels.toArray(new String[labels.size()]);
+        }
+
+        @Override
+        public StringBuffer format(Object object, StringBuffer buffer, FieldPosition field) {
+            int parsedInt = Math.round(Float.parseFloat(object.toString()));
+            String labelString = mLabels[parsedInt];
+            buffer.append(labelString);
+            return buffer;
+        }
+
+        @Override
+        public Object parseObject(String string, ParsePosition position) {
+            return java.util.Arrays.asList(mLabels).indexOf(string);
+        }
     }
 
     private void initializeServersList(){
@@ -199,6 +305,7 @@ public class ApplicationActivity extends Activity{
                 sAdapter.setCurrentApp(position);
                 sAdapter.notifyDataSetChanged();
                 new HistoryGetter().execute("http://server04.test.anotheria.net:8999/moskito-control/rest/history");
+                new ChartsGetter().execute("http://server04.test.anotheria.net:8999/moskito-control/rest/charts/points");
             }
         });
     }
@@ -215,6 +322,47 @@ public class ApplicationActivity extends Activity{
                 historyAdapter.notifyDataSetChanged();
             }
         });
+    }
+
+    private void initializeChartsList() {
+        final ChartsAdapter chartsAdapter = new ChartsAdapter(this, mCurrentApp.getCharts());
+        ExpandableListView chartListView = (ExpandableListView) findViewById(R.id.charts_list);
+        setGroupIndicatorToRight(chartListView);
+        chartListView.setAdapter(chartsAdapter);
+        chartListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+                Line line = mCurrentApp.getCharts().get(groupPosition).getLines().get(childPosition);
+                line.setDrawable(!line.isDrawable());
+                chartsAdapter.notifyDataSetChanged();
+                drawOnMultitouchPlot(groupPosition);
+                return true;
+            }
+        });
+        chartListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+            @Override
+            public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
+                if (parent.isGroupExpanded(groupPosition)){
+                    parent.collapseGroup(groupPosition);
+                } else {
+                    parent.expandGroup(groupPosition);
+                }
+                drawOnMultitouchPlot(groupPosition);
+                return true;
+            }
+        });
+    }
+
+    private void setGroupIndicatorToRight(ExpandableListView expListView) {
+        DisplayMetrics dm = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(dm);
+        int width = dm.widthPixels;
+        expListView.setIndicatorBounds(width - getDipsFromPixel(35), width - getDipsFromPixel(5));
+    }
+
+    public int getDipsFromPixel(float pixels) {
+        final float scale = getResources().getDisplayMetrics().density;
+        return (int) (pixels * scale + 0.5f);
     }
 
     private void updateAppData(Application app){
@@ -271,6 +419,7 @@ public class ApplicationActivity extends Activity{
             initializeAppsList();
             updateAppData(mHelper.getAllApps().get(0));
             new HistoryGetter().execute("http://server04.test.anotheria.net:8999/moskito-control/rest/history");
+            new ChartsGetter().execute("http://server04.test.anotheria.net:8999/moskito-control/rest/charts/points");
         }
     }
 
@@ -281,13 +430,31 @@ public class ApplicationActivity extends Activity{
                 mCurrentApp.addHistory(mHelper.getHistory(urls[0], mCurrentApp.getName()));
                 return "Connection established";
             } catch (IOException e) {
-                mNoDataView.setText("Connection failed. URL may be invalid.");
-                return "Connection failed. URL may be invalid.";
+                mNoDataView.setText("Connection failed while trying to get history. URL may be invalid.");
+                return "Connection failed while trying to get history. URL may be invalid.";
             }
         }
         @Override
         protected void onPostExecute(String result) {
             initializeHistoryList();
+        }
+    }
+
+    private class ChartsGetter extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... urls) {
+            try {
+                mCurrentApp.addCharts(mHelper.getCharts(urls[0], mCurrentApp.getName()));
+                return "Connection established";
+            } catch (IOException e) {
+                mNoDataView.setText("Connection failed while trying to get charts. URL may be invalid.");
+                return "Connection failed while trying to get charts. URL may be invalid.";
+            }
+        }
+        @Override
+        protected void onPostExecute(String result) {
+            initializeChartsList();
+            initMultitouchPlot();
         }
     }
 }

@@ -1,11 +1,13 @@
 package com.stub.entity;
 
-import org.moskito.control.requester.Requester;
-import org.moskito.control.requester.config.RequesterConfiguration;
-import org.moskito.control.requester.data.DataProvider;
-import org.moskito.control.requester.data.HistoryResponse;
-import org.moskito.control.requester.data.StatusResponse;
-import org.moskito.control.requester.parser.ResponseParser;
+
+import org.moskito.control.restclient.DataProvider;
+import org.moskito.control.restclient.config.RequesterConfiguration;
+import org.moskito.control.restclient.data.response.ChartsResponse;
+import org.moskito.control.restclient.data.response.HistoryResponse;
+import org.moskito.control.restclient.data.response.StatusResponse;
+import org.moskito.control.restclient.http.Requester;
+import org.moskito.control.restclient.parser.ResponseParser;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,8 +19,6 @@ import java.util.List;
  * Date: 13.07.13
  */
 public class Helper {
-
-    private List<Application> applications;
     StatusResponse statusResponse;
     DataProvider dataProvider;
 
@@ -39,7 +39,7 @@ public class Helper {
     public List<HistoryItem> getHistory(String url, String appName) throws IOException{
         List<HistoryItem> history = new ArrayList<HistoryItem>();
         HistoryResponse historyResponse = dataProvider.getHistoryResponse(url, appName);
-        for(org.moskito.control.requester.data.HistoryItem historyItem : historyResponse.getHistoryItems()) {
+        for(org.moskito.control.restclient.data.HistoryItem historyItem : historyResponse.getHistoryItems()) {
             String componentName = historyItem.getComponentName();
             State oldState = State.valueOf(historyItem.getOldStatus().toString());
             State newState = State.valueOf(historyItem.getNewStatus().toString());
@@ -56,11 +56,11 @@ public class Helper {
 
     public List<Application> getAllApps(){
         List<Application> appList = new ArrayList<Application>();
-        for (org.moskito.control.requester.data.Application app: statusResponse.getApplications())  {
+        for (org.moskito.control.restclient.data.Application app: statusResponse.getApplications())  {
             String appName = app.getName();
             State appColor = State.valueOf(app.getApplicationColor().toString());
             Application application = new Application(appName, appColor);
-            for(org.moskito.control.requester.data.Component component : app.getComponents()) {
+            for(org.moskito.control.restclient.data.Component component : app.getComponents()) {
                 String name = component.getName();
                 String info = new String();
                 for(String message : component.getMessages()) {
@@ -73,11 +73,38 @@ public class Helper {
             }
             //todo get charts from network
             // stub realization of adding chart for FirstApp
-            if (appName.equals("FirstApp")){
-                application.addChart(Chart.createStubChart());
-            }
+//            if (appName.equals("FirstApp")){
+//                application.addChart(Chart.createStubChart());
+//            }
             appList.add(application);
         }
         return appList;
+    }
+
+    public List<Chart> getCharts(String url, String appName) throws IOException{
+        List<Chart> charts = new ArrayList<Chart>();
+        ChartsResponse chartResponse = dataProvider.getChartsResponse(url, appName);
+        for (org.moskito.control.restclient.data.Chart jsonChart : chartResponse.getCharts()){
+            String chartName = jsonChart.getName();
+            List<Line> lines = new ArrayList<Line>();
+            List<org.moskito.control.restclient.data.Line> jsonLines = jsonChart.getLines();
+            for (org.moskito.control.restclient.data.Line jsonLine : jsonLines){
+                String lineNames = jsonLine.getName();
+                List<Point> points = new ArrayList<Point>();
+                List<org.moskito.control.restclient.data.Point> jsonPoints = jsonLine.getPoints();
+                for (org.moskito.control.restclient.data.Point jsonPoint : jsonPoints){
+                    long timestamp = jsonPoint.getTimestamp();
+                    String x = jsonPoint.getX();
+                    double y = Double.parseDouble(jsonPoint.getY());
+                    Point point = new Point(x,y,timestamp);
+                    points.add(point);
+                }
+                Line line = new Line(lineNames, points);
+                lines.add(line);
+            }
+            Chart chart = new Chart(chartName, lines);
+            charts.add(chart);
+        }
+        return charts;
     }
 }

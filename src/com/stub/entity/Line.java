@@ -11,6 +11,7 @@ import java.util.List;
 public class Line implements Serializable{
     private String name;
     private List<Point> points;
+    private boolean drawable = true;
 
     public Line(String name, List<Point> points) {
         this.name = name;
@@ -32,5 +33,13 @@ public class Line implements Serializable{
 
     public void addPoint(Point point){
         points.add(point);
+    }
+
+    public boolean isDrawable() {
+        return drawable;
+    }
+
+    public void setDrawable(boolean drawable) {
+        this.drawable = drawable;
     }
 }
