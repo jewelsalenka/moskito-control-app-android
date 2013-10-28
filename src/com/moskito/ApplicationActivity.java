@@ -3,13 +3,16 @@ package com.moskito;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.animation.Animation;
@@ -31,8 +34,22 @@ import java.util.List;
  * User: Olenka Shemshey
  * Date: 13.07.13
  */
-public class ApplicationActivity extends Activity{
-    public static final String APP_KEY = ApplicationActivity.class.getSimpleName()+".CurrentApp";
+public class ApplicationActivity extends Activity {
+    public static final String APP_KEY = ApplicationActivity.class.getSimpleName() + ".CurrentApp";
+    private static final String SHARED_PREFERENCES_KEY_URL = ApplicationActivity.class.getSimpleName()
+            + ".SharedPreferences.Url";
+    private static final String SHARED_PREFERENCES_KEY_HTTP = ApplicationActivity.class.getSimpleName()
+            + ".SharedPreferences.Http";
+    private static final String SHARED_PREFERENCES_KEY_PORT = ApplicationActivity.class.getSimpleName()
+            + ".SharedPreferences.Port";
+    private static final String SHARED_PREFERENCES_KEY_LOGIN = ApplicationActivity.class.getSimpleName()
+            + ".SharedPreferences.Login";
+    private static final String SHARED_PREFERENCES_KEY_INTERVAL = ApplicationActivity.class.getSimpleName()
+            + ".SharedPreferences.Interval";
+    public static final String HTTP = "http://";
+    public static final String HTTPS = "https://";
+    private static final String MOSKITO_CONTROL_REST = "/moskito-control/rest/";
+
     private static Helper mHelper;
     private Application mCurrentApp;
     private TextView mNoDataView;
@@ -42,15 +59,16 @@ public class ApplicationActivity extends Activity{
     private SlidingMenu mSliderMenu;
     private View mShowAppList;
     private View mShowSettings;
-    private  MultitouchPlot mMultitouchPlot;
+    private MultitouchPlot mMultitouchPlot;
+    private String mDefaultHttp = HTTP;
 
 
-    public void onCreate(Bundle bundle){
+    public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         setContentView(R.layout.main);
+        initSlidingMenu();
         obtainView();
         initHeader();
-        initSlidingMenu();
         initSettingsPanel();
         createConnection();
         updateHead();
@@ -74,7 +92,7 @@ public class ApplicationActivity extends Activity{
         drawOnMultitouchPlot(0);
     }
 
-    private void drawOnMultitouchPlot(int groupPosition){
+    private void drawOnMultitouchPlot(int groupPosition) {
         mMultitouchPlot.clear();
         Chart chart = mCurrentApp.getCharts().get(groupPosition);
         List<Line> lines = chart.getLines();
@@ -113,7 +131,7 @@ public class ApplicationActivity extends Activity{
         mMultitouchPlot.invalidate();
     }
 
-    private void initSlidingMenu(){
+    private void initSlidingMenu() {
         mSliderMenu = new SlidingMenu(this);
         mSliderMenu.setMode(SlidingMenu.LEFT_RIGHT);
         mSliderMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
@@ -126,34 +144,46 @@ public class ApplicationActivity extends Activity{
         mSliderMenu.setSecondaryShadowDrawable(R.drawable.right_shadow);
     }
 
-    private void initSettingsPanel(){
-        final CheckBox authorization = (CheckBox) findViewById(R.id.checkbox_authorization);
-        final View login = findViewById(R.id.login);
-        final View password = findViewById(R.id.password);
-        final RelativeLayout interval = (RelativeLayout) findViewById(R.id.update_interval);
-        final EditText loginText = (EditText) findViewById(R.id.login_input);
-        final EditText passwordText = (EditText) findViewById(R.id.password_input);
-        authorization.setOnClickListener(new View.OnClickListener() {
+    private void initSettingsPanel() {
+        final SharedPreferences preferences = getPreferences(MODE_PRIVATE);
+        ToggleButton http = (ToggleButton) findViewById(R.id.http_or_https);
+        http.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onClick(View v) {
-                if (authorization.isChecked()){
-                    login.setVisibility(View.VISIBLE);
-                    loginText.setVisibility(View.VISIBLE);
-                    password.setVisibility(View.VISIBLE);
-                    passwordText.setVisibility(View.VISIBLE);
-                } else {
-                    login.setVisibility(View.GONE);
-                    loginText.setVisibility(View.GONE);
-                    password.setVisibility(View.GONE);
-                    passwordText.setVisibility(View.GONE);
-                }
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                mDefaultHttp = isChecked ? HTTP : HTTPS;
             }
         });
 
-        Button minusMinutes = (Button) interval.findViewById(R.id.minus_interval);
+        final EditText urlEditText = (EditText) findViewById(R.id.server_address_input);
+        String url = preferences.getString(SHARED_PREFERENCES_KEY_URL, HTTP);
+        urlEditText.setText(url);
+
+        final EditText portEditText = (EditText) findViewById(R.id.server_port_input);
+        portEditText.setText(preferences.getString(SHARED_PREFERENCES_KEY_PORT, ""));
+
+        final CheckBox authorization = (CheckBox) findViewById(R.id.checkbox_authorization);
+        final View loginView = findViewById(R.id.login);
+        final View passwordView = findViewById(R.id.password);
+        final EditText loginTextView = (EditText) findViewById(R.id.login_input);
+        String login = preferences.getString(SHARED_PREFERENCES_KEY_LOGIN, "");
+        loginTextView.setText(login);
+        final EditText passwordTextView = (EditText) findViewById(R.id.password_input);
+        authorization.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int visibility = authorization.isChecked() ? View.VISIBLE : View.GONE;
+                loginView.setVisibility(visibility);
+                loginTextView.setVisibility(visibility);
+                passwordView.setVisibility(visibility);
+                passwordTextView.setVisibility(visibility);
+            }
+        });
+        mMinutesUpdateInterval.setText(preferences.getString(SHARED_PREFERENCES_KEY_INTERVAL, "1"));
+        final Button minusMinutes = (Button) findViewById(R.id.minus_interval);
         minusMinutes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.i("AndroidRuntime", mMinutesUpdateInterval.getText().toString());
                 int minutes = Integer.parseInt(mMinutesUpdateInterval.getText().toString());
                 if (minutes > 1) {
                     minutes--;
@@ -162,18 +192,38 @@ public class ApplicationActivity extends Activity{
             }
         });
 
-        Button plusMinutes = (Button) interval.findViewById(R.id.plus_interval);
+        final Button plusMinutes = (Button) findViewById(R.id.plus_interval);
         plusMinutes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.i("AndroidRuntime", "" + mMinutesUpdateInterval);
                 int minutes = Integer.parseInt(mMinutesUpdateInterval.getText().toString());
                 minutes++;
                 mMinutesUpdateInterval.setText(String.valueOf(minutes));
             }
         });
+
+        View saveBtn = findViewById(R.id.save_button);
+        saveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("AndroidRuntime", "Yahoooo");
+                SharedPreferences.Editor editor = getPreferences(MODE_PRIVATE).edit();
+                editor.putString(SHARED_PREFERENCES_KEY_URL, TextUtils.isEmpty(urlEditText.getText()) ? mDefaultHttp
+                        : urlEditText.getText().toString());
+                editor.putString(SHARED_PREFERENCES_KEY_PORT, TextUtils.isEmpty(portEditText.getText()) ? "" :
+                        portEditText.getText().toString());
+                editor.putString(SHARED_PREFERENCES_KEY_INTERVAL, TextUtils.isEmpty(mMinutesUpdateInterval.getText())
+                        ? "1" : mMinutesUpdateInterval.getText().toString());
+                editor.putString(SHARED_PREFERENCES_KEY_LOGIN, TextUtils.isEmpty(loginTextView.getText())
+                        ? "" : loginTextView.getText().toString());
+                editor.commit();
+                createConnection();
+            }
+        });
     }
 
-    private void obtainView(){
+    private void obtainView() {
         mNoDataView = (TextView) findViewById(R.id.no_data);
         mMinutesUpdateInterval = (TextView) findViewById(R.id.interval_minutes);
         final SlidingDrawer historyDrawer = (SlidingDrawer) findViewById(R.id.bottom_drawer);
@@ -185,11 +235,11 @@ public class ApplicationActivity extends Activity{
         });
     }
 
-    private void initHeader(){
+    private void initHeader() {
         mHeader = findViewById(R.id.header);
         mAppTitleView = (TextView) mHeader.findViewById(R.id.application_title);
         mShowAppList = mHeader.findViewById(R.id.show_applications);
-        mShowAppList.setOnClickListener(new View.OnClickListener(){
+        mShowAppList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mSliderMenu.toggle();
@@ -224,7 +274,7 @@ public class ApplicationActivity extends Activity{
         graphics.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mCurrentApp.getCharts().size() == 0){
+                if (mCurrentApp.getCharts().size() == 0) {
                     View popUpView = getLayoutInflater().inflate(R.layout.no_charts, null);
                     final PopupWindow mpopup = new PopupWindow(popUpView, RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT, true); //Creation of popup
                     mpopup.setAnimationStyle(android.R.style.Animation_Dialog);
@@ -235,9 +285,9 @@ public class ApplicationActivity extends Activity{
                             mpopup.dismiss();
                         }
                     });
-                }else {
+                } else {
                     SlidingDrawer chartSlidingDrawer = (SlidingDrawer) findViewById(R.id.charts_drawer);
-                    if (chartSlidingDrawer.isOpened()){
+                    if (chartSlidingDrawer.isOpened()) {
                         chartSlidingDrawer.animateClose();
                     } else {
                         chartSlidingDrawer.animateOpen();
@@ -248,9 +298,9 @@ public class ApplicationActivity extends Activity{
         });
     }
 
-    private double findMaxValue(List<Double> y){
+    private double findMaxValue(List<Double> y) {
         double max = 0;
-        for (Double n : y){
+        for (Double n : y) {
             max = Math.max(max, n);
         }
         return max;
@@ -278,7 +328,7 @@ public class ApplicationActivity extends Activity{
         }
     }
 
-    private void initializeServersList(){
+    private void initializeServersList() {
         final ComponentAdapter sAdapter = new ComponentAdapter(this, mCurrentApp.getComponents());
         ListView lvSimple = (ListView) findViewById(R.id.servers_list);
         lvSimple.setAdapter(sAdapter);
@@ -293,7 +343,7 @@ public class ApplicationActivity extends Activity{
 
     }
 
-    private void initializeAppsList(){
+    private void initializeAppsList() {
         final AppAdapter sAdapter = new AppAdapter(this, mHelper.getAllApps());
         ListView lvSimple = (ListView) findViewById(R.id.app_list);
         lvSimple.setAdapter(sAdapter);
@@ -304,13 +354,13 @@ public class ApplicationActivity extends Activity{
                 updateAppData(mHelper.getAllApps().get(position));
                 sAdapter.setCurrentApp(position);
                 sAdapter.notifyDataSetChanged();
-                new HistoryGetter().execute("http://server04.test.anotheria.net:8999/moskito-control/rest/history");
-                new ChartsGetter().execute("http://server04.test.anotheria.net:8999/moskito-control/rest/charts/points");
+                new HistoryGetter().execute(getAddressConnection() + "history");
+                new ChartsGetter().execute(getAddressConnection() + "charts/points");
             }
         });
     }
 
-    private void initializeHistoryList(){
+    private void initializeHistoryList() {
         final HistoryAdapter historyAdapter = new HistoryAdapter(this, mCurrentApp.getHistory());
         ListView lvSimple = (ListView) findViewById(R.id.history_list);
         lvSimple.setAdapter(historyAdapter);
@@ -342,7 +392,7 @@ public class ApplicationActivity extends Activity{
         chartListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
             @Override
             public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
-                if (parent.isGroupExpanded(groupPosition)){
+                if (parent.isGroupExpanded(groupPosition)) {
                     parent.collapseGroup(groupPosition);
                 } else {
                     parent.expandGroup(groupPosition);
@@ -365,7 +415,7 @@ public class ApplicationActivity extends Activity{
         return (int) (pixels * scale + 0.5f);
     }
 
-    private void updateAppData(Application app){
+    private void updateAppData(Application app) {
         mCurrentApp = app;
         updateHead();
         initializeServersList();
@@ -373,9 +423,9 @@ public class ApplicationActivity extends Activity{
         updateNoData();
     }
 
-    private void updateHead(){
+    private void updateHead() {
 
-        if (mCurrentApp == null){
+        if (mCurrentApp == null) {
             mHeader.setBackgroundDrawable(getResources().getDrawable(R.color.light_grey));
             mAppTitleView.setText("App");
         } else {
@@ -384,8 +434,8 @@ public class ApplicationActivity extends Activity{
         }
     }
 
-    private void updateNoData(){
-        if ((mCurrentApp.getComponents() == null) || (mCurrentApp.getComponents().size() == 0)){
+    private void updateNoData() {
+        if ((mCurrentApp.getComponents() == null) || (mCurrentApp.getComponents().size() == 0)) {
             mNoDataView.setVisibility(View.VISIBLE);
         } else {
             mNoDataView.setVisibility(View.GONE);
@@ -393,7 +443,8 @@ public class ApplicationActivity extends Activity{
     }
 
     public void createConnection() {
-        String stringUrl = "http://server04.test.anotheria.net:8999/moskito-control/rest/control";
+        String stringUrl = getAddressConnection() + "control";
+        Log.i("AndroidRuntime", stringUrl);
         ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
         if (networkInfo != null && networkInfo.isConnected()) {
@@ -401,6 +452,13 @@ public class ApplicationActivity extends Activity{
         } else {
             mNoDataView.setText("No network connection available.");
         }
+    }
+
+    private String getAddressConnection() {
+        SharedPreferences preferences = getPreferences(MODE_PRIVATE);
+        String url = preferences.getString(SHARED_PREFERENCES_KEY_URL, HTTP);
+        String port = preferences.getString(SHARED_PREFERENCES_KEY_PORT, "");
+        return url + ":" + port + MOSKITO_CONTROL_REST;
     }
 
     private class HelperConnection extends AsyncTask<String, Void, String> {
@@ -414,12 +472,14 @@ public class ApplicationActivity extends Activity{
                 return "Connection failed. URL may be invalid.";
             }
         }
+
         @Override
         protected void onPostExecute(String result) {
             initializeAppsList();
+            if (mHelper.getAllApps().isEmpty()) return;
             updateAppData(mHelper.getAllApps().get(0));
-            new HistoryGetter().execute("http://server04.test.anotheria.net:8999/moskito-control/rest/history");
-            new ChartsGetter().execute("http://server04.test.anotheria.net:8999/moskito-control/rest/charts/points");
+            new HistoryGetter().execute(getAddressConnection() + "history");
+            new ChartsGetter().execute(getAddressConnection() + "charts/points");
         }
     }
 
@@ -434,6 +494,7 @@ public class ApplicationActivity extends Activity{
                 return "Connection failed while trying to get history. URL may be invalid.";
             }
         }
+
         @Override
         protected void onPostExecute(String result) {
             initializeHistoryList();
@@ -451,6 +512,7 @@ public class ApplicationActivity extends Activity{
                 return "Connection failed while trying to get charts. URL may be invalid.";
             }
         }
+
         @Override
         protected void onPostExecute(String result) {
             initializeChartsList();

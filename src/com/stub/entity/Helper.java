@@ -56,6 +56,7 @@ public class Helper {
 
     public List<Application> getAllApps(){
         List<Application> appList = new ArrayList<Application>();
+        if (statusResponse == null) return appList;
         for (org.moskito.control.restclient.data.Application app: statusResponse.getApplications())  {
             String appName = app.getName();
             State appColor = State.valueOf(app.getApplicationColor().toString());
