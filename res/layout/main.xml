@@ -69,21 +69,33 @@
                 android:layout_height="fill_parent"
                 android:background="@drawable/main_font">
 
-            <com.moskito.MultitouchPlot
+            <WebView
                     android:id="@+id/multitouchPlot"
                     android:layout_width="fill_parent"
                     android:layout_height="200dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
+                    android:layout_marginBottom="15dp"
                     android:layout_below="@id/bottom_handle"
                     title="A Simple multitouch XYPlot Example"/>
+
+            <View
+                    android:id="@+id/charts_devider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@id/multitouchPlot"
+                    android:background="@drawable/main_list_devider"/>
+
             <ExpandableListView
                     android:id="@+id/charts_list"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
                     android:cacheColorHint="#00000000"
-                    android:layout_below="@id/multitouchPlot"/>
+                    android:childDivider="@drawable/main_font"
+                    android:layout_below="@id/charts_devider"/>
         </RelativeLayout>
     </SlidingDrawer>
 

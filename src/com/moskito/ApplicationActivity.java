@@ -17,6 +17,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
+import android.webkit.WebView;
 import android.widget.*;
 import com.androidplot.xy.*;
 import com.example.moskito_control_app_android.R;
@@ -28,6 +29,7 @@ import java.text.FieldPosition;
 import java.text.Format;
 import java.text.ParsePosition;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -59,7 +61,6 @@ public class ApplicationActivity extends Activity {
     private SlidingMenu mSliderMenu;
     private View mShowAppList;
     private View mShowSettings;
-    private MultitouchPlot mMultitouchPlot;
     private String mDefaultHttp = HTTP;
 
 
@@ -74,61 +75,70 @@ public class ApplicationActivity extends Activity {
         updateHead();
     }
 
-    private void initMultitouchPlot() {
-        if (mCurrentApp.getCharts().size() == 0) return;
-        SlidingDrawer chartSlidingDrawer = (SlidingDrawer) findViewById(R.id.charts_drawer);
-        mMultitouchPlot = (MultitouchPlot) chartSlidingDrawer.findViewById(R.id.multitouchPlot);
-        Paint backgroundPaint = new Paint();
-        backgroundPaint.setColor(Color.rgb(255, 255, 236));
-        backgroundPaint.setStyle(Paint.Style.FILL);
-        mMultitouchPlot.getGraphWidget().setBackgroundPaint(backgroundPaint);
-        mMultitouchPlot.getLegendWidget().setVisible(false);
-        mMultitouchPlot.getGraphWidget().setGridBackgroundPaint(backgroundPaint);
-        // Reduce the number of range labels
-        mMultitouchPlot.setTicksPerRangeLabel(3);
-        // By default, AndroidPlot displays developer guides to aid in laying out your plot.
-        // To get rid of them call disableAllMarkup():
-        // multitouchPlot.disableAllMarkup();
-        drawOnMultitouchPlot(0);
+    private void initMultitouchPlot(String chd, String chxl, String chxr, String chds) {
+        WebView webView = (WebView) findViewById(R.id.multitouchPlot);
+        String CHART_URL =  "http://chart.apis.google.com/chart?"
+                +"cht=lc&"
+                +"chs=330x200&"
+                + chd
+                + chxr
+                + chds
+                +"chco=6EFE61,4d89f9,C030FF,FFFF72&"
+                +"chxt=x,y&"
+                + chxl
+                +"chls=3,1,0|3,1,0&"
+                +"chg=0,6.67,5,5";
+        webView.loadUrl(CHART_URL);
     }
 
-    private void drawOnMultitouchPlot(int groupPosition) {
-        mMultitouchPlot.clear();
+    private void drawOnMultitouchPlot(int groupPosition){
         Chart chart = mCurrentApp.getCharts().get(groupPosition);
         List<Line> lines = chart.getLines();
+        //+"chxr=1,0,100&"
+        StringBuilder chxr = new StringBuilder();
+        chxr.append("chxr=1,0,");
+        //+"chds=0,100&"
+        StringBuilder chds = new StringBuilder();
+        chds.append("chds=0,");
+        //+"chd=t:7,18,11,26,22,11,14,7,18,11,26,22,11,14|26,22,11,14,7,11,26,22,11,14&"
+        StringBuilder chd = new StringBuilder();
+        chd.append("chd=t:");
+        //+"chxl=0:|Mon|Tue|Wed|Thu|Fri|Sat|Sun&"
+        StringBuilder chxl = new StringBuilder();
+        chxl.append("chxl=0:");
+        int index = 0;
+        for (Point point : lines.get(0).getPoints()) {
+            if (index%10 == 0){
+                chxl.append("|");
+                chxl.append(point.getxCaption());
+            }
+            index++;
+        }
+        chxl.append("&");
+        index = 0;
+        double max = 0;
         for (Line line : lines) {
             if (line.isDrawable()) {
-                List<Number> x = new ArrayList<Number>();
-                List<Double> y = new ArrayList<Double>();
-                List<String> xString = new ArrayList<String>();
-                int index = 0;
+                if (index != 0) chd.append("|");
+                int pointsNum = 0;
                 for (Point point : line.getPoints()) {
-                    x.add(index);
-                    xString.add(point.getxCaption());
-                    Double yNumber = point.getyValues();
-                    y.add(yNumber);
-                    index++;
+                    double y = point.getyValues();
+                    max = Math.max(max, y);
+                    chd.append(y);
+                    pointsNum++;
+                    if (!(pointsNum == line.getPoints().size())) chd.append(",");
                 }
-
-                // Turn the above arrays into XYSeries:
-                XYSeries series1 = new SimpleXYSeries(
-                        x, y,
-                        "Obw�d brzucha");                             // Set the display title of the series
-
-                // Create a formatter to use for drawing a series using LineAndPointRenderer:
-                LineAndPointFormatter series1Format = new LineAndPointFormatter(
-                        Color.rgb(0, 200, 0),                   // line color
-                        Color.rgb(0, 200, 0),                   // point color
-                        R.color.none, new PointLabelFormatter());              // fill color (optional)
-
-                // Add series1 to the xyplot:
-                mMultitouchPlot.addSeries(series1, series1Format);
-                mMultitouchPlot.getGraphWidget().setDomainValueFormat(new GraphXLabelFormat(xString));
-                mMultitouchPlot.setRangeBoundaries(0, findMaxValue(y), BoundaryMode.FIXED);
-                mMultitouchPlot.setDomainBoundaries(0, 2.2, BoundaryMode.FIXED);
+                index++;
             }
         }
-        mMultitouchPlot.invalidate();
+        chd.append("&");
+        chxr.append(max);
+        chxr.append("&");
+        chds.append(max);
+        chds.append("&");
+        Log.i("AndroidRuntime", "chd" + chd.toString());
+        Log.i("AndroidRuntime", "chxl" + chxl.toString());
+        initMultitouchPlot(chd.toString(), chxl.toString(), chxr.toString(), chds.toString());
     }
 
     private void initSlidingMenu() {
@@ -183,7 +193,6 @@ public class ApplicationActivity extends Activity {
         minusMinutes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i("AndroidRuntime", mMinutesUpdateInterval.getText().toString());
                 int minutes = Integer.parseInt(mMinutesUpdateInterval.getText().toString());
                 if (minutes > 1) {
                     minutes--;
@@ -196,7 +205,6 @@ public class ApplicationActivity extends Activity {
         plusMinutes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i("AndroidRuntime", "" + mMinutesUpdateInterval);
                 int minutes = Integer.parseInt(mMinutesUpdateInterval.getText().toString());
                 minutes++;
                 mMinutesUpdateInterval.setText(String.valueOf(minutes));
@@ -291,6 +299,7 @@ public class ApplicationActivity extends Activity {
                         chartSlidingDrawer.animateClose();
                     } else {
                         chartSlidingDrawer.animateOpen();
+                        drawOnMultitouchPlot(0);
                     }
 
                 }
@@ -516,7 +525,6 @@ public class ApplicationActivity extends Activity {
         @Override
         protected void onPostExecute(String result) {
             initializeChartsList();
-            initMultitouchPlot();
         }
     }
 }
