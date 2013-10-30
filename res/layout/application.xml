@@ -9,9 +9,9 @@
     <TextView
             android:id="@+id/no_data"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:text="@string/no_data"
-            android:gravity="center_horizontal"
+            android:gravity="center"
             android:layout_marginTop="@dimen/no_data_marginTop"
             android:visibility="gone"/>
     <View

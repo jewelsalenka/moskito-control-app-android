@@ -36,6 +36,7 @@
             android:layout_marginLeft="12dp"
             android:textSize="14dp"
             android:layout_below="@id/server_address"
+            android:singleLine="true"
             android:text="http://server04.test.anotheria.net"/>
     <TextView
             android:id="@+id/server_port"
@@ -52,6 +53,7 @@
             android:textSize="14dp"
             android:layout_marginLeft="12dp"
             android:layout_below="@id/server_port"
+            android:singleLine="true"
             android:text="8999"/>
 
     <ToggleButton  android:id="@+id/http_or_https"
