@@ -14,6 +14,15 @@
             android:gravity="center_horizontal"
             android:layout_marginTop="@dimen/no_data_marginTop"
             android:visibility="gone"/>
+    <View
+            android:id="@+id/hepl1"
+            android:layout_width="268dp"
+            android:layout_height="98dp"
+            android:background="@drawable/help1"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="@dimen/header_height"
+            android:visibility="gone"/>
     <ListView
             android:id="@+id/servers_list"
             android:layout_width="match_parent"
@@ -23,6 +32,16 @@
             android:divider="@drawable/main_list_devider"
             android:cacheColorHint="#00000000"
             android:dividerHeight="1dp"/>
+    <View
+            android:id="@+id/hepl2"
+            android:layout_width="199dp"
+            android:layout_height="149dp"
+            android:background="@drawable/help2"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="@dimen/history_button_height"
+            android:visibility="gone"/>
     <TextView
             android:id="@+id/history_button"
             android:layout_height="@dimen/history_button_height"

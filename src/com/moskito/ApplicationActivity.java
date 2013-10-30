@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.opengl.Visibility;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -51,6 +52,7 @@ public class ApplicationActivity extends Activity {
     public static final String HTTP = "http://";
     public static final String HTTPS = "https://";
     private static final String MOSKITO_CONTROL_REST = "/moskito-control/rest/";
+    public static final String CONNECTION_ESTABLISHED = "Connection established";
 
     private static Helper mHelper;
     private Application mCurrentApp;
@@ -71,7 +73,6 @@ public class ApplicationActivity extends Activity {
         obtainView();
         initHeader();
         initSettingsPanel();
-        createConnection();
         updateHead();
     }
 
@@ -226,6 +227,7 @@ public class ApplicationActivity extends Activity {
                 editor.putString(SHARED_PREFERENCES_KEY_LOGIN, TextUtils.isEmpty(loginTextView.getText())
                         ? "" : loginTextView.getText().toString());
                 editor.commit();
+                mSliderMenu.toggle();
                 createConnection();
             }
         });
@@ -305,36 +307,6 @@ public class ApplicationActivity extends Activity {
                 }
             }
         });
-    }
-
-    private double findMaxValue(List<Double> y) {
-        double max = 0;
-        for (Double n : y) {
-            max = Math.max(max, n);
-        }
-        return max;
-    }
-
-    private class GraphXLabelFormat extends Format {
-
-        private String[] mLabels;
-
-        private GraphXLabelFormat(List<String> labels) {
-            this.mLabels = labels.toArray(new String[labels.size()]);
-        }
-
-        @Override
-        public StringBuffer format(Object object, StringBuffer buffer, FieldPosition field) {
-            int parsedInt = Math.round(Float.parseFloat(object.toString()));
-            String labelString = mLabels[parsedInt];
-            buffer.append(labelString);
-            return buffer;
-        }
-
-        @Override
-        public Object parseObject(String string, ParsePosition position) {
-            return java.util.Arrays.asList(mLabels).indexOf(string);
-        }
     }
 
     private void initializeServersList() {
@@ -445,8 +417,10 @@ public class ApplicationActivity extends Activity {
 
     private void updateNoData() {
         if ((mCurrentApp.getComponents() == null) || (mCurrentApp.getComponents().size() == 0)) {
+            Log.i("AndroidRuntime", "mNoDataView - VISIBLE");
             mNoDataView.setVisibility(View.VISIBLE);
         } else {
+            Log.i("AndroidRuntime", "mNoDataView - GONE");
             mNoDataView.setVisibility(View.GONE);
         }
     }
@@ -457,15 +431,29 @@ public class ApplicationActivity extends Activity {
         ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
         if (networkInfo != null && networkInfo.isConnected()) {
+            Log.i("AndroidRuntime", "Network connection available.");
             new HelperConnection().execute(stringUrl);
         } else {
+            Log.i("AndroidRuntime", "No network connection available.");
             mNoDataView.setText("No network connection available.");
+            View popUpView = getLayoutInflater().inflate(R.layout.popup_window, null);
+            final PopupWindow mpopup = new PopupWindow(popUpView, RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT, true); //Creation of popup
+            mpopup.setAnimationStyle(android.R.style.Animation_Dialog);
+            mpopup.showAtLocation(popUpView, Gravity.CENTER, 0, 0);
+            ((TextView) popUpView.findViewById(R.id.popup_window_text)).setText("No network connection available.");
+            popUpView.findViewById(R.id.popup_button_ok).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mpopup.dismiss();
+                }
+            });
         }
     }
 
     private String getAddressConnection() {
         SharedPreferences preferences = getPreferences(MODE_PRIVATE);
         String url = preferences.getString(SHARED_PREFERENCES_KEY_URL, HTTP);
+        helpInfo(url.equals(HTTP));
         String port = preferences.getString(SHARED_PREFERENCES_KEY_PORT, "");
         return url + ":" + port + MOSKITO_CONTROL_REST;
     }
@@ -475,20 +463,24 @@ public class ApplicationActivity extends Activity {
         protected String doInBackground(String... urls) {
             try {
                 mHelper = new Helper(urls[0]);
-                return "Connection established";
+                return CONNECTION_ESTABLISHED;
             } catch (IOException e) {
-                mNoDataView.setText("Connection failed. URL may be invalid.");
                 return "Connection failed. URL may be invalid.";
             }
         }
 
         @Override
         protected void onPostExecute(String result) {
-            initializeAppsList();
-            if (mHelper.getAllApps().isEmpty()) return;
-            updateAppData(mHelper.getAllApps().get(0));
-            new HistoryGetter().execute(getAddressConnection() + "history");
-            new ChartsGetter().execute(getAddressConnection() + "charts/points");
+            if (result.equals(CONNECTION_ESTABLISHED)){
+                initializeAppsList();
+                if (mHelper.getAllApps().isEmpty()) return;
+                updateAppData(mHelper.getAllApps().get(0));
+                new HistoryGetter().execute(getAddressConnection() + "history");
+                new ChartsGetter().execute(getAddressConnection() + "charts/points");
+            } else {
+                mNoDataView.setText("Connection failed. URL may be invalid.");
+                updateNoData();
+            }
         }
     }
 
@@ -497,16 +489,20 @@ public class ApplicationActivity extends Activity {
         protected String doInBackground(String... urls) {
             try {
                 mCurrentApp.addHistory(mHelper.getHistory(urls[0], mCurrentApp.getName()));
-                return "Connection established";
+                return CONNECTION_ESTABLISHED;
             } catch (IOException e) {
-                mNoDataView.setText("Connection failed while trying to get history. URL may be invalid.");
                 return "Connection failed while trying to get history. URL may be invalid.";
             }
         }
 
         @Override
         protected void onPostExecute(String result) {
-            initializeHistoryList();
+            if (result.equals(CONNECTION_ESTABLISHED)){
+                initializeHistoryList();
+            } else {
+                mNoDataView.setText("Connection failed while trying to get history. URL may be invalid.");
+                updateNoData();
+            }
         }
     }
 
@@ -515,16 +511,29 @@ public class ApplicationActivity extends Activity {
         protected String doInBackground(String... urls) {
             try {
                 mCurrentApp.addCharts(mHelper.getCharts(urls[0], mCurrentApp.getName()));
-                return "Connection established";
+                return CONNECTION_ESTABLISHED;
             } catch (IOException e) {
-                mNoDataView.setText("Connection failed while trying to get charts. URL may be invalid.");
                 return "Connection failed while trying to get charts. URL may be invalid.";
             }
         }
 
         @Override
         protected void onPostExecute(String result) {
-            initializeChartsList();
+            if (result.equals(CONNECTION_ESTABLISHED)){
+                initializeChartsList();
+            } else {
+                mNoDataView.setText("Connection failed while trying to get charts. URL may be invalid.");
+                updateNoData();
+            }
         }
+    }
+
+    public void helpInfo(boolean visible){
+        View help1 = findViewById(R.id.hepl1);
+        View help2 = findViewById(R.id.hepl2);
+        int visibility = visible ? View.VISIBLE : View.GONE;
+        help1.setVisibility(visibility);
+        help2.setVisibility(visibility);
+        if (visible) mHeader.setBackgroundDrawable(getResources().getDrawable(R.color.blue));
     }
 }

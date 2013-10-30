@@ -72,11 +72,6 @@ public class Helper {
                 Component server = new Component(name, info, date, state);
                 application.addComponent(server);
             }
-            //todo get charts from network
-            // stub realization of adding chart for FirstApp
-//            if (appName.equals("FirstApp")){
-//                application.addChart(Chart.createStubChart());
-//            }
             appList.add(application);
         }
         return appList;
