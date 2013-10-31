@@ -4,11 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.opengl.Visibility;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -20,17 +17,11 @@ import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.webkit.WebView;
 import android.widget.*;
-import com.androidplot.xy.*;
 import com.example.moskito_control_app_android.R;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.stub.entity.*;
 
 import java.io.IOException;
-import java.text.FieldPosition;
-import java.text.Format;
-import java.text.ParsePosition;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -79,21 +70,21 @@ public class ApplicationActivity extends Activity {
 
     private void initMultitouchPlot(String chd, String chxl, String chxr, String chds) {
         WebView webView = (WebView) findViewById(R.id.multitouchPlot);
-        String CHART_URL =  "http://chart.apis.google.com/chart?"
-                +"cht=lc&"
-                +"chs=330x200&"
+        String CHART_URL = "http://chart.apis.google.com/chart?"
+                + "cht=lc&"
+                + "chs=330x200&"
                 + chd
                 + chxr
                 + chds
-                +"chco=6EFE61,4d89f9,C030FF,FFFF72&"
-                +"chxt=x,y&"
+                + "chco=6EFE61,4d89f9,C030FF,FFFF72&"
+                + "chxt=x,y&"
                 + chxl
-                +"chls=3,1,0|3,1,0&"
-                +"chg=0,6.67,5,5";
+                + "chls=3,1,0|3,1,0&"
+                + "chg=0,6.67,5,5";
         webView.loadUrl(CHART_URL);
     }
 
-    private void drawOnMultitouchPlot(int groupPosition){
+    private void drawOnMultitouchPlot(int groupPosition) {
         if (mCurrentApp == null) return;
         Chart chart = mCurrentApp.getCharts().get(groupPosition);
         List<Line> lines = chart.getLines();
@@ -111,7 +102,7 @@ public class ApplicationActivity extends Activity {
         chxl.append("chxl=0:");
         int index = 0;
         for (Point point : lines.get(0).getPoints()) {
-            if (index%10 == 0){
+            if (index % 10 == 0) {
                 chxl.append("|");
                 chxl.append(point.getxCaption());
             }
@@ -249,6 +240,13 @@ public class ApplicationActivity extends Activity {
             @Override
             public void onDrawerOpened() {
                 historyDrawer.bringToFront();
+                findViewById(R.id.history_arrow).setRotation(0);
+            }
+        });
+        historyDrawer.setOnDrawerCloseListener(new SlidingDrawer.OnDrawerCloseListener() {
+            @Override
+            public void onDrawerClosed() {
+                findViewById(R.id.history_arrow).setRotation(180);
             }
         });
     }
@@ -325,10 +323,19 @@ public class ApplicationActivity extends Activity {
         ListView lvSimple = (ListView) findViewById(R.id.servers_list);
         lvSimple.setAdapter(sAdapter);
         lvSimple.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            boolean isBeforeWasOpen = false;
+
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                RelativeLayout advancedLayout = (RelativeLayout) view.findViewById(R.id.item_advanced);
-                view.setSelected(!(advancedLayout.getVisibility() == View.VISIBLE));
+                view.setSelected(!isBeforeWasOpen);
+                View arrow = view.findViewById(R.id.show_hide_info);
+                if (isBeforeWasOpen) {
+                    arrow.setRotation(0);
+                } else {
+                    arrow.setRotation(180);
+                }
+                arrow.setBackgroundDrawable(getResources().getDrawable(R.drawable.arrow_bottom));
+                isBeforeWasOpen = !isBeforeWasOpen;
                 sAdapter.notifyDataSetChanged();
             }
         });
@@ -356,14 +363,29 @@ public class ApplicationActivity extends Activity {
         final HistoryAdapter historyAdapter = (mCurrentApp == null) ?
                 new HistoryAdapter(this, null) :
                 new HistoryAdapter(this, mCurrentApp.getHistory());
-        ListView lvSimple = (ListView) findViewById(R.id.history_list);
+        final ExpandableListView lvSimple = (ExpandableListView) findViewById(R.id.history_list);
         lvSimple.setAdapter(historyAdapter);
-        lvSimple.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        lvSimple.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                RelativeLayout advancedLayout = (RelativeLayout) view.findViewById(R.id.item_history_advanced);
-                view.setSelected(!(advancedLayout.getVisibility() == View.VISIBLE));
-                historyAdapter.notifyDataSetChanged();
+            public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
+                if (parent.isGroupExpanded(groupPosition)) {
+                    parent.collapseGroup(groupPosition);
+                } else {
+                    parent.expandGroup(groupPosition);
+                }
+                return true;
+            }
+
+        });
+        lvSimple.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+            int previousGroup = -1;
+
+            @Override
+            public void onGroupExpand(int groupPosition) {
+                if (groupPosition != previousGroup) {
+                    lvSimple.collapseGroup(previousGroup);
+                }
+                previousGroup = groupPosition;
             }
         });
     }
@@ -371,7 +393,7 @@ public class ApplicationActivity extends Activity {
     private void initializeChartsList() {
         if (mCurrentApp == null) return;
         final ChartsAdapter chartsAdapter = new ChartsAdapter(this, mCurrentApp.getCharts());
-        ExpandableListView chartListView = (ExpandableListView) findViewById(R.id.charts_list);
+        final ExpandableListView chartListView = (ExpandableListView) findViewById(R.id.charts_list);
         setGroupIndicatorToRight(chartListView);
         chartListView.setAdapter(chartsAdapter);
         chartListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
@@ -393,7 +415,20 @@ public class ApplicationActivity extends Activity {
                     parent.expandGroup(groupPosition);
                 }
                 drawOnMultitouchPlot(groupPosition);
+
                 return true;
+            }
+
+        });
+        chartListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+            int previousGroup = -1;
+
+            @Override
+            public void onGroupExpand(int groupPosition) {
+                if (groupPosition != previousGroup) {
+                    chartListView.collapseGroup(previousGroup);
+                }
+                previousGroup = groupPosition;
             }
         });
     }
@@ -489,13 +524,13 @@ public class ApplicationActivity extends Activity {
 
         @Override
         protected void onPostExecute(String result) {
-            if (result.equals(CONNECTION_ESTABLISHED)){
+            if (result.equals(CONNECTION_ESTABLISHED)) {
                 initializeAppsList();
                 if (mHelper.getAllApps().isEmpty()) {
                     mCurrentApp = null;
                     updateData();
                     return;
-                };
+                }
                 updateAppData(mHelper.getAllApps().get(0));
                 new HistoryGetter().execute(getAddressConnection() + "history");
                 new ChartsGetter().execute(getAddressConnection() + "charts/points");
@@ -519,7 +554,7 @@ public class ApplicationActivity extends Activity {
 
         @Override
         protected void onPostExecute(String result) {
-            if (result.equals(CONNECTION_ESTABLISHED)){
+            if (result.equals(CONNECTION_ESTABLISHED)) {
                 initializeHistoryList();
             } else {
                 mNoDataView.setText("Connection failed while trying to get history. URL may be invalid.");
@@ -541,7 +576,7 @@ public class ApplicationActivity extends Activity {
 
         @Override
         protected void onPostExecute(String result) {
-            if (result.equals(CONNECTION_ESTABLISHED)){
+            if (result.equals(CONNECTION_ESTABLISHED)) {
                 initializeChartsList();
             } else {
                 mNoDataView.setText("Connection failed while trying to get charts. URL may be invalid.");
@@ -550,7 +585,7 @@ public class ApplicationActivity extends Activity {
         }
     }
 
-    public void helpInfo(boolean visible){
+    public void helpInfo(boolean visible) {
         View help1 = findViewById(R.id.hepl1);
         View help2 = findViewById(R.id.hepl2);
         int visibility = visible ? View.VISIBLE : View.GONE;

@@ -58,7 +58,7 @@ public class AppAdapter extends BaseAdapter {
         Application app = (Application) getItem(position);
         appColor.setBackgroundDrawable(context.getResources().getDrawable(app.getColor().getColorDrawableId()));
         appName.setText(app.getName());
-        rootView.findViewById(R.id.go_to_app).setBackground(position != currentApp ? arrow : activeArrow);
+        rootView.findViewById(R.id.go_to_app).setBackgroundDrawable(position != currentApp ? arrow : activeArrow);
         return rootView;
     }
 

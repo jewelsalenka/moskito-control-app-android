@@ -43,9 +43,9 @@ public class Helper {
             String componentName = historyItem.getComponentName();
             State oldState = State.valueOf(historyItem.getOldStatus().toString());
             State newState = State.valueOf(historyItem.getNewStatus().toString());
-            String info = new String();
+            List<String> info = new ArrayList<String>();
             for(String message : historyItem.getNewMessages()) {
-                info += message;
+                info.add(message);
             }
             Date date = new Date(historyItem.getTimestamp());
             HistoryItem item = new HistoryItem(componentName, oldState, newState, date, info);

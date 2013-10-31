@@ -2,6 +2,7 @@ package com.stub.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * User: Olenka Shemshey
@@ -11,15 +12,15 @@ public class HistoryItem implements Serializable{
     private String componentName;
     private State oldColor;
     private State newColor;
-    private String info;
+    private List<String> mMessages;
     private Date date;
 
-    public HistoryItem(String componentName, State oldColor, State newColor, Date date, String info) {
+    public HistoryItem(String componentName, State oldColor, State newColor, Date date, List<String> info) {
         this.componentName = componentName;
         this.oldColor = oldColor;
         this.newColor = newColor;
         this.date = date;
-        this.info = info;
+        this.mMessages = info;
     }
 
     public String getComponentName() {
@@ -38,7 +39,7 @@ public class HistoryItem implements Serializable{
         return date;
     }
 
-    public String getInfo() {
-        return info;
+    public List<String> getMessages() {
+        return mMessages;
     }
 }

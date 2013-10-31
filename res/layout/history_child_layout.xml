@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/item_history_advanced"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginBottom="10dp"
+                android:visibility="gone">
+    <View android:id="@+id/info_icon"
+          android:layout_height="20dp"
+          android:layout_width="20dp"
+          android:background="@drawable/info_bullet"/>
+    <TextView android:id="@+id/history_info_text"
+              android:layout_height="wrap_content"
+              android:layout_width="wrap_content"
+              android:layout_toRightOf="@id/info_icon"
+              android:layout_marginLeft="12dp"
+              android:text="Can't connect to the FirstApp.server04 Can't connect"/>
+    <TextView android:id="@+id/info_date"
+              android:layout_height="wrap_content"
+              android:layout_width="wrap_content"
+              android:layout_below="@id/info_text"
+              android:layout_toRightOf="@id/info_icon"
+              android:layout_marginLeft="12dp"
+              android:text="13 Jul 12:23:45"/>
+</RelativeLayout>
