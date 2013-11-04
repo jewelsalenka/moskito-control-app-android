@@ -40,13 +40,13 @@ public class AppAdapter extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int position) {
+    public Application getItem(int position) {
         return applications.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return position;
     }
 
     @Override
@@ -55,7 +55,7 @@ public class AppAdapter extends BaseAdapter {
         View appColor = rootView.findViewById(R.id.app_color);
         TextView appName = (TextView) rootView.findViewById(R.id.app_name);
 
-        Application app = (Application) getItem(position);
+        Application app = getItem(position);
         appColor.setBackgroundDrawable(context.getResources().getDrawable(app.getColor().getColorDrawableId()));
         appName.setText(app.getName());
         rootView.findViewById(R.id.go_to_app).setBackgroundDrawable(position != currentApp ? arrow : activeArrow);

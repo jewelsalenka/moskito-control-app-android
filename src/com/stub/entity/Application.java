@@ -2,6 +2,7 @@ package com.stub.entity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -9,34 +10,27 @@ import java.util.List;
  * Date: 13.07.13
  */
 public class Application implements Serializable{
-    private String name;
-    private State color;
-    private List<Component> components;
-    private List<HistoryItem> history;
-    private List<Chart> charts;
+    private final String name;
+    private final State color;
+    private final List<Component> components;
+    private final List<HistoryItem> history;
+    private final List<Chart> charts;
 
     public Application(String name, State color) {
         this.name = name;
         this.color = color;
-        components = new ArrayList<Component>();
-        history = new ArrayList<HistoryItem>();
-        charts = new ArrayList<Chart>();
+        components = Collections.synchronizedList(new ArrayList<Component>());
+        history = Collections.synchronizedList(new ArrayList<HistoryItem>());
+        charts = Collections.synchronizedList(new ArrayList<Chart>());
     }
 
     public void addComponent(Component component){
         components.add(component);
     }
 
-    public void addChange(HistoryItem historyItem){
-        history.add(historyItem);
-    }
-
-    public void addHistory(List<HistoryItem> history){
+    public void setHistory(List<HistoryItem> history){
+        this.history.clear();
         this.history.addAll(history);
-    }
-
-    public void addChart(Chart chart){
-        charts.add(chart);
     }
 
     public void addCharts(List<Chart> charts){
@@ -52,14 +46,20 @@ public class Application implements Serializable{
     }
 
     public List<Component> getComponents() {
-        return components;
+        synchronized (components){
+            return new ArrayList<Component>(components);
+        }
     }
 
     public List<HistoryItem> getHistory() {
-        return history;
+        synchronized (history){
+            return new ArrayList<HistoryItem>(history);
+        }
     }
 
     public List<Chart> getCharts() {
-        return charts;
+        synchronized (charts){
+            return new ArrayList<Chart>(charts);
+        }
     }
 }

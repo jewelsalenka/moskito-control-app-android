@@ -1,6 +1,5 @@
 package com.moskito;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +9,8 @@ import com.example.moskito_control_app_android.R;
 import com.stub.entity.Chart;
 import com.stub.entity.Line;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -17,12 +18,10 @@ import java.util.List;
  * Date: 27.10.13
  */
 public class ChartsAdapter extends BaseExpandableListAdapter {
-    private List<Chart> mCharts;
-    private Context mContext;
+    private final List<Chart> mCharts;
 
-    public ChartsAdapter(Context mContext, List<Chart> mCharts) {
-        this.mCharts = mCharts;
-        this.mContext = mContext;
+    public ChartsAdapter(List<Chart> charts) {
+        mCharts = (charts != null) ? new ArrayList<Chart>(charts) : Collections.<Chart>emptyList();
     }
 
     @Override
@@ -36,13 +35,13 @@ public class ChartsAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
-    public Object getGroup(int groupPosition) {
+    public Chart getGroup(int groupPosition) {
         return mCharts.get(groupPosition);
     }
 
     @Override
-    public Object getChild(int groupPosition, int childPosition) {
-        return mCharts.get(groupPosition).getLines();
+    public Line getChild(int groupPosition, int childPosition) {
+        return mCharts.get(groupPosition).getLines().get(childPosition);
     }
 
     @Override
@@ -52,7 +51,7 @@ public class ChartsAdapter extends BaseExpandableListAdapter {
 
     @Override
     public long getChildId(int groupPosition, int childPosition) {
-        return childPosition;
+        return groupPosition << 16 + childPosition;
     }
 
     @Override
@@ -63,7 +62,7 @@ public class ChartsAdapter extends BaseExpandableListAdapter {
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            LayoutInflater inflater = LayoutInflater.from(parent.getContext());
             convertView = inflater.inflate(R.layout.charts_parent_layout, null);
         }
         TextView chartNameView = (TextView) convertView.findViewById(R.id.charts_name);
@@ -75,18 +74,14 @@ public class ChartsAdapter extends BaseExpandableListAdapter {
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
         if (convertView == null){
-            LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            LayoutInflater inflater = LayoutInflater.from(parent.getContext());
             convertView = inflater.inflate(R.layout.charts_child_layout, null);
         }
         TextView lineNameView = (TextView) convertView.findViewById(R.id.line_name);
         Line line = mCharts.get(groupPosition).getLines().get(childPosition);
         lineNameView.setText(line.getName());
         View tick = convertView.findViewById(R.id.show_or_hide_line);
-        if (line.isDrawable()){
-            tick.setVisibility(View.VISIBLE);
-        } else {
-            tick.setVisibility(View.INVISIBLE);
-        }
+        tick.setVisibility(line.isDrawable() ? View.VISIBLE : View.INVISIBLE);
         return convertView;
     }
 

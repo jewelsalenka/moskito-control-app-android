@@ -21,7 +21,6 @@ import com.example.moskito_control_app_android.R;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.stub.entity.*;
 
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -29,23 +28,18 @@ import java.util.List;
  * Date: 13.07.13
  */
 public class ApplicationActivity extends Activity {
-    public static final String APP_KEY = ApplicationActivity.class.getSimpleName() + ".CurrentApp";
-    private static final String SHARED_PREFERENCES_KEY_URL = ApplicationActivity.class.getSimpleName()
-            + ".SharedPreferences.Url";
-    private static final String SHARED_PREFERENCES_KEY_HTTP = ApplicationActivity.class.getSimpleName()
-            + ".SharedPreferences.Http";
-    private static final String SHARED_PREFERENCES_KEY_PORT = ApplicationActivity.class.getSimpleName()
-            + ".SharedPreferences.Port";
-    private static final String SHARED_PREFERENCES_KEY_LOGIN = ApplicationActivity.class.getSimpleName()
-            + ".SharedPreferences.Login";
-    private static final String SHARED_PREFERENCES_KEY_INTERVAL = ApplicationActivity.class.getSimpleName()
-            + ".SharedPreferences.Interval";
-    public static final String HTTP = "http://";
-    public static final String HTTPS = "https://";
+    private static final String TAG = ApplicationActivity.class.getSimpleName();
+    private static final String SHARED_PREFERENCES_KEY_URL = TAG + ".SharedPreferences.Url";
+    private static final String SHARED_PREFERENCES_KEY_HTTP = TAG + ".SharedPreferences.Http";
+    private static final String SHARED_PREFERENCES_KEY_PORT = TAG + ".SharedPreferences.Port";
+    private static final String SHARED_PREFERENCES_KEY_LOGIN = TAG + ".SharedPreferences.Login";
+    private static final String SHARED_PREFERENCES_KEY_INTERVAL = TAG + ".SharedPreferences.Interval";
     private static final String MOSKITO_CONTROL_REST = "/moskito-control/rest/";
-    public static final String CONNECTION_ESTABLISHED = "Connection established";
+    private static final String HTTPS = "https://";
+    private static final String HTTP = "http://";
+    private static final String CONNECTION_ESTABLISHED = "Connection established";
 
-    private static Helper mHelper;
+    private final Helper mHelper = new Helper();
     private Application mCurrentApp;
     private TextView mNoDataView;
     private View mHeader;
@@ -161,7 +155,7 @@ public class ApplicationActivity extends Activity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 mDefaultHttp = isChecked ? HTTP : HTTPS;
                 String currentUrl = urlEditText.getText().toString();
-                if (currentUrl.isEmpty()) urlEditText.setText(mDefaultHttp);
+                if (TextUtils.isEmpty(currentUrl)) urlEditText.setText(mDefaultHttp);
                 else if (isChecked) urlEditText.setText(currentUrl.replaceFirst(HTTPS, HTTP));
                 else urlEditText.setText(currentUrl.replaceFirst(HTTP, HTTPS));
             }
@@ -240,13 +234,13 @@ public class ApplicationActivity extends Activity {
             @Override
             public void onDrawerOpened() {
                 historyDrawer.bringToFront();
-                findViewById(R.id.history_arrow).setRotation(0);
+//                findViewById(R.id.history_arrow).setRotation(0);
             }
         });
         historyDrawer.setOnDrawerCloseListener(new SlidingDrawer.OnDrawerCloseListener() {
             @Override
             public void onDrawerClosed() {
-                findViewById(R.id.history_arrow).setRotation(180);
+//                findViewById(R.id.history_arrow).setRotation(180);
             }
         });
     }
@@ -330,9 +324,9 @@ public class ApplicationActivity extends Activity {
                 view.setSelected(!isBeforeWasOpen);
                 View arrow = view.findViewById(R.id.show_hide_info);
                 if (isBeforeWasOpen) {
-                    arrow.setRotation(0);
+//                    arrow.setRotation(0);
                 } else {
-                    arrow.setRotation(180);
+//                    arrow.setRotation(180);
                 }
                 arrow.setBackgroundDrawable(getResources().getDrawable(R.drawable.arrow_bottom));
                 isBeforeWasOpen = !isBeforeWasOpen;
@@ -342,19 +336,27 @@ public class ApplicationActivity extends Activity {
 
     }
 
-    private void initializeAppsList() {
-        final AppAdapter sAdapter = new AppAdapter(this, mHelper.getAllApps());
+    private void initializeAppsList(List<Application> apps) {
+        final AppAdapter adapter = new AppAdapter(this, apps);
         ListView lvSimple = (ListView) findViewById(R.id.app_list);
-        lvSimple.setAdapter(sAdapter);
+        lvSimple.setAdapter(adapter);
         lvSimple.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 mSliderMenu.toggle();
-                updateAppData(mHelper.getAllApps().get(position));
-                sAdapter.setCurrentApp(position);
-                sAdapter.notifyDataSetChanged();
-                new HistoryGetter().execute(getAddressConnection() + "history");
-                new ChartsGetter().execute(getAddressConnection() + "charts/points");
+                updateAppData(adapter.getItem(position));
+                adapter.setCurrentApp(position);
+                adapter.notifyDataSetChanged();
+                if (mCurrentApp.getHistory().isEmpty()){
+                    new HistoryGetter().execute(getAddressConnection() + "history");
+                } else {
+                    initializeHistoryList();
+                }
+                if (mCurrentApp.getCharts().isEmpty()){
+                    new ChartsGetter().execute(getAddressConnection() + "charts/points");
+                } else {
+                    initializeChartsList();
+                }
             }
         });
     }
@@ -485,7 +487,7 @@ public class ApplicationActivity extends Activity {
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
         if (networkInfo != null && networkInfo.isConnected()) {
             Log.i("AndroidRuntime", "Network connection available.");
-            new HelperConnection().execute(stringUrl);
+            new ApplicationGetter().execute(stringUrl);
         } else {
             Log.i("AndroidRuntime", "No network connection available.");
             mNoDataView.setText("No network connection available.");
@@ -511,27 +513,23 @@ public class ApplicationActivity extends Activity {
         return url + ":" + port + MOSKITO_CONTROL_REST;
     }
 
-    private class HelperConnection extends AsyncTask<String, Void, String> {
+    private class ApplicationGetter extends AsyncTask<String, Void, List<Application>> {
         @Override
-        protected String doInBackground(String... urls) {
+        protected List<Application> doInBackground(String... urls) {
             try {
-                mHelper = new Helper(urls[0]);
-                return CONNECTION_ESTABLISHED;
-            } catch (IOException e) {
-                return "Connection failed. URL may be invalid.";
+                return mHelper.getAllApps(urls[0]);
+            } catch (RuntimeException e) {
+                Log.w(TAG, "failed to get list of all apps. ", e);
+                return null;
             }
         }
 
         @Override
-        protected void onPostExecute(String result) {
-            if (result.equals(CONNECTION_ESTABLISHED)) {
-                initializeAppsList();
-                if (mHelper.getAllApps().isEmpty()) {
-                    mCurrentApp = null;
-                    updateData();
-                    return;
-                }
-                updateAppData(mHelper.getAllApps().get(0));
+        protected void onPostExecute(List<Application> apps) {
+            if (apps != null) {
+                updateAppData(apps.isEmpty() ? null : apps.get(0));
+                if (apps.isEmpty()) return;
+                initializeAppsList(apps);
                 new HistoryGetter().execute(getAddressConnection() + "history");
                 new ChartsGetter().execute(getAddressConnection() + "charts/points");
             } else {
@@ -541,20 +539,23 @@ public class ApplicationActivity extends Activity {
         }
     }
 
-    private class HistoryGetter extends AsyncTask<String, Void, String> {
+    private class HistoryGetter extends AsyncTask<String, Void, List<HistoryItem>> {
+        private final Application mCurrentHistoryApp = mCurrentApp;
+
         @Override
-        protected String doInBackground(String... urls) {
+        protected List<HistoryItem> doInBackground(String... urls) {
             try {
-                if (mCurrentApp != null) mCurrentApp.addHistory(mHelper.getHistory(urls[0], mCurrentApp.getName()));
-                return CONNECTION_ESTABLISHED;
-            } catch (IOException e) {
-                return "Connection failed while trying to get history. URL may be invalid.";
+                return mHelper.getHistory(urls[0], mCurrentHistoryApp.getName());
+            } catch (RuntimeException e) {
+                Log.w(TAG, "Failed to get list of history. ", e);
+                return null;
             }
         }
 
         @Override
-        protected void onPostExecute(String result) {
-            if (result.equals(CONNECTION_ESTABLISHED)) {
+        protected void onPostExecute(List<HistoryItem> history) {
+            if (history != null) {
+                mCurrentHistoryApp.setHistory(history);
                 initializeHistoryList();
             } else {
                 mNoDataView.setText("Connection failed while trying to get history. URL may be invalid.");
@@ -563,20 +564,22 @@ public class ApplicationActivity extends Activity {
         }
     }
 
-    private class ChartsGetter extends AsyncTask<String, Void, String> {
+    private class ChartsGetter extends AsyncTask<String, Void, List<Chart>> {
+        private final Application mChartsApp = mCurrentApp;
         @Override
-        protected String doInBackground(String... urls) {
+        protected List<Chart> doInBackground(String... urls) {
             try {
-                if (mCurrentApp != null) mCurrentApp.addCharts(mHelper.getCharts(urls[0], mCurrentApp.getName()));
-                return CONNECTION_ESTABLISHED;
-            } catch (IOException e) {
-                return "Connection failed while trying to get charts. URL may be invalid.";
+                return mHelper.getCharts(urls[0], mChartsApp.getName());
+            } catch (RuntimeException e) {
+                Log.v(TAG, "Failed to get charts. ", e);
+                return null;
             }
         }
 
         @Override
-        protected void onPostExecute(String result) {
-            if (result.equals(CONNECTION_ESTABLISHED)) {
+        protected void onPostExecute(List<Chart> charts) {
+            if (charts != null) {
+                mChartsApp.addCharts(charts);
                 initializeChartsList();
             } else {
                 mNoDataView.setText("Connection failed while trying to get charts. URL may be invalid.");
