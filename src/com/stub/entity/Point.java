@@ -7,14 +7,9 @@ import java.io.Serializable;
  * Date: 14.10.13
  */
 public class Point implements Serializable{
-    private String xCaption;
-    private double yValues;
-    private long timestamp;
-
-    public Point(String xCaption, double yValues) {
-        this.xCaption = xCaption;
-        this.yValues = yValues;
-    }
+    private final String xCaption;
+    private final double yValues;
+    private final long timestamp;
 
     public Point(String xCaption, double yValues, long debugTs) {
         this.xCaption = xCaption;

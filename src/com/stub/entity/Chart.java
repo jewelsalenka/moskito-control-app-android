@@ -2,6 +2,7 @@ package com.stub.entity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -9,29 +10,29 @@ import java.util.List;
  * Date: 14.10.13
  */
 public class Chart implements Serializable{
-    private String name;
-    private List<Line> lines;
+    private final String mName;
+    private final List<Line> mLines;
 
     public Chart(String name) {
-        this.name = name;
-        lines = new ArrayList<Line>();
+        mName = name;
+        mLines = Collections.synchronizedList(new ArrayList<Line>());
     }
 
     public Chart(String name, List<Line> lines) {
-        this.name = name;
-        this.lines = lines;
+        mName = name;
+        mLines = lines;
     }
 
     public String getName() {
-        return name;
+        return mName;
     }
 
     public List<Line> getLines() {
-        return lines;
+        return new ArrayList<Line>(mLines);
     }
 
     public void addLine(Line line){
-        lines.add(line);
+        mLines.add(line);
     }
 
 }

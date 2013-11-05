@@ -8,48 +8,32 @@ import java.util.Date;
  * Date: 13.07.13
  */
 public class Component implements Serializable {
-    private String name;
-    private String info;
-    private Date date;
-    private State state;
+    private final String mName;
+    private final String mInfo;
+    private final Date mDate;
+    private final State mState;
 
     public Component(String name, String info, Date date, State state) {
-        this.name = name;
-        this.info = info;
-        this.date = date;
-        this.state = state;
+        this.mName = name;
+        this.mInfo = info;
+        this.mDate = date;
+        this.mState = state;
     }
 
     public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+        return mName;
     }
 
     public String getInfo() {
-        return info;
-    }
-
-    public void setInfo(String info) {
-        this.info = info;
+        return mInfo;
     }
 
     public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
+        return mDate;
     }
 
     public State getState() {
-        return state;
-    }
-
-    public void setState(State state) {
-        this.state = state;
+        return mState;
     }
 }
 

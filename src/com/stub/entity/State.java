@@ -9,49 +9,26 @@ import java.io.Serializable;
  * Date: 21.07.13
  */
 public enum State implements Serializable{
-    GREEN,
-    YELLOW,
-    ORANGE,
-    RED,
-    PURPLE,
-    NONE;
+    GREEN(R.drawable.green, R.color.green),
+    YELLOW(R.drawable.yellow, R.color.yellow),
+    ORANGE(R.drawable.orange, R.color.orange),
+    RED(R.drawable.red, R.color.red),
+    PURPLE(R.drawable.purple, R.color.purple),
+    NONE(R.drawable.none, R.color.none);
 
+    private final int mDrawableId;
+    private final int mColorId;
+
+    private State(int drawableId, int colorId){
+        mDrawableId = drawableId;
+        mColorId = colorId;
+    }
     public int getColorDrawableId() {
-        switch (this){
-            case GREEN:
-                return R.drawable.green;
-            case YELLOW:
-                return R.drawable.yellow;
-            case ORANGE:
-                return R.drawable.orange;
-            case RED:
-                return R.drawable.red;
-            case PURPLE:
-                return R.drawable.purple;
-            case NONE:
-
-            default:
-                return R.drawable.none;
-        }
+        return mDrawableId;
     }
 
     public int getColorId(){
-        switch (this){
-            case GREEN:
-                return R.color.green;
-            case YELLOW:
-                return R.color.yellow;
-            case ORANGE:
-                return R.color.orange;
-            case RED:
-                return R.color.red;
-            case PURPLE:
-                return R.color.purple;
-            case NONE:
-
-            default:
-                return R.color.none;
-        }
+        return mColorId;
     }
 
 }

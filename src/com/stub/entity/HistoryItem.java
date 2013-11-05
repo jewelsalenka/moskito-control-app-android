@@ -1,6 +1,8 @@
 package com.stub.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -9,37 +11,37 @@ import java.util.List;
  * Date: 13.07.13
  */
 public class HistoryItem implements Serializable{
-    private String componentName;
-    private State oldColor;
-    private State newColor;
-    private List<String> mMessages;
-    private Date date;
+    private final String mComponentName;
+    private final State mOldColor;
+    private final State mNewColor;
+    private final List<String> mMessages;
+    private final Date mDate;
 
     public HistoryItem(String componentName, State oldColor, State newColor, Date date, List<String> info) {
-        this.componentName = componentName;
-        this.oldColor = oldColor;
-        this.newColor = newColor;
-        this.date = date;
-        this.mMessages = info;
+        mComponentName = componentName;
+        mOldColor = oldColor;
+        mNewColor = newColor;
+        mDate = date;
+        mMessages = new ArrayList<String>(info);
     }
 
     public String getComponentName() {
-        return componentName;
+        return mComponentName;
     }
 
     public int getOldColorId() {
-        return oldColor.getColorDrawableId();
+        return mOldColor.getColorDrawableId();
     }
 
     public int getNewColorId() {
-        return newColor.getColorDrawableId();
+        return mNewColor.getColorDrawableId();
     }
 
     public Date getDate() {
-        return date;
+        return mDate;
     }
 
     public List<String> getMessages() {
-        return mMessages;
+        return new ArrayList<String>(mMessages);
     }
 }

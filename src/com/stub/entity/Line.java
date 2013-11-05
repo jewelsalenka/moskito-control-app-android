@@ -2,6 +2,7 @@ package com.stub.entity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -9,18 +10,18 @@ import java.util.List;
  * Date: 14.10.13
  */
 public class Line implements Serializable{
-    private String name;
-    private List<Point> points;
-    private boolean drawable = true;
+    private final String name;
+    private final List<Point> points;
+    private volatile boolean drawable = true;
 
     public Line(String name, List<Point> points) {
         this.name = name;
-        this.points = points;
+        this.points = Collections.synchronizedList(points);
     }
 
     public Line(String name) {
         this.name = name;
-        points = new ArrayList<Point>();
+        points = Collections.synchronizedList(new ArrayList<Point>());
     }
 
     public String getName() {
@@ -28,7 +29,7 @@ public class Line implements Serializable{
     }
 
     public List<Point> getPoints() {
-        return points;
+        return new ArrayList<Point>(points);
     }
 
     public void addPoint(Point point){
