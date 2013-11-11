@@ -20,7 +20,7 @@ import android.widget.*;
 import com.example.moskito_control_app_android.R;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.stub.entity.*;
-
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -51,6 +51,7 @@ public class ApplicationActivity extends Activity {
     private String mDefaultHttp = HTTP;
 
 
+    @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         setContentView(R.layout.main);
@@ -96,7 +97,7 @@ public class ApplicationActivity extends Activity {
         chxl.append("chxl=0:");
         int index = 0;
         for (Point point : lines.get(0).getPoints()) {
-            if (index % 10 == 0) {
+            if (index%15 == 0){
                 chxl.append("|");
                 chxl.append(point.getxCaption());
             }
@@ -133,13 +134,14 @@ public class ApplicationActivity extends Activity {
         mSliderMenu = new SlidingMenu(this);
         mSliderMenu.setMode(SlidingMenu.LEFT_RIGHT);
         mSliderMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+        mSliderMenu.setShadowDrawable(R.drawable.shadow_left);
         mSliderMenu.setShadowWidthRes(R.dimen.shadow_width);
         mSliderMenu.setBehindOffsetRes(R.dimen.slidingmenu_offset);
         mSliderMenu.setFadeDegree(0.35f);
         mSliderMenu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
         mSliderMenu.setMenu(R.layout.applications);
         mSliderMenu.setSecondaryMenu(R.layout.settings);
-        mSliderMenu.setSecondaryShadowDrawable(R.drawable.right_shadow);
+        mSliderMenu.setSecondaryShadowDrawable(R.drawable.shadow_right);
     }
 
     private void initSettingsPanel() {
@@ -394,7 +396,7 @@ public class ApplicationActivity extends Activity {
 
     private void initializeChartsList() {
         if (mCurrentApp == null) return;
-        final ChartsAdapter chartsAdapter = new ChartsAdapter(this, mCurrentApp.getCharts());
+        final ChartsAdapter chartsAdapter = new ChartsAdapter(mCurrentApp.getCharts());
         final ExpandableListView chartListView = (ExpandableListView) findViewById(R.id.charts_list);
         setGroupIndicatorToRight(chartListView);
         chartListView.setAdapter(chartsAdapter);
@@ -439,7 +441,7 @@ public class ApplicationActivity extends Activity {
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         int width = dm.widthPixels;
-        expListView.setIndicatorBounds(width - getDipsFromPixel(35), width - getDipsFromPixel(5));
+        expListView.setIndicatorBounds(width - getDipsFromPixel(10), width - getDipsFromPixel(5));
     }
 
     public int getDipsFromPixel(float pixels) {

@@ -108,7 +108,17 @@
                     android:layout_marginRight="20dp"
                     android:cacheColorHint="#00000000"
                     android:childDivider="@drawable/main_font"
-                    android:layout_below="@id/charts_devider"/>
+                    android:divider="@drawable/main_font"
+                    android:dividerHeight="1dp"
+                    android:layout_below="@id/multitouchPlot"/>
+            <View
+                    android:id="@+id/charts_devider_below"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_below="@id/charts_list"
+                    android:background="@drawable/main_list_devider"/>
         </RelativeLayout>
     </SlidingDrawer>
 

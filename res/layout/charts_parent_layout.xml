@@ -3,12 +3,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="150dp">
+    <View
+            android:id="@+id/charts_parent_devider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/main_list_devider"/>
 
     <TextView android:id="@+id/charts_name"
               android:layout_width="wrap_content"
               android:layout_height="match_parent"
               android:layout_marginLeft="40dp"
               android:gravity="center_vertical"
+              android:layout_below="@id/charts_parent_devider"
               android:text="Session100"/>
 
 </LinearLayout>
