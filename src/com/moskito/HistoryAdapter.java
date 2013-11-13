@@ -2,6 +2,7 @@ package com.moskito;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,12 +44,12 @@ public class HistoryAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
-    public Object getGroup(int groupPosition) {
+    public HistoryItem getGroup(int groupPosition) {
         return mHistory.get(groupPosition);
     }
 
     @Override
-    public Object getChild(int groupPosition, int childPosition) {
+    public String getChild(int groupPosition, int childPosition) {
         return mHistory.get(groupPosition).getMessages().get(childPosition);
     }
 
@@ -71,14 +72,14 @@ public class HistoryAdapter extends BaseExpandableListAdapter {
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.history_list_item, null);
+            convertView = inflater.inflate(R.layout.history_parent_layout, null);
         }
         TextView dateView = (TextView) convertView.findViewById(R.id.change_date);
         TextView componentNameView = (TextView) convertView.findViewById(R.id.server_name);
         View oldStateView = convertView.findViewById(R.id.history_old_state);
         View newStateView = convertView.findViewById(R.id.history_new_state);
 
-        HistoryItem historyItem = (HistoryItem) getGroup(groupPosition);
+        HistoryItem historyItem = getGroup(groupPosition);
         String date = new SimpleDateFormat("dd MMM HH:mm:ss", Locale.ENGLISH).format(historyItem.getDate());
         dateView.setText(date);
         componentNameView.setText(historyItem.getComponentName());
@@ -90,18 +91,20 @@ public class HistoryAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
-    public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-        if (convertView == null) {
+    public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View view, ViewGroup parent) {
+        if (view == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.charts_child_layout, null);
+            view = inflater.inflate(R.layout.history_child_layout, null);
         }
-        ((TextView) convertView.findViewById(R.id.history_info_text)).setText(mHistory.get(groupPosition).getMessages().get
-                (childPosition));
+        String infoText = getChild(groupPosition, childPosition);
+        Log.i("AndroidRuntime", "position = " + childPosition + ", text = " + infoText);
+        TextView infoTextView = (TextView) view.findViewById(R.id.history_info_text);
+        infoTextView.setText(infoText);
         String newString = new SimpleDateFormat("HH:mm:ss").format(mHistory.get(groupPosition).getDate());
-        ((TextView) convertView.findViewById(R.id.info_date)).setText(newString);
-        convertView.findViewById(R.id.info_date);
+        ((TextView) view.findViewById(R.id.info_date)).setText(newString);
+        view.findViewById(R.id.info_date);
 
-        return convertView;
+        return view;
     }
 
     @Override

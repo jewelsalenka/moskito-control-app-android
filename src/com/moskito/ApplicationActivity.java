@@ -368,6 +368,7 @@ public class ApplicationActivity extends Activity {
                 new HistoryAdapter(this, null) :
                 new HistoryAdapter(this, mCurrentApp.getHistory());
         final ExpandableListView lvSimple = (ExpandableListView) findViewById(R.id.history_list);
+        setGroupIndicatorToRight(lvSimple);
         lvSimple.setAdapter(historyAdapter);
         lvSimple.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
             @Override
@@ -441,7 +442,7 @@ public class ApplicationActivity extends Activity {
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         int width = dm.widthPixels;
-        expListView.setIndicatorBounds(width - getDipsFromPixel(10), width - getDipsFromPixel(5));
+        expListView.setIndicatorBounds(width - getDipsFromPixel(5), width - getDipsFromPixel(5));
     }
 
     public int getDipsFromPixel(float pixels) {
