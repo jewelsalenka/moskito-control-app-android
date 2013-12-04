@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
-              android:layout_height="150dp">
+              android:layout_height="40dp">
     <View
             android:id="@+id/charts_parent_devider"
             android:layout_width="match_parent"
@@ -11,10 +11,17 @@
 
     <TextView android:id="@+id/charts_name"
               android:layout_width="wrap_content"
-              android:layout_height="match_parent"
-              android:layout_marginLeft="40dp"
-              android:gravity="center_vertical"
+              android:layout_height="40dp"
               android:layout_below="@id/charts_parent_devider"
-              android:text="Session100"/>
+              android:textSize="@dimen/history_date_textSize"
+              android:gravity="center_vertical"
+              android:background="@color/green"
+              android:text="something"/>
 
-</LinearLayout>
+    <View android:id="@+id/charts_group_indicator"
+          android:layout_width="@dimen/component_show_hide_info_width"
+          android:layout_height="@dimen/component_show_hide_info_height"
+          android:layout_centerVertical="true"
+            />
+
+</RelativeLayout>

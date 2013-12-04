@@ -60,7 +60,7 @@ public class HistoryAdapter extends BaseExpandableListAdapter {
 
     @Override
     public long getChildId(int groupPosition, int childPosition) {
-        return childPosition;
+        return groupPosition << 16 + childPosition;
     }
 
     @Override

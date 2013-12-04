@@ -7,7 +7,7 @@
 
     <include layout="@layout/header"/>
     <TextView
-            android:id="@+id/no_data"
+            android:id="@+id/textView_about_no_data_loading"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="@string/no_data"
@@ -15,7 +15,7 @@
             android:layout_marginTop="@dimen/no_data_marginTop"
             android:visibility="gone"/>
     <View
-            android:id="@+id/hepl1"
+            android:id="@+id/image_help1"
             android:layout_width="268dp"
             android:layout_height="98dp"
             android:background="@drawable/help1"
@@ -23,17 +23,23 @@
             android:layout_marginRight="20dp"
             android:layout_marginTop="@dimen/header_height"
             android:visibility="gone"/>
-    <ListView
-            android:id="@+id/servers_list"
+    <ExpandableListView
+            android:id="@+id/list_of_components"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/header_height"
-            android:layout_marginBottom="@dimen/history_button_height"
-            android:divider="@drawable/main_list_devider"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/header_height_minus_devider"
+            android:childDivider="@drawable/main_font"
+            android:divider="@drawable/main_font"
             android:cacheColorHint="#00000000"
             android:dividerHeight="1dp"/>
     <View
-            android:id="@+id/hepl2"
+            android:id="@+id/component_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/list_of_components"
+            android:background="@drawable/main_list_devider"/>
+    <View
+            android:id="@+id/image_help2"
             android:layout_width="199dp"
             android:layout_height="149dp"
             android:background="@drawable/help2"

@@ -7,7 +7,7 @@
                 android:background="@drawable/main_font">
     <TextView
             android:id="@+id/settings_header"
-            android:layout_height="@dimen/header_height"
+            android:layout_height="@dimen/header_height_minus_devider"
             android:layout_width="match_parent"
             android:text="@string/settings"
             android:gravity="center_vertical"
@@ -127,8 +127,7 @@
             android:layout_marginRight="12dp"
             android:layout_below="@id/password"
             android:visibility="gone"
-            android:password="true"
-            android:text="*************"/>
+            android:password="true"/>
 
     <TextView
             android:id="@+id/update_interval_text"

@@ -1,5 +1,6 @@
 package com.moskito;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,7 +67,9 @@ public class ChartsAdapter extends BaseExpandableListAdapter {
             convertView = inflater.inflate(R.layout.charts_parent_layout, null);
         }
         TextView chartNameView = (TextView) convertView.findViewById(R.id.charts_name);
-        chartNameView.setText(mCharts.get(groupPosition).getName());
+        String name = getGroup(groupPosition).getName();
+        chartNameView.setText(name);
+        Log.i("Alenka", name);
 
         return convertView;
     }

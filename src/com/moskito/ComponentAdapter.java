@@ -5,7 +5,7 @@ import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
+import android.widget.BaseExpandableListAdapter;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.example.moskito_control_app_android.R;
@@ -19,58 +19,84 @@ import java.util.List;
  * User: Olenka Shemshey
  * Date: 14.07.13
  */
-public class ComponentAdapter extends BaseAdapter{
-    private List<Component> components;
-    private final Context context;
+public class ComponentAdapter extends BaseExpandableListAdapter {
+    private List<Component> mComponents;
+    private final Context mContext;
 
     public ComponentAdapter(Context context, List<Component> components) {
-        this.context = context;
+        mContext = context;
         if (components != null){
-            this.components = components;
+            mComponents = components;
         } else {
-            this.components = new ArrayList<Component>();
+            mComponents = new ArrayList<Component>();
         }
     }
+
     @Override
-    public int getCount() {
-        return components.size();
+    public int getGroupCount() {
+        return mComponents.size();
     }
 
     @Override
-    public Object getItem(int position) {
-        return components.get(position);
+    public int getChildrenCount(int groupPosition) {
+        return 1;
     }
 
     @Override
-    public long getItemId(int position) {
-        return 0;
+    public Component getGroup(int groupPosition) {
+        return mComponents.get(groupPosition);
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public String getChild(int groupPosition, int childPosition) {
+        return null;
+    }
 
+    @Override
+    public long getGroupId(int groupPosition) {
+        return groupPosition;
+    }
+
+    @Override
+    public long getChildId(int groupPosition, int childPosition) {
+        return groupPosition << 16 + childPosition;
+    }
+
+    @Override
+    public boolean hasStableIds() {
+        return true;
+    }
+
+    @Override
+    public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
         View rootView = convertView;
         if (rootView == null){
-            rootView = LayoutInflater.from(context).inflate(R.layout.component_list_item_advanced, parent, false);
+            rootView = LayoutInflater.from(mContext).inflate(R.layout.component_parent_layout, parent, false);
         }
         View componentStateView = rootView.findViewById(R.id.server_color_state);
         TextView appName = (TextView) rootView.findViewById(R.id.server_name);
-
-        Component component = (Component) getItem(position);
-        Drawable color = context.getResources().getDrawable(component.getState().getColorDrawableId());
+        Component component = getGroup(groupPosition);
+        Drawable color = mContext.getResources().getDrawable(component.getState().getColorDrawableId());
         componentStateView.setBackgroundDrawable(color);
         appName.setText(component.getName());
-
-        RelativeLayout advancedLayout = (RelativeLayout) rootView.findViewById(R.id.item_advanced);
-
-        if (rootView.isSelected()){
-            advancedLayout.setVisibility(View.VISIBLE);
-            ((TextView) rootView.findViewById(R.id.info_text)).setText(component.getInfo());
-            String date = new SimpleDateFormat("dd MMM HH:mm:ss").format(component.getDate());
-            ((TextView) rootView.findViewById(R.id.info_date)).setText(date);
-        } else {
-            advancedLayout.setVisibility(View.GONE);
-        }
         return rootView;
+    }
+
+    @Override
+    public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
+        View rootView = convertView;
+        if (rootView == null) {
+            rootView = LayoutInflater.from(mContext).inflate(R.layout.component_child_layout, parent, false);
+        }
+        Component component = getGroup(groupPosition);
+        ((TextView) rootView.findViewById(R.id.info_text)).setText(component.getInfo());
+        String date = new SimpleDateFormat("dd MMM HH:mm:ss").format(component.getDate());
+        ((TextView) rootView.findViewById(R.id.info_date)).setText(date);
+        return rootView;
+    }
+
+    @Override
+    public boolean isChildSelectable(int groupPosition, int childPosition) {
+        return false;
     }
 }

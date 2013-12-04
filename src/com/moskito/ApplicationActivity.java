@@ -20,7 +20,7 @@ import android.widget.*;
 import com.example.moskito_control_app_android.R;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.stub.entity.*;
-import java.io.IOException;
+
 import java.util.List;
 
 /**
@@ -179,6 +179,7 @@ public class ApplicationActivity extends Activity {
                 int visibility = authorization.isChecked() ? View.VISIBLE : View.GONE;
                 loginView.setVisibility(visibility);
                 loginTextView.setVisibility(visibility);
+                loginTextView.setText(preferences.getString(SHARED_PREFERENCES_KEY_LOGIN, ""));
                 passwordView.setVisibility(visibility);
                 passwordTextView.setVisibility(visibility);
             }
@@ -229,20 +230,20 @@ public class ApplicationActivity extends Activity {
     }
 
     private void obtainView() {
-        mNoDataView = (TextView) findViewById(R.id.no_data);
+        mNoDataView = (TextView) findViewById(R.id.textView_about_no_data_loading);
         mMinutesUpdateInterval = (TextView) findViewById(R.id.interval_minutes);
         final SlidingDrawer historyDrawer = (SlidingDrawer) findViewById(R.id.bottom_drawer);
         historyDrawer.setOnDrawerOpenListener(new SlidingDrawer.OnDrawerOpenListener() {
             @Override
             public void onDrawerOpened() {
                 historyDrawer.bringToFront();
-//                findViewById(R.id.history_arrow).setRotation(0);
+                findViewById(R.id.history_arrow).setRotation(0);
             }
         });
         historyDrawer.setOnDrawerCloseListener(new SlidingDrawer.OnDrawerCloseListener() {
             @Override
             public void onDrawerClosed() {
-//                findViewById(R.id.history_arrow).setRotation(180);
+                findViewById(R.id.history_arrow).setRotation(180);
             }
         });
     }
@@ -312,49 +313,60 @@ public class ApplicationActivity extends Activity {
         });
     }
 
-    private void initializeServersList() {
+    private void initializeComponentList() {
         final ComponentAdapter sAdapter = (mCurrentApp == null) ?
-                new ComponentAdapter(this, null) :
-                new ComponentAdapter(this, mCurrentApp.getComponents());
-        ListView lvSimple = (ListView) findViewById(R.id.servers_list);
-        lvSimple.setAdapter(sAdapter);
-        lvSimple.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            boolean isBeforeWasOpen = false;
-
+                new ComponentAdapter(this, null) : new ComponentAdapter(this, mCurrentApp.getComponents());
+        final ExpandableListView componentList = (ExpandableListView) findViewById(R.id.list_of_components);
+        componentList.setAdapter(sAdapter);
+        setGroupIndicatorToRight(componentList);
+        componentList.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+            View previousArrow;
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                view.setSelected(!isBeforeWasOpen);
-                View arrow = view.findViewById(R.id.show_hide_info);
-                if (isBeforeWasOpen) {
-//                    arrow.setRotation(0);
+            public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
+                View arrow = v.findViewById(R.id.show_hide_info);
+                if (parent.isGroupExpanded(groupPosition)) {
+                    parent.collapseGroup(groupPosition);
+                    arrow.setRotation(0);
                 } else {
-//                    arrow.setRotation(180);
+                    parent.expandGroup(groupPosition);
+                    if (previousArrow != null) previousArrow.setRotation(0);
+                    arrow.setRotation(180);
                 }
-                arrow.setBackgroundDrawable(getResources().getDrawable(R.drawable.arrow_bottom));
-                isBeforeWasOpen = !isBeforeWasOpen;
-                sAdapter.notifyDataSetChanged();
+                previousArrow = arrow;
+                return true;
             }
         });
 
+        componentList.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+            int previousGroup = -1;
+
+            @Override
+            public void onGroupExpand(int groupPosition) {
+                if (groupPosition != previousGroup) {
+                    componentList.collapseGroup(previousGroup);
+                }
+                previousGroup = groupPosition;
+            }
+        });
     }
 
     private void initializeAppsList(List<Application> apps) {
         final AppAdapter adapter = new AppAdapter(this, apps);
-        ListView lvSimple = (ListView) findViewById(R.id.app_list);
-        lvSimple.setAdapter(adapter);
-        lvSimple.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        ListView applicationList = (ListView) findViewById(R.id.app_list);
+        applicationList.setAdapter(adapter);
+        applicationList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 mSliderMenu.toggle();
                 updateAppData(adapter.getItem(position));
                 adapter.setCurrentApp(position);
                 adapter.notifyDataSetChanged();
-                if (mCurrentApp.getHistory().isEmpty()){
+                if (mCurrentApp.getHistory().isEmpty()) {
                     new HistoryGetter().execute(getAddressConnection() + "history");
                 } else {
                     initializeHistoryList();
                 }
-                if (mCurrentApp.getCharts().isEmpty()){
+                if (mCurrentApp.getCharts().isEmpty()) {
                     new ChartsGetter().execute(getAddressConnection() + "charts/points");
                 } else {
                     initializeChartsList();
@@ -367,10 +379,10 @@ public class ApplicationActivity extends Activity {
         final HistoryAdapter historyAdapter = (mCurrentApp == null) ?
                 new HistoryAdapter(this, null) :
                 new HistoryAdapter(this, mCurrentApp.getHistory());
-        final ExpandableListView lvSimple = (ExpandableListView) findViewById(R.id.history_list);
-        setGroupIndicatorToRight(lvSimple);
-        lvSimple.setAdapter(historyAdapter);
-        lvSimple.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+        final ExpandableListView historyList = (ExpandableListView) findViewById(R.id.history_list);
+        setGroupIndicatorToRight(historyList);
+        historyList.setAdapter(historyAdapter);
+        historyList.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
             @Override
             public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
                 if (parent.isGroupExpanded(groupPosition)) {
@@ -382,13 +394,13 @@ public class ApplicationActivity extends Activity {
             }
 
         });
-        lvSimple.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+        historyList.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
             int previousGroup = -1;
 
             @Override
             public void onGroupExpand(int groupPosition) {
                 if (groupPosition != previousGroup) {
-                    lvSimple.collapseGroup(previousGroup);
+                    historyList.collapseGroup(previousGroup);
                 }
                 previousGroup = groupPosition;
             }
@@ -399,12 +411,11 @@ public class ApplicationActivity extends Activity {
         if (mCurrentApp == null) return;
         final ChartsAdapter chartsAdapter = new ChartsAdapter(mCurrentApp.getCharts());
         final ExpandableListView chartListView = (ExpandableListView) findViewById(R.id.charts_list);
-        setGroupIndicatorToRight(chartListView);
         chartListView.setAdapter(chartsAdapter);
         chartListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-                Line line = mCurrentApp.getCharts().get(groupPosition).getLines().get(childPosition);
+                Line line = chartsAdapter.getChild(groupPosition, childPosition);
                 line.setDrawable(!line.isDrawable());
                 chartsAdapter.notifyDataSetChanged();
                 drawOnMultitouchPlot(groupPosition);
@@ -457,7 +468,7 @@ public class ApplicationActivity extends Activity {
 
     private void updateData() {
         updateHead();
-        initializeServersList();
+        initializeComponentList();
         initializeHistoryList();
         updateNoData();
     }
@@ -490,6 +501,11 @@ public class ApplicationActivity extends Activity {
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
         if (networkInfo != null && networkInfo.isConnected()) {
             Log.i("AndroidRuntime", "Network connection available.");
+            if (((CheckBox)findViewById(R.id.checkbox_authorization)).isChecked()){
+                String login = ((TextView) findViewById(R.id.login_input)).getText().toString();
+                String pass = ((TextView) findViewById(R.id.password_input)).getText().toString();
+                mHelper.setHttpAuth(login, pass);
+            }
             new ApplicationGetter().execute(stringUrl);
         } else {
             Log.i("AndroidRuntime", "No network connection available.");
@@ -592,11 +608,15 @@ public class ApplicationActivity extends Activity {
     }
 
     public void helpInfo(boolean visible) {
-        View help1 = findViewById(R.id.hepl1);
-        View help2 = findViewById(R.id.hepl2);
+        View help1 = findViewById(R.id.image_help1);
+        View help2 = findViewById(R.id.image_help2);
         int visibility = visible ? View.VISIBLE : View.GONE;
         help1.setVisibility(visibility);
         help2.setVisibility(visibility);
         if (visible) mHeader.setBackgroundDrawable(getResources().getDrawable(R.color.blue));
+    }
+
+    public void refreshData(){
+
     }
 }

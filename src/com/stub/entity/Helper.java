@@ -9,7 +9,6 @@ import org.moskito.control.restclient.data.response.StatusResponse;
 import org.moskito.control.restclient.http.Requester;
 import org.moskito.control.restclient.parser.ResponseParser;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -21,22 +20,29 @@ import java.util.List;
 public class Helper {
     private static final int CONNECT_TIMEOUT = 100000;
     private static final int READ_TIMEOUT = 100000;
-    private final DataProvider dataProvider;
+    private final DataProvider mDataProvider;
+    private final RequesterConfiguration mConfiguration;
 
     public Helper() {
-        RequesterConfiguration configuration = new RequesterConfiguration();
-        configuration.setConnectTimeout(CONNECT_TIMEOUT);
-        configuration.setReadTimeout(READ_TIMEOUT);
-        Requester requester = new Requester(configuration);
+        mConfiguration = new RequesterConfiguration();
+        mConfiguration.setConnectTimeout(CONNECT_TIMEOUT);
+        mConfiguration.setReadTimeout(READ_TIMEOUT);
+        Requester requester = new Requester(mConfiguration);
         ResponseParser parser = new ResponseParser();
-        dataProvider = new DataProvider(requester, parser);
+        mDataProvider = new DataProvider(requester, parser);
+    }
+
+    public void setHttpAuth(String login, String pass){
+        mConfiguration.setBasicAuthEnabled(true);
+        mConfiguration.setLogin(login);
+        mConfiguration.setPassword(pass);
     }
 
     public List<HistoryItem> getHistory(String url, String appName) {
         List<HistoryItem> history = new ArrayList<HistoryItem>();
         HistoryResponse historyResponse;
-        synchronized (dataProvider) {
-            historyResponse = dataProvider.getHistoryResponse(url, appName);
+        synchronized (mDataProvider) {
+            historyResponse = mDataProvider.getHistoryResponse(url, appName);
         }
         for(org.moskito.control.restclient.data.HistoryItem historyItem : historyResponse.getHistoryItems()) {
             String componentName = historyItem.getComponentName();
@@ -56,8 +62,8 @@ public class Helper {
     public List<Application> getAllApps(String url) {
         List<Application> appList = new ArrayList<Application>();
         StatusResponse statusResponse;
-        synchronized (dataProvider) {
-            statusResponse = dataProvider.getStatusResponse(url);
+        synchronized (mDataProvider) {
+            statusResponse = mDataProvider.getStatusResponse(url);
         }
         if (statusResponse == null) return appList;
         for (org.moskito.control.restclient.data.Application app: statusResponse.getApplications())  {
@@ -83,8 +89,8 @@ public class Helper {
     public List<Chart> getCharts(String url, String appName) {
         List<Chart> charts = new ArrayList<Chart>();
         ChartsResponse chartResponse;
-        synchronized (dataProvider){
-            chartResponse = dataProvider.getChartsResponse(url, appName);
+        synchronized (mDataProvider){
+            chartResponse = mDataProvider.getChartsResponse(url, appName);
         }
         for (org.moskito.control.restclient.data.Chart jsonChart : chartResponse.getCharts()){
             String chartName = jsonChart.getName();
