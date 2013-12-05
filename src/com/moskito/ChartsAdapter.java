@@ -1,5 +1,6 @@
 package com.moskito;
 
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -85,6 +86,9 @@ public class ChartsAdapter extends BaseExpandableListAdapter {
         lineNameView.setText(line.getName());
         View tick = convertView.findViewById(R.id.show_or_hide_line);
         tick.setVisibility(line.isDrawable() ? View.VISIBLE : View.INVISIBLE);
+        View colorIcon = convertView.findViewById(R.id.line_color);
+        Drawable colorDrawable = convertView.getContext().getResources().getDrawable(line.getColor().getColorDrawableId());
+        colorIcon.setBackground(colorDrawable);
         return convertView;
     }
 

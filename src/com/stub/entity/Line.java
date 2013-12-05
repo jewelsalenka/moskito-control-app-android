@@ -10,37 +10,44 @@ import java.util.List;
  * Date: 14.10.13
  */
 public class Line implements Serializable{
-    private final String name;
-    private final List<Point> points;
-    private volatile boolean drawable = true;
+    private final String mName;
+    private final List<Point> mPoints;
+    private final LineColors mColor;
+    private volatile boolean mIsDrawable = true;
 
-    public Line(String name, List<Point> points) {
-        this.name = name;
-        this.points = Collections.synchronizedList(points);
+    public Line(String name, List<Point> points, int i) {
+        mName = name;
+        mPoints = Collections.synchronizedList(points);
+        mColor = LineColors.values()[i-1];
     }
 
-    public Line(String name) {
-        this.name = name;
-        points = Collections.synchronizedList(new ArrayList<Point>());
+    public Line(String name, int i) {
+        mName = name;
+        mPoints = Collections.synchronizedList(new ArrayList<Point>());
+        mColor = LineColors.values()[i-1];
     }
 
     public String getName() {
-        return name;
+        return mName;
     }
 
     public List<Point> getPoints() {
-        return new ArrayList<Point>(points);
+        return new ArrayList<Point>(mPoints);
     }
 
     public void addPoint(Point point){
-        points.add(point);
+        mPoints.add(point);
     }
 
     public boolean isDrawable() {
-        return drawable;
+        return mIsDrawable;
     }
 
     public void setDrawable(boolean drawable) {
-        this.drawable = drawable;
+        mIsDrawable = drawable;
+    }
+
+    public LineColors getColor() {
+        return mColor;
     }
 }

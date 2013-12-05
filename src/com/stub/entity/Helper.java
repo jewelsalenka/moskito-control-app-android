@@ -96,6 +96,7 @@ public class Helper {
             String chartName = jsonChart.getName();
             List<Line> lines = new ArrayList<Line>();
             List<org.moskito.control.restclient.data.Line> jsonLines = jsonChart.getLines();
+            int color = 1;
             for (org.moskito.control.restclient.data.Line jsonLine : jsonLines){
                 String lineNames = jsonLine.getName();
                 List<Point> points = new ArrayList<Point>();
@@ -107,8 +108,9 @@ public class Helper {
                     Point point = new Point(x,y,timestamp);
                     points.add(point);
                 }
-                Line line = new Line(lineNames, points);
+                Line line = new Line(lineNames, points, color);
                 lines.add(line);
+                color = (color == LineColors.LENGTH) ? 0 : color + 1;
             }
             Chart chart = new Chart(chartName, lines);
             charts.add(chart);

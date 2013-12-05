@@ -107,6 +107,7 @@
             android:layout_marginRight="12dp"
             android:layout_below="@id/login"
             android:visibility="gone"
+            android:singleLine="true"
             android:text="Alenka"/>
 
     <TextView
@@ -127,6 +128,7 @@
             android:layout_marginRight="12dp"
             android:layout_below="@id/password"
             android:visibility="gone"
+            android:singleLine="true"
             android:password="true"/>
 
     <TextView

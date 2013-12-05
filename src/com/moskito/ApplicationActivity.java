@@ -37,7 +37,6 @@ public class ApplicationActivity extends Activity {
     private static final String MOSKITO_CONTROL_REST = "/moskito-control/rest/";
     private static final String HTTPS = "https://";
     private static final String HTTP = "http://";
-    private static final String CONNECTION_ESTABLISHED = "Connection established";
 
     private final Helper mHelper = new Helper();
     private Application mCurrentApp;
@@ -63,7 +62,7 @@ public class ApplicationActivity extends Activity {
         updateHead();
     }
 
-    private void initMultitouchPlot(String chd, String chxl, String chxr, String chds) {
+    private void initMultitouchPlot(String chd, String chxl, String chxr, String chds, String chco) {
         WebView webView = (WebView) findViewById(R.id.multitouchPlot);
         String CHART_URL = "http://chart.apis.google.com/chart?"
                 + "cht=lc&"
@@ -71,7 +70,7 @@ public class ApplicationActivity extends Activity {
                 + chd
                 + chxr
                 + chds
-                + "chco=6EFE61,4d89f9,C030FF,FFFF72&"
+                + chco
                 + "chxt=x,y&"
                 + chxl
                 + "chls=3,1,0|3,1,0&"
@@ -84,17 +83,15 @@ public class ApplicationActivity extends Activity {
         Chart chart = mCurrentApp.getCharts().get(groupPosition);
         List<Line> lines = chart.getLines();
         //+"chxr=1,0,100&"
-        StringBuilder chxr = new StringBuilder();
-        chxr.append("chxr=1,0,");
+        StringBuilder chxr = new StringBuilder("chxr=1,0,");
         //+"chds=0,100&"
-        StringBuilder chds = new StringBuilder();
-        chds.append("chds=0,");
+        StringBuilder chds = new StringBuilder("chds=0,");
         //+"chd=t:7,18,11,26,22,11,14,7,18,11,26,22,11,14|26,22,11,14,7,11,26,22,11,14&"
-        StringBuilder chd = new StringBuilder();
-        chd.append("chd=t:");
+        StringBuilder chd = new StringBuilder("chd=t:");
         //+"chxl=0:|Mon|Tue|Wed|Thu|Fri|Sat|Sun&"
-        StringBuilder chxl = new StringBuilder();
-        chxl.append("chxl=0:");
+        StringBuilder chxl = new StringBuilder("chxl=0:");
+        //+"chco=6EFE61,4d89f9,C030FF,FFFF72&"
+        StringBuilder chco = new StringBuilder("chco=");
         int index = 0;
         for (Point point : lines.get(0).getPoints()) {
             if (index%15 == 0){
@@ -108,6 +105,8 @@ public class ApplicationActivity extends Activity {
         double max = 0;
         for (Line line : lines) {
             if (line.isDrawable()) {
+                chco.append(line.getColor().getColor());
+                chco.append(",");
                 if (index != 0) chd.append("|");
                 int pointsNum = 0;
                 for (Point point : line.getPoints()) {
@@ -115,7 +114,7 @@ public class ApplicationActivity extends Activity {
                     max = Math.max(max, y);
                     chd.append(y);
                     pointsNum++;
-                    if (!(pointsNum == line.getPoints().size())) chd.append(",");
+                    if (pointsNum != line.getPoints().size()) chd.append(",");
                 }
                 index++;
             }
@@ -125,9 +124,9 @@ public class ApplicationActivity extends Activity {
         chxr.append("&");
         chds.append(max);
         chds.append("&");
-        Log.i("AndroidRuntime", "chd" + chd.toString());
-        Log.i("AndroidRuntime", "chxl" + chxl.toString());
-        initMultitouchPlot(chd.toString(), chxl.toString(), chxr.toString(), chds.toString());
+        chco.deleteCharAt(chco.length()-1);
+        chco.append("&");
+        initMultitouchPlot(chd.toString(), chxl.toString(), chxr.toString(), chds.toString(), chco.toString());
     }
 
     private void initSlidingMenu() {
@@ -412,6 +411,7 @@ public class ApplicationActivity extends Activity {
         final ChartsAdapter chartsAdapter = new ChartsAdapter(mCurrentApp.getCharts());
         final ExpandableListView chartListView = (ExpandableListView) findViewById(R.id.charts_list);
         chartListView.setAdapter(chartsAdapter);
+        setGroupIndicatorToRight(chartListView);
         chartListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
@@ -423,13 +423,19 @@ public class ApplicationActivity extends Activity {
             }
         });
         chartListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+            View previousArrow;
             @Override
             public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
+                View arrow = v.findViewById(R.id.charts_group_indicator);
                 if (parent.isGroupExpanded(groupPosition)) {
                     parent.collapseGroup(groupPosition);
+                    arrow.setRotation(0);
                 } else {
                     parent.expandGroup(groupPosition);
+                    if (previousArrow != null) previousArrow.setRotation(0);
+                    arrow.setRotation(180);
                 }
+                previousArrow = arrow;
                 drawOnMultitouchPlot(groupPosition);
 
                 return true;
@@ -614,9 +620,5 @@ public class ApplicationActivity extends Activity {
         help1.setVisibility(visibility);
         help2.setVisibility(visibility);
         if (visible) mHeader.setBackgroundDrawable(getResources().getDrawable(R.color.blue));
-    }
-
-    public void refreshData(){
-
     }
 }

@@ -91,8 +91,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="15dp"
-                    android:layout_below="@id/bottom_handle"
-                    title="A Simple multitouch XYPlot Example"/>
+                    android:layout_below="@id/bottom_handle"/>
 
             <View
                     android:id="@+id/charts_devider"
@@ -107,7 +106,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-                    android:groupIndicator="@drawable/arrow_bottom"
                     android:cacheColorHint="#00000000"
                     android:childDivider="@drawable/main_font"
                     android:divider="@drawable/main_font"

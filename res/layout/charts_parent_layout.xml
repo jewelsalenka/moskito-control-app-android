@@ -1,27 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="40dp">
-    <View
-            android:id="@+id/charts_parent_devider"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@drawable/main_list_devider"/>
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+
+    <View android:id="@+id/charts_parent_devider"
+          android:layout_width="match_parent"
+          android:layout_height="1dp"
+          android:background="@drawable/main_list_devider"/>
 
     <TextView android:id="@+id/charts_name"
               android:layout_width="wrap_content"
               android:layout_height="40dp"
               android:layout_below="@id/charts_parent_devider"
-              android:textSize="@dimen/history_date_textSize"
-              android:gravity="center_vertical"
-              android:background="@color/green"
-              android:text="something"/>
+              android:textSize="16dp"
+              android:textColor="@color/black"
+              android:gravity="center_vertical"/>
 
     <View android:id="@+id/charts_group_indicator"
           android:layout_width="@dimen/component_show_hide_info_width"
           android:layout_height="@dimen/component_show_hide_info_height"
-          android:layout_centerVertical="true"
-            />
+          android:background="@drawable/arrow_bottom"
+          android:layout_alignParentRight="true"
+          android:layout_marginRight="10dp"
+          android:layout_centerVertical="true"/>
 
 </RelativeLayout>

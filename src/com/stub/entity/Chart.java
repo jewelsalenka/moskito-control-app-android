@@ -34,5 +34,4 @@ public class Chart implements Serializable{
     public void addLine(Line line){
         mLines.add(line);
     }
-
 }
