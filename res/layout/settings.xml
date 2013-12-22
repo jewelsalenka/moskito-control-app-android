@@ -2,8 +2,8 @@
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
                 android:background="@drawable/main_font">
     <TextView
             android:id="@+id/settings_header"
@@ -111,32 +111,31 @@
             android:visibility="invisible"
             android:text="@string/password"/>
 
-    <LinearLayout android:layout_width="match_parent"
+    <LinearLayout android:layout_width="fill_parent"
                   android:layout_height="38dp"
                   android:layout_below="@id/login"
                   android:layout_marginRight="12dp"
                   android:layout_marginLeft="12dp"
                   android:orientation="horizontal"
+                  android:visibility="gone"
+                  android:weightSum="2"
                   android:id="@+id/textEditForLoginAndPass"
             >
         <EditText
                 android:id="@+id/login_input"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_height="38dp"
                 android:textSize="14dp"
-                android:visibility="gone"
                 android:singleLine="true"
                 android:layout_weight="1"
-                android:layout_marginRight="6dp"
-                android:text="Alenka"/>
+                android:layout_marginRight="6dp"/>
 
         <EditText
                 android:id="@+id/password_input"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="38dp"
                 android:textSize="14dp"
                 android:layout_marginLeft="6dp"
-                android:visibility="gone"
                 android:singleLine="true"
                 android:layout_weight="1"
                 android:password="true"/>

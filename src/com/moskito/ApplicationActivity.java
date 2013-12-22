@@ -191,20 +191,19 @@ public class ApplicationActivity extends Activity {
         final EditText loginTextView = (EditText) findViewById(R.id.login_input);
         String login = preferences.getString(SHARED_PREFERENCES_KEY_LOGIN, "");
         loginTextView.setText(login);
-        loginTextView.setVisibility(visibility);
         final EditText passwordTextView = (EditText) findViewById(R.id.password_input);
         String pass = preferences.getString(SHARED_PREFERENCES_KEY_PASS, "");
         passwordTextView.setText(pass);
-        passwordTextView.setVisibility(visibility);
+        final View passAndLogin = findViewById(R.id.textEditForLoginAndPass);
+        passAndLogin.setVisibility(visibility);
         authorization.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int visibility = authorization.isChecked() ? View.VISIBLE : View.GONE;
                 loginView.setVisibility(visibility);
-                loginTextView.setVisibility(visibility);
                 loginTextView.setText(preferences.getString(SHARED_PREFERENCES_KEY_LOGIN, ""));
                 passwordView.setVisibility(visibility);
-                passwordTextView.setVisibility(visibility);
+                passAndLogin.setVisibility(visibility);
             }
         });
         mMinutesUpdateInterval.setText(preferences.getInt(SHARED_PREFERENCES_KEY_INTERVAL, 1) + "");
