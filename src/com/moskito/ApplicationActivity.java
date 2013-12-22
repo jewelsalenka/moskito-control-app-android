@@ -19,6 +19,7 @@ import android.view.animation.RotateAnimation;
 import android.webkit.WebView;
 import android.widget.*;
 import com.example.moskito_control_app_android.R;
+import com.google.common.base.Objects;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.stub.entity.*;
 
@@ -252,6 +253,8 @@ public class ApplicationActivity extends Activity {
                 mSliderMenu.toggle();
                 createConnection();
                 startDataUpdater();
+                Toast toastNetwork = Toast.makeText(ApplicationActivity.this, R.string.save_settings, 1000);
+                toastNetwork.show();
             }
         });
     }
@@ -317,26 +320,24 @@ public class ApplicationActivity extends Activity {
             @Override
             public void onClick(View v) {
                 if (mCurrentApp == null) return;
-                if (mCurrentApp.getCharts().size() == 0) {
-                    View popUpView = getLayoutInflater().inflate(R.layout.no_charts, null);
-                    final PopupWindow mpopup = new PopupWindow(popUpView, RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT, true); //Creation of popup
-                    mpopup.setAnimationStyle(android.R.style.Animation_Dialog);
-                    mpopup.showAtLocation(popUpView, Gravity.CENTER, 0, 0);
-                    popUpView.findViewById(R.id.button_ok).setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            mpopup.dismiss();
-                        }
-                    });
-                } else {
-                    SlidingDrawer chartSlidingDrawer = (SlidingDrawer) findViewById(R.id.charts_drawer);
-                    if (chartSlidingDrawer.isOpened()) {
-                        chartSlidingDrawer.animateClose();
+                ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+                if (networkInfo != null && networkInfo.isConnected()) {
+                    if (mCurrentApp.getCharts().size() == 0) {
+                        Toast toastNoCharts = Toast.makeText(ApplicationActivity.this, R.string.no_charts, 10000);
+                        toastNoCharts.show();
                     } else {
-                        chartSlidingDrawer.animateOpen();
-                        drawOnMultitouchPlot(0);
+                        SlidingDrawer chartSlidingDrawer = (SlidingDrawer) findViewById(R.id.charts_drawer);
+                        if (chartSlidingDrawer.isOpened()) {
+                            chartSlidingDrawer.animateClose();
+                        } else {
+                            chartSlidingDrawer.animateOpen();
+                            drawOnMultitouchPlot(0);
+                        }
                     }
-
+                } else {
+                    Toast toastNetwork = Toast.makeText(ApplicationActivity.this, R.string.no_network_connection, 20000);
+                    toastNetwork.show();
                 }
             }
         });
@@ -548,18 +549,9 @@ public class ApplicationActivity extends Activity {
             }
             new ApplicationGetter().execute(stringUrl);
         } else {
-            mNoDataView.setText("No network connection available.");
-            View popUpView = getLayoutInflater().inflate(R.layout.popup_window, null);
-            final PopupWindow mpopup = new PopupWindow(popUpView, RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT, true); //Creation of popup
-            mpopup.setAnimationStyle(android.R.style.Animation_Dialog);
-            mpopup.showAtLocation(popUpView, Gravity.CENTER, 0, 0);
-            ((TextView) popUpView.findViewById(R.id.popup_window_text)).setText("No network connection available.");
-            popUpView.findViewById(R.id.popup_button_ok).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mpopup.dismiss();
-                }
-            });
+            Toast toastNetwork = Toast.makeText(ApplicationActivity.this, R.string.no_network_connection, 20000);
+            toastNetwork.show();
+
         }
     }
 

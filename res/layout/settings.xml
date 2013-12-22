@@ -33,7 +33,7 @@
     <EditText
             android:id="@+id/server_address_input"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="38dp"
             android:layout_marginRight="12dp"
             android:layout_marginLeft="12dp"
             android:textSize="14dp"
@@ -51,7 +51,7 @@
     <EditText
             android:id="@+id/server_port_input"
             android:layout_width="100dp"
-            android:layout_height="44dp"
+            android:layout_height="38dp"
             android:textSize="14dp"
             android:layout_marginLeft="12dp"
             android:layout_below="@id/server_port"
@@ -60,11 +60,13 @@
 
     <ToggleButton  android:id="@+id/http_or_https"
                    android:layout_width="80dp"
-                   android:layout_height="45dp"
+                   android:layout_height="38dp"
                    android:layout_marginRight="12dp"
                    android:layout_below="@id/server_port"
                    android:layout_alignParentRight="true"
                    android:checked="true"
+                   android:textSize="10dp"
+                   android:scrollbarSize="20dp"
                    android:textOn="@string/http"
                    android:textOff="@string/https"/>
 
@@ -94,51 +96,59 @@
     <TextView
             android:id="@+id/login"
             android:layout_height="20dp"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_marginLeft="12dp"
             android:layout_below="@id/authorization"
             android:visibility="gone"
             android:text="@string/login"/>
-
-    <EditText
-            android:id="@+id/login_input"
-            android:layout_width="match_parent"
-            android:layout_height="44dp"
-            android:textSize="14dp"
-            android:layout_marginLeft="12dp"
-            android:layout_marginRight="12dp"
-            android:layout_below="@id/login"
-            android:visibility="gone"
-            android:singleLine="true"
-            android:text="Alenka"/>
-
     <TextView
             android:id="@+id/password"
             android:layout_height="20dp"
-            android:layout_width="match_parent"
-            android:layout_marginLeft="12dp"
-            android:layout_below="@id/login_input"
+            android:layout_width="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="12dp"
+            android:layout_below="@id/authorization"
             android:visibility="invisible"
             android:text="@string/password"/>
 
-    <EditText
-            android:id="@+id/password_input"
-            android:layout_width="match_parent"
-            android:layout_height="44dp"
-            android:textSize="14dp"
-            android:layout_marginLeft="12dp"
-            android:layout_marginRight="12dp"
-            android:layout_below="@id/password"
-            android:visibility="gone"
-            android:singleLine="true"
-            android:password="true"/>
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="38dp"
+                  android:layout_below="@id/login"
+                  android:layout_marginRight="12dp"
+                  android:layout_marginLeft="12dp"
+                  android:orientation="horizontal"
+                  android:id="@+id/textEditForLoginAndPass"
+            >
+        <EditText
+                android:id="@+id/login_input"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="14dp"
+                android:visibility="gone"
+                android:singleLine="true"
+                android:layout_weight="1"
+                android:layout_marginRight="6dp"
+                android:text="Alenka"/>
+
+        <EditText
+                android:id="@+id/password_input"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:textSize="14dp"
+                android:layout_marginLeft="6dp"
+                android:visibility="gone"
+                android:singleLine="true"
+                android:layout_weight="1"
+                android:password="true"/>
+
+    </LinearLayout>
 
     <TextView
             android:id="@+id/update_interval_text"
             android:layout_height="20dp"
             android:layout_width="match_parent"
             android:layout_marginLeft="12dp"
-            android:layout_below="@id/password_input"
+            android:layout_below="@id/textEditForLoginAndPass"
             android:visibility="gone"
             android:text="@string/update_interval"/>
 
@@ -147,13 +157,14 @@
             android:layout_width="match_parent"
             android:layout_below="@id/update_interval_text"
             android:background="@drawable/field"
-            android:layout_marginLeft="12dp"
-            android:layout_marginRight="12dp"
-            android:layout_height="44dp">
+            android:layout_marginLeft="13dp"
+            android:layout_marginRight="13dp"
+            android:layout_marginTop="12dp"
+            android:layout_height="38dp">
 
         <Button android:id="@+id/minus_interval"
-                  android:layout_height="30dp"
-                  android:layout_width="30dp"
+                  android:layout_height="20dp"
+                  android:layout_width="20dp"
                   android:layout_marginLeft="12dp"
                   android:layout_centerVertical="true"
                   android:background="@drawable/minus"/>
@@ -168,8 +179,8 @@
                 android:text="@string/interval"/>
 
         <Button android:id="@+id/plus_interval"
-              android:layout_height="30dp"
-              android:layout_width="30dp"
+              android:layout_height="20dp"
+              android:layout_width="20dp"
               android:layout_alignParentRight="true"
               android:layout_centerVertical="true"
               android:layout_marginRight="12dp"
@@ -179,13 +190,13 @@
 
     <Button android:id="@+id/save_button"
           android:layout_width="match_parent"
-          android:layout_height="44dp"
+          android:layout_height="38dp"
           android:layout_below="@id/update_interval"
           android:background="@color/green"
           android:text="@string/save"
           android:textSize="22dp"
           android:gravity="center"
           android:layout_marginTop="12dp"
-          android:layout_marginLeft="12dp"
-          android:layout_marginRight="12dp"/>
+          android:layout_marginLeft="13dp"
+          android:layout_marginRight="13dp"/>
 </RelativeLayout>

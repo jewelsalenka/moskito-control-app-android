@@ -30,7 +30,6 @@ public class GoogleChartAPI {
                     + "            <input type='hidden' name='chxl' value='%s'/>"
                     + "            <input type='hidden' name='chls' value='3,1,0|3,1,0'/>"
                     + "            <input type='hidden' name='chg' value='0,6.67,5,5'/>"
-                    + "            <input type='submit'/>"
                     + "        </form>"
                     + "    </body>"
                     + "</html>";
