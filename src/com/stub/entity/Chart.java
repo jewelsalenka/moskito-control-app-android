@@ -34,4 +34,12 @@ public class Chart implements Serializable{
     public void addLine(Line line){
         mLines.add(line);
     }
+
+    public int getNumOfLinesWhichIsDrawable(){
+        int result = 0;
+        for (Line line: mLines){
+            if (line.isDrawable()) result++;
+        }
+        return result;
+    }
 }

@@ -20,8 +20,9 @@
             android:id="@+id/server_name"
             android:layout_height="match_parent"
             android:layout_width="wrap_content"
-            android:text="localhost"
             android:layout_toRightOf="@id/server_color_state"
+            android:textSize="16dp"
+            android:textColor="@color/black"
             android:gravity="center_vertical"/>
     <View
             android:id="@+id/show_hide_info"

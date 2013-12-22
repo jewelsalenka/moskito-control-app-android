@@ -8,11 +8,13 @@
     <TextView
             android:id="@+id/settings_header"
             android:layout_height="@dimen/header_height_minus_devider"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:text="@string/settings"
             android:gravity="center_vertical"
-            android:layout_marginLeft="12dp"
-            android:textColor="@android:color/black"/>
+            android:layout_marginRight="12dp"
+            android:layout_alignParentRight="true"
+            android:textSize="18dp"
+            android:textColor="@color/black"/>
     <View
             android:id="@+id/settings_devider"
             android:layout_width="match_parent"
